@@ -12,6 +12,7 @@ class DataItem(NamedTuple):
 def load_auto_file(filename: str) -> Iterator[DataItem]:
     """
     load CCG data from .auto file sentence by sentence
+    returns an iterator
     """
 
     # pyparsing patterns
