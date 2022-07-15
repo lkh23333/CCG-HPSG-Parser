@@ -2,6 +2,7 @@ from typing import List, Tuple, Union, Optional, Callable, TypeVar
 import re
 
 Node = TypeVar('Node')
+FALSE = TypeVar('False')
 
 class Feature:
     def __init__(self, feature: str = None):
@@ -98,9 +99,9 @@ class Functor(Category):
     def __str__(self) -> str: # to represent the functor category string itself
         def _str(cat):
             if isinstance(cat, Functor):
-                return f'({cat})'
+                return f'{cat}'
             return str(cat)
-        return _str(self.left) + self.slash + _str(self.right)
+        return '(' + _str(self.left) + self.slash + _str(self.right) + ')'
     
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Functor):
@@ -122,8 +123,8 @@ class Token:
     def __repr__(self) -> str:
         return str({'contents': self.contents, 'lemma': self.lemma, 'POS': self.POS, 'tag': self.tag})
 
-UnaryRule = Callable[[Node], Optional[Node]]
-BinaryRule = Callable[[Node, Node], Optional[Node]]
+UnaryRule = Callable[[Node], Union[Node, FALSE]]
+BinaryRule = Callable[[Node, Node], Union[Node, FALSE]]
 
 class ConstituentNode:
     def __init__(self, tag: Tag = None, children: List[Union[Token, Node]] = None, used_rule: Union[UnaryRule, BinaryRule] = None):
