@@ -7,6 +7,9 @@ X = TypeVar('X')
 FALSE = TypeVar('False')
 Pair = Tuple[X, X]
 
+'''
+UNARY RULES
+'''
 
 def forward_type_raising(x: ConstituentNode, T: Category) -> Union[ConstituentNode, FALSE]:
     return ConstituentNode(
@@ -34,22 +37,10 @@ def backward_type_raising(x: ConstituentNode, T: Category) -> Union[ConstituentN
         used_rule = 'BT'
     )
 
-def apply_instantiated_unary_rules(x: ConstituentNode, unary_rule_pairs: List[Pair[str]]) -> List[ConstituentNode]:
-    results = list()
 
-    for unary_rule_pair in unary_rule_pairs:
-        input_cat, output_cat = unary_rule_pair
-        input_cat = Category.parse(input_cat)
-        output_cat = Category.parse(output_cat)
-        if x.tag == input_cat:
-            results.append(
-                ConstituentNode(
-                    tag = output_cat, children = [x], used_rule = 'UNARY_INSTANCE' ### need to specify which rule is used later
-                )
-            )
-    return results
-
-
+'''
+BINARY RULES
+'''
 def forward_application(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     pattern = ('a/b', 'b')
     unified_pair = unification(x.tag, y.tag, pattern)
@@ -196,6 +187,11 @@ def parenthetical_direct_speech(x: ConstituentNode, y: ConstituentNode) -> Union
     pass
 
 
+unary_rules: Dict[str, UnaryRule] = {
+    'FT': forward_type_raising,
+    'BT': backward_type_raising
+}
+
 binary_rules: Dict[str, BinaryRule] = {
     'FA': forward_application,
     'BA': backward_application,
@@ -211,6 +207,21 @@ binary_rules: Dict[str, BinaryRule] = {
     'LP3': comma_vp_to_adv,
     'LP4': parenthetical_direct_speech,
 }
+
+def apply_instantiated_unary_rules(x: ConstituentNode, unary_rule_pairs: List[Pair[str]]) -> List[ConstituentNode]:
+    results = list()
+
+    for unary_rule_pair in unary_rule_pairs:
+        input_cat, output_cat = unary_rule_pair
+        input_cat = Category.parse(input_cat)
+        output_cat = Category.parse(output_cat)
+        if x.tag == input_cat:
+            results.append(
+                ConstituentNode(
+                    tag = output_cat, children = [x], used_rule = 'UNARY_INSTANCE' ### need to specify which rule is used later
+                )
+            )
+    return results
 
 def apply_unary_rules():
     pass
