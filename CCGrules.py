@@ -17,7 +17,7 @@ def forward_type_raising(x: ConstituentNode, T: Category) -> Union[ConstituentNo
             left = T,
             slash = '/',
             right = Functor(
-                T, '\\', x
+                T, '\\', x.tag
             )
         ),
         children = [x],
@@ -30,7 +30,7 @@ def backward_type_raising(x: ConstituentNode, T: Category) -> Union[ConstituentN
             left = T,
             slash = '\\',
             right = Functor(
-                T, '/', x
+                T, '/', x.tag
             )
         ),
         children = [x],
