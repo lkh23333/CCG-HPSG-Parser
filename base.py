@@ -99,9 +99,9 @@ class Functor(Category):
     def __str__(self) -> str: # to represent the functor category string itself
         def _str(cat):
             if isinstance(cat, Functor):
-                return f'{cat}'
+                return f'({cat})'
             return str(cat)
-        return '(' + _str(self.left) + self.slash + _str(self.right) + ')'
+        return _str(self.left) + self.slash + _str(self.right)
     
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Functor):
