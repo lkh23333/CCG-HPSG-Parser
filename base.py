@@ -5,11 +5,11 @@ Node = TypeVar('Node')
 FALSE = TypeVar('False')
 
 class Feature:
-    def __init__(self, feature: str = None):
-        self.feature = feature
+    def __init__(self, feature_str: str = None):
+        self.feature = [feature_str]
 
     def __repr__(self) -> str:
-        return str(self.feature)
+        return str(self.feature[0])
 
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Feature):
@@ -32,6 +32,7 @@ class Category(Tag):
         buffer = list(reversed([token for token in tokens.split(' ') if token != '']))
         stack = list()
 
+        X_generic_feature = ['X']
         while len(buffer):
             item = buffer.pop()
             if item in punctuations:
@@ -50,8 +51,13 @@ class Category(Tag):
             else:
                 if len(buffer) >= 3 and buffer[-1] == '[':
                     buffer.pop()
-                    feature = Feature(feature = buffer.pop())
+                    feature = Feature(feature_str = buffer.pop())
                     assert buffer.pop() == ']'
+
+                    if repr(feature) == 'X':
+                        feature.feature = X_generic_feature
+                        # to assign a shallow copy list containing 'X' so that when one 'X' is assigned a concrete value, the other ones too
+                    
                     stack.append(Atom(item, feature))
                 else:
                     stack.append(Atom(item))
