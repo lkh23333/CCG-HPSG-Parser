@@ -2,9 +2,9 @@ from typing import Tuple, Union, Optional, TypeVar
 from base import Category, Atom, Functor
 
 
-X = TypeVar('X')
+Y = TypeVar('Y')
 FALSE = TypeVar('False')
-Pair = Tuple[X, X]
+Pair = Tuple[Y, Y]
 
 def unification(x: Category, y: Category, pattern: Pair[str]) -> Union[Pair[Category], FALSE]:
     # return the unified category pair or False if failed
@@ -33,11 +33,18 @@ def unification(x: Category, y: Category, pattern: Pair[str]) -> Union[Pair[Cate
     def _unify_atoms(x: Atom, y: Atom) -> Union[Pair[Atom], FALSE]:
         # return the unified atom pair or False (if failed)
         if x.tag == y.tag:
-            if not((x.feature != None) and (y.feature != None) and (x.feature != y.feature)):
-                if x.feature == None and y.feature != None:
-                    return (y, y)
-                else:
-                    return (x, x)
+            if x.feature == y.feature:
+                return (x, y)
+            elif x.feature == None and y.feature != None:
+                return (y, y)
+            elif x.feature != None and y.feature == None:
+                return (x, x)
+            elif x.feature != None and repr(y.feature) == 'X':
+                y.feature.feature[0] = x.feature.feature[0]
+                return (x, y)
+            elif y.feature != None and repr(x.feature) == 'X':
+                x.feature.feature[0] = y.feature.feature[0]
+                return (x, y)
         return False
 
     def _unify_functors(x: Functor, y: Functor) -> Union[Pair[Functor], FALSE]:
@@ -159,9 +166,9 @@ def unification(x: Category, y: Category, pattern: Pair[str]) -> Union[Pair[Cate
 
 if __name__ == '__main__':
     meta_x = 'a/b'
-    meta_y = '(b/c)/$'
-    x = Category.parse('S/((S[dcl]\\NP)/NP[nb])')
-    y = Category.parse('(((S\\NP[nb])/NP)/PP)/(S\\NP)')
+    meta_y = 'b/c'
+    x = Category.parse('S/((S[dcl]\\NP)/S)')
+    y = Category.parse('((S[X]\\NP[nb])/S[X])/PP')
     c = unification(x, y, (meta_x, meta_y))
     print(str(c[0]))
     print(str(c[1]))
