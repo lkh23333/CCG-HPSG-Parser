@@ -11,9 +11,17 @@ SupertaggerOutput = List[List[CategoryStr]]
 
 
 class CCGSupertagger:
-    def __init__(self, model: nn.Module, tokenizer):
+    def __init__(
+        self,
+        model: nn.Module,
+        tokenizer,
+        idx2category: Dict[int, str],
+        top_k: int = 1
+    ):
         self.model = model
         self.tokenizer = tokenizer
+        self.idx2category = idx2category
+        self.top_k = top_k
 
     def predict_sent(self, sent: str) -> SupertaggerOutput:
         # predict 1-top category for each token
@@ -29,10 +37,17 @@ class CCGSupertagger:
             mask = torch.FloatTensor([inputs.attention_mask]),
             word_piece_tracked = [word_piece_tracked]
         )
-        return _convert_model_outputs(outputs)
+        return _convert_model_outputs(outputs, len(word_piece_tracked))
 
-    def _convert_model_outputs(self, output_dicts: List[Dict[str, numpy.ndarray]]) -> SupertaggerOutput:
-        pass
+    def _convert_model_outputs(self, outputs: torch.Tensor, sent_len: int) -> SupertaggerOutput:
+        # outputs: B*L*C, B = 1
+        # sent_len: length of the pretokenized sentence
+        outputs = torch.squeeze(outputs) # L*C
+        predicted = list()
+        for i in range(sent_len):
+            topk_ids = torch.topk(outputs[i], self.top_k)[1]
+            predicted.append([self.idx2category[int(idx.item())] for idx in topk_ids])
+        return predicted
 
 if __name__ == '__main__':
     from transformers import BertTokenizer
@@ -45,7 +60,6 @@ if __name__ == '__main__':
     pretokenized_sent = pre_tokenize_sent(text_1)
     
     print(tokenizer([text_0, text_1], add_special_tokens = False, padding = True))
-    assert None
 
     print(pretokenized_sent)
     
