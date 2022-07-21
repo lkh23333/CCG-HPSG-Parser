@@ -108,17 +108,24 @@ class CCGSupertaggingTrainer:
         self.model.eval()
 
         loss_sum = 0.
+        correct_cnt = 0
+        total_cnt = 0
+
         for data, mask, word_piece_tracked, target in dataloader:
             data = data.to(self.device)
             mask = mask.to(self.device)
             target = target.to(self.device)
 
-            outputs = model(data, mask, word_piece_tracked)
-            loss = F.cross_entropy(outputs.permute(0, 2, 1), target.permute(0, 1))
+            outputs = self.model(data, mask, word_piece_tracked)
+            calculate = get_cross_entropy_loss(outputs, target)
+            loss = calculate[0]
             loss_sum += loss.item()
+            total_cnt += calculate[1]
             print(f'testing loss = {loss.item()}\n')
+            correct_cnt += (torch.argmax(outputs, dim = 2) == target).sum()
 
         loss_sum /= len(dataloader)
+        print(f'======== acc: {(correct_cnt / total_cnt) * 100: .3f} ========\n')
 
 def main(args):
     auto_parser = AutoParser()
