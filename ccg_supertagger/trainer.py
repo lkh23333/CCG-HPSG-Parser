@@ -46,7 +46,7 @@ class CCGSupertaggingTrainer:
         model: nn.Module,
         batch_size: int,
         optimizer: torch.optim = AdamW,
-        lr = 0.001
+        lr = 0.0001
     ):
         self.n_epochs = n_epochs
         self.device = device
@@ -54,6 +54,7 @@ class CCGSupertaggingTrainer:
         self.batch_size = batch_size
         self.optimizer = optimizer
         self.lr = lr
+        self.criterion = nn.CrossEntropyLoss()
 
     def train(self, dataset: Dataset):
         dataloader = DataLoader(
@@ -82,7 +83,12 @@ class CCGSupertaggingTrainer:
 
                 outputs = self.model(data, mask, word_piece_tracked)
                 calculate = get_cross_entropy_loss(outputs, target)
-                loss = calculate[0]
+
+                outputs_ = outputs.view(-1, outputs.size(-1))
+                target_ = target.view(-1)
+                loss = self.criterion(outputs_, target_)
+
+                #loss = calculate[0]
                 loss_sum += loss.item()
                 total_cnt += calculate[1]
                 print(f'training loss = {loss.item()}\n')
@@ -133,7 +139,7 @@ def main(args):
     # train_data_items, categories = auto_parser.load_auto_file(args.train_data_dir)
     # dev_data_items, categories = auto_parser.load_auto_file(args.dev_data_dir)
     # test_data_items, _ = auto_parser.load_auto_file(args.test_data_dir)
-    data_items, categories = auto_parser.load_auto_file(args.sample_data_dir)
+    data_items, categories = auto_parser.load_auto_file(args.dev_data_dir)
 
     category2idx = {categories[idx]: idx for idx in range(len(categories))}
     idx2category = {idx: category for category, idx in category2idx.items()}
@@ -170,7 +176,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'supertagging')
     parser.add_argument('--n_epochs', type = int, default = 20)
     parser.add_argument('--device', type = torch.device, default = torch.device('cuda:0'))
-    parser.add_argument('--batch_size', type = int, default = 10)
+    parser.add_argument('--batch_size', type = int, default = 6)
     parser.add_argument('--lr', type = float, default = 0.001)
     parser.add_argument('--dropout_p', type = float, default = 0.2)
     parser.add_argument('--sample_data_dir', type = str, default = '../data/ccg-sample.auto')

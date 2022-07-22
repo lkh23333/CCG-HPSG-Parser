@@ -25,21 +25,24 @@ class CCGSupertaggerModel(nn.Module):
             input_ids = encoded_batch,
             attention_mask = mask
         ).last_hidden_state # B*L*H
-        f1 = self.w1(
-            self.dropout(
-                self.relu(f0)
-            )
-        )
-        f2 = self.w2(
-            self.dropout(
-                self.relu(f1)
-            )
-        )
-        for i in range(f2.shape[0]):
+
+        for i in range(f0.shape[0]):
             k = 0
             for j in range(len(word_piece_tracked[i])):
                 n_piece = word_piece_tracked[i][j]
-                f2[i, j] = torch.sum(f2[i, k:k+n_piece], dim = 0) / n_piece # to take the average of word pieces
+                f0[i, j] = torch.sum(f0[i, k:k+n_piece], dim = 0) / n_piece # to take the average of word pieces
                 k += n_piece
 
-        return self.softmax(f2) # B*L*C (C the number of classes)
+        f1 = self.dropout(
+            self.relu(
+                self.w1(f0)
+            )
+        )
+
+        f2 = self.dropout(
+            self.relu(
+                self.w2(f1)
+            )
+        )
+
+        return f2

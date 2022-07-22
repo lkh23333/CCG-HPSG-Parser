@@ -1,2 +1,4 @@
 __pycache__
 .idea
+data/ccgbank*.auto
+ccg_supertagger/models/plms/bert-base-uncased/*.bin
