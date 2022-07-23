@@ -138,7 +138,7 @@ def load_auto_file(filename: str) -> Tuple[List[DataItem], List[str]]:
                 root, tokens, cats = _AutoLineReader(line).parse()
 
                 data_items.append(DataItem(id, tokens, root))
-                all_cats.union(cats)
+                all_cats.update(cats)
 
     return data_items, list(all_cats)
 
