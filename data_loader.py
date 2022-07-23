@@ -1,6 +1,5 @@
 """adapted from depccg's implementation @ https://github.com/masashi-y/depccg"""
 from typing import List, Tuple, NamedTuple
-from pyparsing import *
 from base import Token, ConstituentNode, Category
 
 
