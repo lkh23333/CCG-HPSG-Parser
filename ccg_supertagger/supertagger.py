@@ -52,6 +52,10 @@ class CCGSupertagger:
             predicted.append([self.idx2category[int(idx.item())] for idx in topk_ids])
         return predicted
 
+    def _load_model_checkpoint(self, checkpoints_dir: str, checkpoint_epoch: int):
+        checkpoint = torch.load(os.path.join(checkpoints_dir, f'epoch_{checkpoint_epoch}.pt'))
+        self.model.load_state_dict(checkpoint['model_state_dict'])
+
 if __name__ == '__main__':
     dev_data_dir = '../data/ccgbank-wsj_00.auto'
     _, categories = load_auto_file(dev_data_dir)
@@ -70,8 +74,7 @@ if __name__ == '__main__':
     )
     checkpoints_dir = './checkpoints'
     checkpoint_epoch = 5
-    checkpoint = torch.load(os.path.join(checkpoints_dir, f'epoch_{checkpoint_epoch}.pt'))
-    supertagger.model.load_state_dict(checkpoint['model_state_dict'])
+    supertagger._load_model_checkpoint(checkpoints_dir, checkpoint_epoch)
 
     sent = 'Mr. Vinken is chairman of Elsevier N.V., the Dutch publishing group'
     predicted = supertagger.predict_sent(sent)
