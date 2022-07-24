@@ -1,10 +1,13 @@
 from typing import List, Dict, Any, TypeVar
-import numpy, re
+import os, sys, numpy, re
 import torch
 import torch.nn as nn
 
 from utils import pre_tokenize_sent
+from models.simple_model import CCGSupertaggerModel
 
+sys.path.append('..')
+from data_loader import load_auto_file
 
 CategoryStr = TypeVar('CategoryStr')
 SupertaggerOutput = List[List[CategoryStr]]
@@ -37,7 +40,7 @@ class CCGSupertagger:
             mask = torch.FloatTensor([inputs.attention_mask]),
             word_piece_tracked = [word_piece_tracked]
         )
-        return _convert_model_outputs(outputs, len(word_piece_tracked))
+        return self._convert_model_outputs(outputs, len(word_piece_tracked))
 
     def _convert_model_outputs(self, outputs: torch.Tensor, sent_len: int) -> SupertaggerOutput:
         # outputs: B*L*C, B = 1
@@ -50,44 +53,26 @@ class CCGSupertagger:
         return predicted
 
 if __name__ == '__main__':
-    from transformers import BertTokenizer
-    from transformers import BertModel
-    tokenizer = BertTokenizer.from_pretrained('./models/plms/bert-base-uncased')
-    model = BertModel.from_pretrained('./models/plms/bert-base-uncased')
-    
-    text_0 = 'I really want to do something.'
-    text_1 = 'I haven\'t done that before.'
-    pretokenized_sent = pre_tokenize_sent(text_1)
-    
-    print(tokenizer([text_0, text_1], add_special_tokens = False, padding = True))
+    dev_data_dir = '../data/ccgbank-wsj_00.auto'
+    _, categories = load_auto_file(dev_data_dir)
+    categories = sorted(categories)
+    category2idx = {categories[idx]: idx for idx in range(len(categories))}
+    UNK_CATEGORY = 'UNK_CATEGORY'
+    category2idx[UNK_CATEGORY] = len(category2idx)
+    idx2category = {idx: category for category, idx in category2idx.items()}
 
-    print(pretokenized_sent)
-    
-    word_piece_tracked = [len(item) for item in tokenizer(pretokenized_sent, add_special_tokens = False).input_ids]
-    
-    print(word_piece_tracked)
-    
-    inputs = tokenizer(
-        pretokenized_sent,
-        add_special_tokens = False,
-        is_split_into_words = True
+    from transformers import BertTokenizer
+    model_path = './models/plms/bert-base-uncased'
+    supertagger = CCGSupertagger(
+        model = CCGSupertaggerModel(model_path, len(category2idx)),
+        tokenizer = BertTokenizer.from_pretrained(model_path),
+        idx2category = idx2category
     )
-    
-    f2 = model(
-            input_ids = torch.LongTensor([inputs.input_ids]),
-            attention_mask = torch.Tensor([inputs.attention_mask]),
-            output_hidden_states = True
-        ).last_hidden_state # B*L*H
-    
-    print(f2.shape)
-    
-    f3 = f2.clone()
-    word_piece_tracked = [word_piece_tracked]
-    for i in range(f3.shape[0]):
-        k = 0
-        for j in range(len(word_piece_tracked[i])):
-            n_piece = word_piece_tracked[i][j]
-            f3[i, j] = torch.sum(f3[i, k:k+n_piece], dim = 0)
-            k += n_piece
-    
-    
+    checkpoints_dir = './checkpoints'
+    checkpoint_epoch = 5
+    checkpoint = torch.load(os.path.join(checkpoints_dir, f'epoch_{checkpoint_epoch}.pt'))
+    supertagger.model.load_state_dict(checkpoint['model_state_dict'])
+
+    sent = 'Mr. Vinken is chairman of Elsevier N.V., the Dutch publishing group'
+    predicted = supertagger.predict_sent(sent)
+    print(predicted)
