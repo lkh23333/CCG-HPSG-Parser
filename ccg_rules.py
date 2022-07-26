@@ -1,4 +1,5 @@
 from typing import Tuple, List, Dict, Callable, Union, Optional, TypeVar
+from string import ascii_letters
 from base import Token, Atom, Functor, ConstituentNode, Category, UnaryRule, BinaryRule
 from ccg_unification import unification
 
@@ -6,6 +7,24 @@ from ccg_unification import unification
 X = TypeVar('X')
 FALSE = TypeVar('False')
 Pair = Tuple[X, X]
+
+
+def _is_punct(x: Category) -> bool:
+    if isinstance(x, Functor):
+        return False
+    
+    return (
+        not x.tag[0] in ascii_letters
+        or x.tag in ('LRB', 'RRB', 'LQU', 'RQU')
+    )
+
+def _is_type_raised(x: Category) -> bool:
+    if isinstance(x, Atom):
+        return False
+    return (
+        isinstance(x.right, Functor)
+        and x.right.left == x.left
+    )
 
 '''
 UNARY RULES
@@ -166,47 +185,103 @@ def generalized_backward_composition(x: ConstituentNode, y: ConstituentNode) -> 
     return False
 
 def conjunction(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pass
+    if (
+        not _is_punct(y.tag)
+        and not _is_type_raised(y.tag)
+        and x.tag in (
+            Category.parse(','),
+            Category.parse(';'),
+            Category.parse('conj')
+        )
+        and not (y.tag ^ Category.parse('NP\\NP'))
+    ):
+        return ConstituentNode(
+            tag = Functor(y.tag, '\\', y.tag),
+            children = [x, y],
+            used_rule = 'CONJ'
+        )
+    return False
 
 def conjunction2(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pass
+    if x.tag == Category.parse('conj') and y.tag == Category.parse('NP\\NP'):
+        return ConstituentNode(
+            tag = y.tag,
+            children = [x, y],
+            used_rule = 'CONJ'
+        )
+    return False
 
 def remove_punctuation1(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pass
+    if _is_punct(x.tag):
+        return ConstituentNode(
+            tag = y.tag,
+            children = [x, y],
+            used_rule = 'LP'
+        )
+    return False
 
 def remove_punctuation2(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pass
+    if _is_punct(y.tag):
+        return ConstituentNode(
+            tag = x.tag,
+            children = [x, y],
+            used_rule = 'RP'
+        )
+    return False
 
 def remove_punctuation_left(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pass
+    if x.tag in (Category.parse('LQU'), Category.parse('LRB')):
+        return ConstituentNode(
+            tag = Functor(y.tag, '\\', y.tag),
+            children = [x, y],
+            used_rule = 'LP'
+        )
+    return False
 
 def comma_vp_to_adv(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pass
+    if (
+        x.tag == Category.parse(',')
+        and y.tag in (
+            Category.parse('S[ng]\\NP'),
+            Category.parse('S[pss]\\NP')
+        )
+    ):
+        return ConstituentNode(
+            tag = Category.parse('(S\\NP)\\(S\\NP)'),
+            children = [x, y],
+            used_rule = 'LP'
+        )
+    return False
 
 def parenthetical_direct_speech(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pass
+    if x.tag == Category.parse(',') and y.tag == Category.parse('S[dcl]/S[dcl]'):
+        return ConstituentNode(
+            tag = Category.parse('(S\\NP)/(S\\NP)'),
+            children = [x, y],
+            used_rule = 'LP'
+        )
+    return False
 
+unary_rules= [
+    forward_type_raising,
+    backward_type_raising
+]
 
-unary_rules: Dict[str, UnaryRule] = {
-    'FT': forward_type_raising,
-    'BT': backward_type_raising
-}
-
-binary_rules: Dict[str, BinaryRule] = {
-    'FA': forward_application,
-    'BA': backward_application,
-    'FC': forward_composition,
-    'BC': backward_composition,
-    'GFC': generalized_forward_composition,
-    'GBC': generalized_backward_composition,
-    'CONJ1': conjunction,
-    'CONJ2': conjunction2,
-    'LP1': remove_punctuation1,
-    'RP': remove_punctuation2,
-    'LP2': remove_punctuation_left,
-    'LP3': comma_vp_to_adv,
-    'LP4': parenthetical_direct_speech,
-}
+binary_rules = [
+    forward_application,
+    backward_application,
+    forward_composition,
+    backward_composition,
+    generalized_forward_composition,
+    generalized_backward_composition,
+    conjunction,
+    conjunction2,
+    remove_punctuation1,
+    remove_punctuation2,
+    remove_punctuation_left,
+    comma_vp_to_adv,
+    parenthetical_direct_speech
+]
 
 def apply_instantiated_unary_rules(x: ConstituentNode, unary_rule_pairs: List[Pair[str]]) -> List[ConstituentNode]:
     results = list()
@@ -214,20 +289,16 @@ def apply_instantiated_unary_rules(x: ConstituentNode, unary_rule_pairs: List[Pa
     for unary_rule_pair in unary_rule_pairs:
         input_cat, output_cat = unary_rule_pair
         input_cat = Category.parse(input_cat)
-        output_cat = Category.parse(output_cat)
         if x.tag == input_cat:
             results.append(
                 ConstituentNode(
-                    tag = output_cat, children = [x], used_rule = 'UNARY_INSTANCE' ### need to specify which rule is used later
+                    tag = Category.parse(output_cat),
+                    children = [x],
+                    used_rule = 'UNARY_INSTANCE' ### need to specify which rule is used later
                 )
             )
     return results
 
-def apply_unary_rules():
-    pass
-
-def apply_binary_rules():
-    pass
 
 if __name__ == '__main__':
     

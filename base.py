@@ -92,6 +92,11 @@ class Atom(Category):
             )
         return False
 
+    def __xor__(self, other: object) -> bool:
+        if not isinstance(other, Atom):
+            return False
+        return self.tag == other.tag
+
 
 class Functor(Category):
     def __init__(self, left: Category, slash: str, right: Category):
@@ -118,6 +123,15 @@ class Functor(Category):
             )
         else:
             return False
+
+    def __xor__(self, other: object) -> bool:
+        if not isinstance(other, Functor):
+            return False
+        return (
+            self.left ^ other.left
+            and self.slash == other.slash
+            and self.right ^ other.right
+        )
 
 class Token:
     def __init__(self, contents: str = None, lemma: str = None, POS: str = None, tag: Tag = None):

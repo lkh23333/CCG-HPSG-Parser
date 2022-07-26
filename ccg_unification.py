@@ -49,7 +49,9 @@ def unification(x: Category, y: Category, pattern: Pair[str]) -> Union[Pair[Cate
 
     def _unify_functors(x: Functor, y: Functor) -> Union[Pair[Functor], FALSE]:
         # return the unified functor pair or False (if failed)
-        if isinstance(x, Atom) and isinstance(y, Atom):
+        if type(x) != type(y):
+            return False
+        elif isinstance(x, Atom) and isinstance(y, Atom):
             return _unify_atoms(x, y)
         elif x.slash != y.slash:
             return False
