@@ -18,6 +18,7 @@ def _is_punct(x: Category) -> bool:
         or x.tag in ('LRB', 'RRB', 'LQU', 'RQU')
     )
 
+
 def _is_type_raised(x: Category) -> bool:
     if isinstance(x, Atom):
         return False
@@ -26,9 +27,15 @@ def _is_type_raised(x: Category) -> bool:
         and x.right.left == x.left
     )
 
+
+def _is_modifier(x: Category) -> bool:
+    return isinstance(x, Functor) and x.left == x.right
+
+
 '''
 UNARY RULES
 '''
+
 
 def forward_type_raising(x: ConstituentNode, T: Category) -> Union[ConstituentNode, FALSE]:
     return ConstituentNode(
@@ -40,8 +47,10 @@ def forward_type_raising(x: ConstituentNode, T: Category) -> Union[ConstituentNo
             )
         ),
         children = [x],
-        used_rule = 'FT'
+        used_rule = 'FT',
+        head_is_left=True
     )
+
 
 def backward_type_raising(x: ConstituentNode, T: Category) -> Union[ConstituentNode, FALSE]:
     return ConstituentNode(
@@ -53,38 +62,63 @@ def backward_type_raising(x: ConstituentNode, T: Category) -> Union[ConstituentN
             )
         ),
         children = [x],
-        used_rule = 'BT'
+        used_rule = 'BT',
+        head_is_left=True
     )
 
 
 '''
 BINARY RULES
 '''
+
+
 def forward_application(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     pattern = ('a/b', 'b')
     unified_pair = unification(x.tag, y.tag, pattern)
+
+    if _is_modifier(x.tag) or _is_type_raised(x.tag):
+        head_is_left = False
+    else:
+        head_is_left = True
+
     if unified_pair:
         return ConstituentNode(
             tag = unified_pair[0].left,
             children = [x, y],
-            used_rule = 'FA'
+            used_rule = 'FA',
+            head_is_left=head_is_left
         )
     return False
+
 
 def backward_application(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     pattern = ('b', 'a\\b')
     unified_pair = unification(x.tag, y.tag, pattern)
+
+    if _is_modifier(y.tag) or _is_type_raised(y.tag):
+        head_is_left = True
+    else:
+        head_is_left = False
+
     if unified_pair:
         return ConstituentNode(
             tag = unified_pair[1].left,
             children = [x, y],
-            used_rule = 'BA'
+            used_rule = 'BA',
+            head_is_left=head_is_left
         )
     return False
+
 
 def forward_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     pattern = ('a/b', 'b/c')
     unified_pair = unification(x.tag, y.tag, pattern)
+
+    if _is_modifier(x.tag) or _is_type_raised(x.tag):
+        head_is_left = False
+    else:
+        head_is_left = True
+
     if unified_pair:
         return ConstituentNode(
             tag = Functor(
@@ -93,13 +127,21 @@ def forward_composition(x: ConstituentNode, y: ConstituentNode) -> Union[Constit
                 right = unified_pair[1].right
             ),
             children = [x, y],
-            used_rule = 'FC'
+            used_rule = 'FC',
+            head_is_left=head_is_left
         )
     return False
+
 
 def backward_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     pattern = ('b\\c', 'a\\b')
     unified_pair = unification(x.tag, y.tag, pattern)
+
+    if _is_modifier(y.tag) or _is_type_raised(y.tag):
+        head_is_left = True
+    else:
+        head_is_left = False
+
     if unified_pair:
         return ConstituentNode(
             tag = Functor(
@@ -108,14 +150,22 @@ def backward_composition(x: ConstituentNode, y: ConstituentNode) -> Union[Consti
                 right = unified_pair[0].right
             ),
             children = [x, y],
-            used_rule = 'BC'
+            used_rule = 'BC',
+            head_is_left=head_is_left
         )
     return False
+
 
 def generalized_forward_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     pattern_0 = ('a/b', '(b/c)/$')
     pattern_1 = ('a/b', '(b/c)\\$')
     unified_pair = unification(x.tag, y.tag, pattern_0)
+
+    if _is_modifier(x.tag) or _is_type_raised(x.tag):
+        head_is_left = False
+    else:
+        head_is_left = True
+
     if unified_pair:
         return ConstituentNode(
             tag = Functor(
@@ -128,7 +178,8 @@ def generalized_forward_composition(x: ConstituentNode, y: ConstituentNode) -> U
                 right = unified_pair[1].right
             ),
             children = [x, y],
-            used_rule = 'GFC'
+            used_rule = 'GFC',
+            head_is_left=head_is_left
         )
     else:
         unified_pair = unification(x.tag, y.tag, pattern_1)
@@ -144,14 +195,22 @@ def generalized_forward_composition(x: ConstituentNode, y: ConstituentNode) -> U
                     right = unified_pair[1].right
                 ),
                 children = [x, y],
-                used_rule = 'GFC'
+                used_rule = 'GFC',
+                head_is_left=head_is_left
             )
     return False
+
 
 def generalized_backward_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     pattern_0 = ('(b\\c)/$', 'a\\b')
     pattern_1 = ('(b\\c)\\$', 'a\\b')
     unified_pair = unification(x.tag, y.tag, pattern_0)
+
+    if _is_modifier(y.tag) or _is_type_raised(y.tag):
+        head_is_left = True
+    else:
+        head_is_left = False
+
     if unified_pair:
         return ConstituentNode(
             tag = Functor(
@@ -164,7 +223,8 @@ def generalized_backward_composition(x: ConstituentNode, y: ConstituentNode) -> 
                 right = unified_pair[0].right
             ),
             children = [x, y],
-            used_rule = 'GBC'
+            used_rule = 'GBC',
+            head_is_left=head_is_left
         )
     else:
         unified_pair = unification(x.tag, y.tag, pattern_1)
@@ -180,9 +240,11 @@ def generalized_backward_composition(x: ConstituentNode, y: ConstituentNode) -> 
                     right = unified_pair[0].right
                 ),
                 children = [x, y],
-                used_rule = 'GBC'
+                used_rule = 'GBC',
+                head_is_left=head_is_left
             )
     return False
+
 
 def conjunction(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     if (
@@ -198,45 +260,55 @@ def conjunction(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode
         return ConstituentNode(
             tag = Functor(y.tag, '\\', y.tag),
             children = [x, y],
-            used_rule = 'CONJ'
+            used_rule = 'CONJ',
+            head_is_left=False
         )
     return False
+
 
 def conjunction2(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     if x.tag == Category.parse('conj') and y.tag == Category.parse('NP\\NP'):
         return ConstituentNode(
             tag = y.tag,
             children = [x, y],
-            used_rule = 'CONJ'
+            used_rule = 'CONJ',
+            head_is_left=False
         )
     return False
+
 
 def remove_punctuation1(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     if _is_punct(x.tag):
         return ConstituentNode(
             tag = y.tag,
             children = [x, y],
-            used_rule = 'LP'
+            used_rule = 'LP',
+            head_is_left=False
         )
     return False
+
 
 def remove_punctuation2(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     if _is_punct(y.tag):
         return ConstituentNode(
             tag = x.tag,
             children = [x, y],
-            used_rule = 'RP'
+            used_rule = 'RP',
+            head_is_left=True
         )
     return False
+
 
 def remove_punctuation_left(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     if x.tag in (Category.parse('LQU'), Category.parse('LRB')):
         return ConstituentNode(
             tag = Functor(y.tag, '\\', y.tag),
             children = [x, y],
-            used_rule = 'LP'
+            used_rule = 'LP',
+            head_is_left=False
         )
     return False
+
 
 def comma_vp_to_adv(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     if (
@@ -249,18 +321,22 @@ def comma_vp_to_adv(x: ConstituentNode, y: ConstituentNode) -> Union[Constituent
         return ConstituentNode(
             tag = Category.parse('(S\\NP)\\(S\\NP)'),
             children = [x, y],
-            used_rule = 'LP'
+            used_rule = 'LP',
+            head_is_left=False
         )
     return False
+
 
 def parenthetical_direct_speech(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     if x.tag == Category.parse(',') and y.tag == Category.parse('S[dcl]/S[dcl]'):
         return ConstituentNode(
             tag = Category.parse('(S\\NP)/(S\\NP)'),
             children = [x, y],
-            used_rule = 'LP'
+            used_rule = 'LP',
+            head_is_left=False
         )
     return False
+
 
 unary_rules= [
     forward_type_raising,
@@ -282,6 +358,7 @@ binary_rules = [
     comma_vp_to_adv,
     parenthetical_direct_speech
 ]
+
 
 def apply_instantiated_unary_rules(x: ConstituentNode, unary_rule_pairs: List[Pair[str]]) -> List[ConstituentNode]:
     results = list()
