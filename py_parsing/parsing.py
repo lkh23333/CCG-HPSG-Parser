@@ -32,17 +32,29 @@ class Parser:
         self.beam_width = beam_width
         self.unary_rule_pairs = unary_rule_pairs
 
+    def batch_parse(
+        self,
+        pretokenized_sents: List[List[str]],
+        categories_distribution: List[List[torch.Tensor]]
+    ):
+        tables = list()
+        for pretokenized_sent, category_distribution in zip(pretokenized_sents, categories_distribution):
+            tables.append(
+                self.cky_parse(pretokenized_sent, category_distribution)
+            )
+        return tables
+
     def cky_parse(
         self,
         pretokenized_sent: List[str],
-        categories_distribution: torch.Tensor # L*C
+        category_distribution: List[torch.Tensor] # l_sent * C
     ):
         table = [None] * len(pretokenized_sent)
         for i in range(len(pretokenized_sent)):
             table[i] = [None] * (len(pretokenized_sent) + 1)
         # [0, ..., L-1] * [0, 1, ..., L]
 
-        topk_ps, topk_ids = torch.topk(categories_distribution, k = self.beam_width, dim = 1)
+        topk_ps, topk_ids = torch.topk(category_distribution, k = self.beam_width, dim = 1)
         ktop_categories = list()
         for i in range(topk_ids.shape[0]):
             topk_p = topk_ps[i]
