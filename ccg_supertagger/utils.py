@@ -16,6 +16,8 @@ def pre_tokenize_sent(sent: str) -> List[str]:
     for token in splited:
         if re.match('[a-zA-Z]', token[-1]):
             returned.append(token)
+        elif token == 'Mr.' or token == 'Ms.':
+            returned.append(token)
         else:
             returned.extend([token[0: -1], token[-1]])
     return returned
@@ -29,7 +31,6 @@ def get_cat_ids(categories: List[str], category2idx: Dict[str, int]) -> List[int
 
 def prepare_data(data_items: List[DataItem], tokenizer, category2idx: Dict[str, int]):
     # return wrapped data needed to input into the model.
-    # !!! The result hasn't been padded !!! 
     data = list() # a list containing a list of input_ids for each sentence
     mask = list() # a list containing the attention mask list for each sentence
     word_piece_tracked = list() # a list containing the list of word_piece_tracked for each sentence
@@ -64,10 +65,10 @@ def prepare_data(data_items: List[DataItem], tokenizer, category2idx: Dict[str, 
         target[i] = target[i] + [TARGET_PADDING] * (max_length - len(target[i])) # padding
 
     return {
-        'input_ids': data,
-        'mask': mask,
+        'input_ids': torch.LongTensor(data),
+        'mask': torch.FloatTensor(mask),
         'word_piece_tracked': word_piece_tracked,
-        'target': target
+        'target': torch.LongTensor(target)
     }
 
 

@@ -45,10 +45,10 @@ g.manual_seed(0)
 
 class CCGSupertaggingDataset(Dataset):
     def __init__(self, data, mask, word_piece_tracked, target):
-        self.data = torch.LongTensor(data)
-        self.mask = torch.FloatTensor(mask)
+        self.data = data
+        self.mask = mask
         self.word_piece_tracked = word_piece_tracked
-        self.target = torch.LongTensor(target)
+        self.target = target
     
     def __getitem__(self, idx):
         return (self.data[idx], self.mask[idx], self.word_piece_tracked[idx], self.target[idx])
@@ -230,27 +230,27 @@ class CCGSupertaggingTrainer:
 def main(args):
 
     print('================= parsing data =================\n')
-    train_data_items, categories = load_auto_file(args.train_data_dir)
-    dev_data_items, _ = load_auto_file(args.dev_data_dir)
+    # train_data_items, categories = load_auto_file(args.train_data_dir)
+    dev_data_items, categories = load_auto_file(args.dev_data_dir)
     # test_data_items, _ = load_auto_file(args.test_data_dir)
 
-    categories = sorted(categories) # to ensure the same order for reproducibility
+    categories = sorted(categories) # !!! to ensure the same order for reproducibility !!!
     category2idx = {categories[idx]: idx for idx in range(len(categories))}
     category2idx[UNK_CATEGORY] = len(category2idx)
     idx2category = {idx: category for category, idx in category2idx.items()}
 
     print('================= preparing data =================\n')
     tokenizer = BertTokenizer.from_pretrained(args.model_path)
-    train_data = prepare_data(train_data_items, tokenizer, category2idx)
+    # train_data = prepare_data(train_data_items, tokenizer, category2idx)
     dev_data = prepare_data(dev_data_items, tokenizer, category2idx)
     # test_data = prepare_data(test_data_items, tokenizer, category2idx)
 
-    train_dataset = CCGSupertaggingDataset(
-        data = train_data['input_ids'],
-        mask = train_data['mask'],
-        word_piece_tracked = train_data['word_piece_tracked'],
-        target = train_data['target']
-    )
+    # train_dataset = CCGSupertaggingDataset(
+    #     data = train_data['input_ids'],
+    #     mask = train_data['mask'],
+    #     word_piece_tracked = train_data['word_piece_tracked'],
+    #     target = train_data['target']
+    # )
     dev_dataset = CCGSupertaggingDataset(
         data = dev_data['input_ids'],
         mask = dev_data['mask'],
@@ -268,14 +268,14 @@ def main(args):
         ),
         batch_size = args.batch_size,
         checkpoints_dir = args.checkpoints_dir,
-        train_dataset = train_dataset,
+        train_dataset = dev_dataset,
         dev_dataset = dev_dataset,
         lr = args.lr
     )
 
     print('================= supertagging training =================\n')
-    trainer.train() # default training from the beginning
-    # trainer.load_checkpoint_and_train(checkpoint_epoch=1) # train from (checkpoint_epoch + 1)
+    # trainer.train() # default training from the beginning
+    trainer.load_checkpoint_and_train(checkpoint_epoch=1) # train from (checkpoint_epoch + 1)
     # trainer.load_checkpoint_and_test(checkpoint_epoch=1, mode='train_eval')
     # trainer.test(dataset = self.test_dataset)
     
