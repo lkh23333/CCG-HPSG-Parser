@@ -147,10 +147,12 @@ UnaryRule = Callable[[Node], Union[Node, FALSE]]
 BinaryRule = Callable[[Node, Node], Union[Node, FALSE]]
 
 class ConstituentNode:
-    def __init__(self, tag: Tag = None, children: List[Union[Token, Node]] = None, used_rule: Union[UnaryRule, BinaryRule] = None):
+    def __init__(self, tag: Tag = None, children: List[Union[Token, Node]] = None,
+                 used_rule: Union[UnaryRule, BinaryRule] = None, head_is_left: bool = None):
         self.tag = tag
         self.children = children
         self.used_rule = used_rule
+        self.head_is_left = head_is_left
 
     def __repr__(self) -> str: # to represent the constituent structure
         return str({'tag': self.tag, 'children': self.children, 'used_rule': self.used_rule})
