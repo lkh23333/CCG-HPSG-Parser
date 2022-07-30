@@ -3,8 +3,8 @@ import os, sys, numpy, re
 import torch
 import torch.nn as nn
 
-from utils import pre_tokenize_sent
-from models.simple_model import CCGSupertaggerModel
+from ccg_supertagger.utils import pre_tokenize_sent
+from ccg_supertagger.models.simple_model import CCGSupertaggerModel
 
 sys.path.append('..')
 from data_loader import load_auto_file
@@ -87,7 +87,11 @@ class CCGSupertagger:
         ) # B*L*C
         sents_lengths = [len(word_piece_tracked) for word_piece_tracked in batch_data['word_piece_tracked']]
         
-        return [outputs[i, :sents_lengths[i], :] for i in range(len(batch))] # a list, each of the shape l_sent * C
+        softmax = nn.Softmax(dim = 1)
+        return [
+            softmax(outputs[i, :sents_lengths[i], :])
+            for i in range(len(batch))
+        ] # a list, each of the shape l_sent * C
 
     def get_model_outputs_for_sent(self, sent: Union[str, List[str]]) -> torch.Tensor:
         return self.get_model_outputs_for_batch([sent])[0] # L*C -> length of this sentence *C
