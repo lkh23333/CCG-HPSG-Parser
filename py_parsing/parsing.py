@@ -3,7 +3,7 @@ import sys, time
 import torch
 import bisect
 
-sys.path.append('..')
+sys.path.append('../..')
 import base, ccg_rules
 from base import Token, Category, ConstituentNode
 
@@ -13,7 +13,8 @@ Y = TypeVar('Y')
 Pair = Tuple[Y, Y]
 CategoryStr = TypeVar('CategoryStr')
 RuleName = TypeVar('RuleName')
-InstantiatedBinaryRule = List[Tuple[CategoryStr, CategoryStr, List[Tuple[CategoryStr, RuleName]]]]
+InstantiatedUnaryRule = Tuple[CategoryStr, CategoryStr, RuleName]
+InstantiatedBinaryRule = Tuple[CategoryStr, CategoryStr, List[Tuple[CategoryStr, RuleName]]]
 
 
 class TableItem:
@@ -102,14 +103,16 @@ class CCGParser(Parser):
     ):
         super().__init__(beam_width = beam_width, idx2tag = idx2category)
 
-    def _get_instantiated_unary_rules(self, unary_rule_pairs: List[Pair[CategoryStr]]):
+    def _get_instantiated_unary_rules(self, instantiated_unary_rules: List[InstantiatedUnaryRule]):
         self.apply_instantiated_unary_rules = dict()
-        for unary_rule_pair in unary_rule_pairs:
-            initial_cat = Category.parse(unary_rule_pair[0])
-            final_cat = Category.parse(unary_rule_pair[1])
+        for instantiated_unary_rule in instantiated_unary_rules:
+            initial_cat = Category.parse(instantiated_unary_rule[0])
+            final_cat = Category.parse(instantiated_unary_rule[1])
             if initial_cat not in self.apply_instantiated_unary_rules.keys():
                 self.apply_instantiated_unary_rules[initial_cat] = list()
-            self.apply_instantiated_unary_rules[initial_cat].append(final_cat)
+            self.apply_instantiated_unary_rules[initial_cat].append(
+                {'result_cat': final_cat, 'used_rule': instantiated_unary_rule[2]}
+            )
 
     def _get_instantiated_binary_rules(self, instantiated_binary_rules: List[InstantiatedBinaryRule]):
         self.apply_instantiated_binary_rules = dict()
@@ -190,9 +193,9 @@ class CCGParser(Parser):
                     [
                         TableItem(
                             constituent = ConstituentNode(
-                                tag = tag,
+                                tag = tag['result_cat'],
                                 children = [result.constituent],
-                                used_rule = 'UNARY_RULE'
+                                used_rule = tag['used_rule']
                             ),
                             log_probability = result.log_probability
                         )

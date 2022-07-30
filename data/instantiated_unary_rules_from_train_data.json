@@ -1,698 +1,872 @@
 [
   [
     "(S[dcl]\\NP)/NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "(S[ng]\\NP)/NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "(S[ng]\\NP)/NP",
-    "S"
+    "S",
+    "TC"
   ],
   [
     "(S[to]\\NP)/NP",
-    "((NP\\NP)\\(NP\\NP))\\((NP\\NP)\\(NP\\NP))"
+    "((NP\\NP)\\(NP\\NP))\\((NP\\NP)\\(NP\\NP))",
+    "TC"
   ],
   [
     "(S[to]\\NP)/NP",
-    "(S\\NP)\\((S\\NP)/((S[to]\\NP)/NP))"
+    "(S\\NP)\\((S\\NP)/((S[to]\\NP)/NP))",
+    "BT"
   ],
   [
     "(S[to]\\NP)/NP",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "(S[to]\\NP)/NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "(S[to]\\NP)/NP",
-    "N\\N"
+    "N\\N",
+    "TC"
   ],
   [
     "N",
-    "NP"
+    "NP",
+    "TC"
   ],
   [
     "NP",
-    "(((S\\NP)/((S\\NP)/NP))/NP)\\((((S\\NP)/((S\\NP)/NP))/NP)/NP)"
+    "(((S\\NP)/((S\\NP)/NP))/NP)\\((((S\\NP)/((S\\NP)/NP))/NP)/NP)",
+    "BT"
   ],
   [
     "NP",
-    "(((S\\NP)\\(S\\NP))/(S[adj]\\NP))\\((((S\\NP)\\(S\\NP))/(S[adj]\\NP))/NP)"
+    "(((S\\NP)\\(S\\NP))/(S[adj]\\NP))\\((((S\\NP)\\(S\\NP))/(S[adj]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S/S)/(S[adj]\\NP))\\(((S/S)/(S[adj]\\NP))/NP)"
+    "((S/S)/(S[adj]\\NP))\\(((S/S)/(S[adj]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S/S)/(S[ng]\\NP))\\(((S/S)/(S[ng]\\NP))/NP)"
+    "((S/S)/(S[ng]\\NP))\\(((S/S)/(S[ng]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S/S)/(S[pss]\\NP))\\(((S/S)/(S[pss]\\NP))/NP)"
+    "((S/S)/(S[pss]\\NP))\\(((S/S)/(S[pss]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S\\NP)/((S\\NP)/NP))\\(((S\\NP)/((S\\NP)/NP))/NP)"
+    "((S\\NP)/((S\\NP)/NP))\\(((S\\NP)/((S\\NP)/NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S\\NP)/(NP\\NP))\\(((S\\NP)/(NP\\NP))/NP)"
+    "((S\\NP)/(NP\\NP))\\(((S\\NP)/(NP\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S\\NP)/(S[adj]\\NP))\\(((S\\NP)/(S[adj]\\NP))/NP)"
+    "((S\\NP)/(S[adj]\\NP))\\(((S\\NP)/(S[adj]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S\\NP)/(S[b]\\NP))\\(((S\\NP)/(S[b]\\NP))/NP)"
+    "((S\\NP)/(S[b]\\NP))\\(((S\\NP)/(S[b]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S\\NP)/(S[ng]\\NP))\\(((S\\NP)/(S[ng]\\NP))/NP)"
+    "((S\\NP)/(S[ng]\\NP))\\(((S\\NP)/(S[ng]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S\\NP)/(S[to]\\NP))\\(((S\\NP)/(S[to]\\NP))/NP)"
+    "((S\\NP)/(S[to]\\NP))\\(((S\\NP)/(S[to]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S\\NP)/(S\\NP))\\(((S\\NP)/(S\\NP))/NP)"
+    "((S\\NP)/(S\\NP))\\(((S\\NP)/(S\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "((S\\NP)/PP)\\(((S\\NP)/PP)/NP)"
+    "((S\\NP)/PP)\\(((S\\NP)/PP)/NP)",
+    "BT"
   ],
   [
     "NP",
-    "(S/(S[b]\\NP))\\((S/(S[b]\\NP))/NP)"
+    "(S/(S[b]\\NP))\\((S/(S[b]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "(S/(S[pss]\\NP))\\((S/(S[pss]\\NP))/NP)"
+    "(S/(S[pss]\\NP))\\((S/(S[pss]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "(S/(S[to]\\NP))\\((S/(S[to]\\NP))/NP)"
+    "(S/(S[to]\\NP))\\((S/(S[to]\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "(S[adj]\\NP)\\((S[adj]\\NP)/NP)"
+    "(S[adj]\\NP)\\((S[adj]\\NP)/NP)",
+    "BT"
   ],
   [
     "NP",
-    "(S\\(S\\NP))\\((S\\(S\\NP))/NP)"
+    "(S\\(S\\NP))\\((S\\(S\\NP))/NP)",
+    "BT"
   ],
   [
     "NP",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "NP",
-    "(S\\NP)\\((S\\NP)/NP)"
+    "(S\\NP)\\((S\\NP)/NP)",
+    "BT"
   ],
   [
     "NP",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "NP",
-    "NP/(NP\\NP)"
+    "NP/(NP\\NP)",
+    "FT"
   ],
   [
     "NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "NP",
-    "S/(S/NP)"
+    "S/(S/NP)",
+    "TC"
   ],
   [
     "NP",
-    "S/(S\\NP)"
+    "S/(S\\NP)",
+    "FT"
   ],
   [
     "NP",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "NP",
-    "S\\(S/NP)"
+    "S\\(S/NP)",
+    "BT"
   ],
   [
     "NP\\NP",
-    "(S\\NP)\\((S\\NP)/(NP\\NP))"
+    "(S\\NP)\\((S\\NP)/(NP\\NP))",
+    "BT"
   ],
   [
     "PP",
-    "((S\\NP)/(S\\NP))\\(((S\\NP)/(S\\NP))/PP)"
+    "((S\\NP)/(S\\NP))\\(((S\\NP)/(S\\NP))/PP)",
+    "BT"
   ],
   [
     "PP",
-    "((S\\NP)/PP)\\(((S\\NP)/PP)/PP)"
+    "((S\\NP)/PP)\\(((S\\NP)/PP)/PP)",
+    "BT"
   ],
   [
     "PP",
-    "(S\\NP)\\((S\\NP)/PP)"
+    "(S\\NP)\\((S\\NP)/PP)",
+    "BT"
   ],
   [
     "S",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "S",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[adj]",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[adj]",
-    "NP"
+    "NP",
+    "TC"
   ],
   [
     "S[adj]",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[adj]",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[adj]\\NP",
-    "((S\\NP)\\(S\\NP))\\(((S\\NP)\\(S\\NP))/(S[adj]\\NP))"
+    "((S\\NP)\\(S\\NP))\\(((S\\NP)\\(S\\NP))/(S[adj]\\NP))",
+    "BT"
   ],
   [
     "S[adj]\\NP",
-    "(N/N)\\(N/N)"
+    "(N/N)\\(N/N)",
+    "TC"
   ],
   [
     "S[adj]\\NP",
-    "(NP\\NP)\\(NP\\NP)"
+    "(NP\\NP)\\(NP\\NP)",
+    "TC"
   ],
   [
     "S[adj]\\NP",
-    "(S/S)\\(S/S)"
+    "(S/S)\\(S/S)",
+    "TC"
   ],
   [
     "S[adj]\\NP",
-    "(S[adj]\\NP)\\(S[adj]\\NP)"
+    "(S[adj]\\NP)\\(S[adj]\\NP)",
+    "TC"
   ],
   [
     "S[adj]\\NP",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "S[adj]\\NP",
-    "(S\\NP)\\((S\\NP)/(S[adj]\\NP))"
+    "(S\\NP)\\((S\\NP)/(S[adj]\\NP))",
+    "BT"
   ],
   [
     "S[adj]\\NP",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[adj]\\NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[adj]\\NP",
-    "N\\N"
+    "N\\N",
+    "TC"
   ],
   [
     "S[adj]\\NP",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[b]",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[b]/NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[b]\\NP",
-    "(N\\N)/(N\\N)"
+    "(N\\N)/(N\\N)",
+    "TC"
   ],
   [
     "S[b]\\NP",
-    "(S\\NP)\\((S\\NP)/(S[b]\\NP))"
+    "(S\\NP)\\((S\\NP)/(S[b]\\NP))",
+    "BT"
   ],
   [
     "S[b]\\NP",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[b]\\NP",
-    "N"
+    "N",
+    "TC"
   ],
   [
     "S[b]\\NP",
-    "N/N"
+    "N/N",
+    "TC"
   ],
   [
     "S[b]\\NP",
-    "NP/NP"
+    "NP/NP",
+    "TC"
   ],
   [
     "S[b]\\NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[b]\\NP",
-    "N\\N"
+    "N\\N",
+    "TC"
   ],
   [
     "S[b]\\NP",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[b]\\NP",
-    "S\\(S/(S[b]\\NP))"
+    "S\\(S/(S[b]\\NP))",
+    "BT"
   ],
   [
     "S[b]\\NP",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[dcl]",
-    "((S\\NP)/(S\\NP))\\((S\\NP)/(S\\NP))"
+    "((S\\NP)/(S\\NP))\\((S\\NP)/(S\\NP))",
+    "TC"
   ],
   [
     "S[dcl]",
-    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))"
+    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))",
+    "TC"
   ],
   [
     "S[dcl]",
-    "(N/N)\\(N/N)"
+    "(N/N)\\(N/N)",
+    "TC"
   ],
   [
     "S[dcl]",
-    "(NP\\NP)\\(NP\\NP)"
+    "(NP\\NP)\\(NP\\NP)",
+    "TC"
   ],
   [
     "S[dcl]",
-    "(S/S)\\(S/S)"
+    "(S/S)\\(S/S)",
+    "TC"
   ],
   [
     "S[dcl]",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "S[dcl]",
-    "(S\\NP)\\((S\\NP)/S[dcl])"
+    "(S\\NP)\\((S\\NP)/S[dcl])",
+    "BT"
   ],
   [
     "S[dcl]",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[dcl]",
-    "N/N"
+    "N/N",
+    "TC"
   ],
   [
     "S[dcl]",
-    "NP"
+    "NP",
+    "TC"
   ],
   [
     "S[dcl]",
-    "NP/NP"
+    "NP/NP",
+    "TC"
   ],
   [
     "S[dcl]",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[dcl]",
-    "N\\N"
+    "N\\N",
+    "TC"
   ],
   [
     "S[dcl]",
-    "S"
+    "S",
+    "TC"
   ],
   [
     "S[dcl]",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[dcl]",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[dcl]/NP",
-    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))"
+    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))",
+    "TC"
   ],
   [
     "S[dcl]/NP",
-    "(NP\\NP)\\(NP\\NP)"
+    "(NP\\NP)\\(NP\\NP)",
+    "TC"
   ],
   [
     "S[dcl]/NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[dcl]/NP",
-    "S"
+    "S",
+    "TC"
   ],
   [
     "S[dcl]/NP",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[dcl]/S[dcl]",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "S[dcl]/S[dcl]",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[dcl]/S[dcl]",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[dcl]/S[dcl]",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[dcl]/S[dcl]",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))"
+    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "(NP\\NP)\\(NP\\NP)"
+    "(NP\\NP)\\(NP\\NP)",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "N"
+    "N",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "N/N"
+    "N/N",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "N\\N"
+    "N\\N",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "S"
+    "S",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "S/(S\\(S[dcl]\\NP))"
+    "S/(S\\(S[dcl]\\NP))",
+    "FT"
   ],
   [
     "S[dcl]\\NP",
-    "S[dcl]"
+    "S[dcl]",
+    "TC"
   ],
   [
     "S[dcl]\\NP",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[dcl]\\S[dcl]",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "S[dcl]\\S[dcl]",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[dcl]\\S[dcl]",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[dcl]\\S[dcl]",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[em]",
-    "(S\\NP)\\((S\\NP)/S[em])"
+    "(S\\NP)\\((S\\NP)/S[em])",
+    "BT"
   ],
   [
     "S[for]",
-    "(S\\NP)\\((S\\NP)/S[for])"
+    "(S\\NP)\\((S\\NP)/S[for])",
+    "BT"
   ],
   [
     "S[intj]",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[intj]",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[ng]",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[ng]",
-    "NP"
+    "NP",
+    "TC"
   ],
   [
     "S[ng]",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[ng]",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[ng]",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))"
+    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "(NP\\NP)\\(NP\\NP)"
+    "(NP\\NP)\\(NP\\NP)",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "(S/S)\\((S/S)/(S[ng]\\NP))"
+    "(S/S)\\((S/S)/(S[ng]\\NP))",
+    "BT"
   ],
   [
     "S[ng]\\NP",
-    "(S[adj]\\NP)\\(S[adj]\\NP)"
+    "(S[adj]\\NP)\\(S[adj]\\NP)",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "(S\\NP)\\((S\\NP)/(S[ng]\\NP))"
+    "(S\\NP)\\((S\\NP)/(S[ng]\\NP))",
+    "BT"
   ],
   [
     "S[ng]\\NP",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "(S\\S)\\(S\\S)"
+    "(S\\S)\\(S\\S)",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "N"
+    "N",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "N/N"
+    "N/N",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "NP"
+    "NP",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "NP/NP"
+    "NP/NP",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "PP\\PP"
+    "PP\\PP",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[ng]\\NP",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[pss]",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "S[pss]",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[pss]",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))"
+    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "(NP\\NP)\\(NP\\NP)"
+    "(NP\\NP)\\(NP\\NP)",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "(N\\N)\\(N\\N)"
+    "(N\\N)\\(N\\N)",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "(S/S)\\((S/S)/(S[pss]\\NP))"
+    "(S/S)\\((S/S)/(S[pss]\\NP))",
+    "BT"
   ],
   [
     "S[pss]\\NP",
-    "(S/S)\\(S/S)"
+    "(S/S)\\(S/S)",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "N/N"
+    "N/N",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "NP/NP"
+    "NP/NP",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "N\\N"
+    "N\\N",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "S"
+    "S",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[pss]\\NP",
-    "S\\(S/(S[pss]\\NP))"
+    "S\\(S/(S[pss]\\NP))",
+    "BT"
   ],
   [
     "S[pss]\\NP",
-    "S\\S"
+    "S\\S",
+    "TC"
   ],
   [
     "S[pt]\\NP",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[qem]",
-    "(S\\NP)\\((S\\NP)/S[qem])"
+    "(S\\NP)\\((S\\NP)/S[qem])",
+    "BT"
   ],
   [
     "S[to]\\NP",
-    "(((S\\NP)\\(S\\NP))\\PP)\\(((S\\NP)\\(S\\NP))\\PP)"
+    "(((S\\NP)\\(S\\NP))\\PP)\\(((S\\NP)\\(S\\NP))\\PP)",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))"
+    "((S\\NP)\\(S\\NP))\\((S\\NP)\\(S\\NP))",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "(NP\\NP)\\(NP\\NP)"
+    "(NP\\NP)\\(NP\\NP)",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "(S[adj]\\NP)\\(S[adj]\\NP)"
+    "(S[adj]\\NP)\\(S[adj]\\NP)",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "(S\\NP)/(S\\NP)"
+    "(S\\NP)/(S\\NP)",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "(S\\NP)\\((S\\NP)/(S[to]\\NP))"
+    "(S\\NP)\\((S\\NP)/(S[to]\\NP))",
+    "BT"
   ],
   [
     "S[to]\\NP",
-    "(S\\NP)\\(S\\NP)"
+    "(S\\NP)\\(S\\NP)",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "NP"
+    "NP",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "NP\\NP"
+    "NP\\NP",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "N\\N"
+    "N\\N",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "S"
+    "S",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "S/S"
+    "S/S",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "S[adj]\\S[adj]"
+    "S[adj]\\S[adj]",
+    "TC"
   ],
   [
     "S[to]\\NP",
-    "S\\(S/(S[to]\\NP))"
+    "S\\(S/(S[to]\\NP))",
+    "BT"
   ],
   [
     "S[to]\\NP",
-    "S\\S"
+    "S\\S",
+    "TC"
   ]
 ]
