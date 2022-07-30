@@ -92,6 +92,9 @@ class Atom(Category):
             )
         return False
 
+    def __hash__(self):
+        return hash(str(self))
+
     def __xor__(self, other: object) -> bool:
         if not isinstance(other, Atom):
             return False
@@ -123,6 +126,9 @@ class Functor(Category):
             )
         else:
             return False
+
+    def __hash__(self):
+        return hash(str(self))
 
     def __xor__(self, other: object) -> bool:
         if not isinstance(other, Functor):
@@ -162,6 +168,7 @@ class ConstituentNode:
 
 
 if __name__ == '__main__':
+    # sample
     token_0 = Token(contents = 'I', lemma = 'I', POS = 'pron', tag = Category.parse('NP'))
     token_1 = Token(contents = 'like', lemma = 'like', POS = 'verb', tag = Category.parse('(S\\NP)/NP'))
     token_2 = Token(contents = 'apples', lemma = 'apple', POS = 'noun', tag = Category.parse('NP'))
@@ -174,7 +181,4 @@ if __name__ == '__main__':
     constituent_012 = ConstituentNode(tag = 'S', children = [constituent_0, constituent_12], used_rule = 'BW')
 
     
-    #print(constituent_012)
-    
-    c = Category.parse('(S[dcl]\\NP)/NP')
-    d = Category.parse('(S[dcl]\\NP)/NP')
+    print(constituent_012)
