@@ -3,7 +3,7 @@ import sys, time
 import torch
 import bisect
 
-sys.path.append('../..')
+sys.path.append('..')
 import base, ccg_rules
 from base import Token, Category, ConstituentNode
 
@@ -217,20 +217,7 @@ class CCGParser(Parser):
             for left in table[i][j]:
                 for right in table[j][k]:
 
-                    # # only apply binary patterns
-                    # for binary_rule in ccg_rules.binary_rules:
-                    #         result = binary_rule(left.constituent, right.constituent)
-                    #         if result:
-                    #             results.append(
-                    #                 TableItem(
-                    #                     constituent = result,
-                    #                     log_probability = left.log_probability + right.log_probability
-                    #                 )
-                    #             )
-
-
-                    # only apply instantiated binary rules
-                    t0 = time.time()
+                    # apply instantiated rules first, otherwise search for binary rules if one of the two constituents contains the X feature, otherwise no results
                     if left.constituent.tag in self.apply_instantiated_binary_rules.keys():
                         if right.constituent.tag in self.apply_instantiated_binary_rules[left.constituent.tag].keys():
                             for result in self.apply_instantiated_binary_rules[left.constituent.tag][right.constituent.tag]:
@@ -243,56 +230,28 @@ class CCGParser(Parser):
                                     log_probability = left.log_probability + right.log_probability
                                 )
                                 bisect.insort(results, new_item, key = lambda x: x.log_probability)
-
-                    # # apply instantiated rules first
-                    # if left.constituent.tag in self.apply_instantiated_binary_rules.keys():
-                    #     if right.constituent.tag in self.apply_instantiated_binary_rules[left.constituent.tag].keys():
-                    #         instantiated_cnt += 1
-                    #         t1 = time.time()
-                    #         results.extend(
-                    #             [
-                    #                 TableItem(
-                    #                     constituent = ConstituentNode(
-                    #                         tag = result['result_cat'],
-                    #                         children = [left.constituent, right.constituent],
-                    #                         used_rule = result['used_rule']
-                    #                     ),
-                    #                     log_probability = left.log_probability + right.log_probability
-                    #                 )
-                    #                 for result in self.apply_instantiated_binary_rules[left.constituent.tag][right.constituent.tag]
-                    #             ]
-                    #         )
-                    #         instantiated_t += time.time() - t1
-                    #     else:
-                    #         flag = False
-                    #         for binary_rule in ccg_rules.binary_rules:
-                    #             result = binary_rule(left.constituent, right.constituent)
-                    #             if result:
-                    #                 flag = True
-                    #                 results.append(
-                    #                     TableItem(
-                    #                         constituent = result,
-                    #                         log_probability = left.log_probability + right.log_probability
-                    #                     )
-                    #                 )
-                    #         if flag:
-                    #             pattern_cnt += 1
-                    # else:
-                    #     flag = False
-                    #     for binary_rule in ccg_rules.binary_rules:
-                    #         result = binary_rule(left.constituent, right.constituent)
-                    #         if result:
-                    #             flag = True
-                    #             results.append(
-                    #                 TableItem(
-                    #                     constituent = result,
-                    #                     log_probability = left.log_probability + right.log_probability
-                    #                 )
-                    #             )
-                    #     if flag:
-                    #         pattern_cnt += 1
+                        else:
+                            if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
+                                for binary_rule in ccg_rules.binary_rules:
+                                    result = binary_rule(left.constituent, right.constituent)
+                                    if result:
+                                        new_item = TableItem(
+                                            constituent = result,
+                                            log_probability = left.log_probability + right.log_probability
+                                        )
+                                        bisect.insort(results, new_item, key = lambda x: x.log_probability)
+                    else:
+                        if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
+                            for binary_rule in ccg_rules.binary_rules:
+                                result = binary_rule(left.constituent, right.constituent)
+                                if result:
+                                    new_item = TableItem(
+                                        constituent = result,
+                                        log_probability = left.log_probability + right.log_probability
+                                    )
+                                    bisect.insort(results, new_item, key = lambda x: x.log_probability)
               
-        results = results[len(results)-1 : len(results)-1-self.beam_width : -1]
+        results = results[-1 : len(results)-1-self.beam_width : -1] if len(results)-1-self.beam_width >= 0 else results[-1::-1]
         table[i][k] = results
         return table
 
@@ -302,23 +261,6 @@ if __name__ == '__main__':
     categories_distribution = torch.Tensor([[0.6,0.3,0.1],[0.4,0.5,0.1],[0.45,0.35,0.2]])
     idx2category = {0:'NP', 1:'(S\\NP)/NP', 2:'S'}
     beam_width = 6
-    unary_rule_pairs = [
-        ['N', 'NP'],
-        ['S[pss]\\NP', 'NP\\NP'],
-        ['S[ng]\\NP', 'NP\\NP'],
-        ['S[adj]\\NP', 'NP\\NP'],
-        ['S[to]\\NP', 'NP\\NP'],
-        ['S[dcl]/NP', 'NP\\NP'],
-        ['S[to]\\NP', '(S/S)'],
-        ['S[pss]\\NP', '(S/S)'],
-        ['S[ng]\\NP', '(S/S)'],
-        ['NP', '(S[X]/(S[X]\\NP))'],
-        ['NP', '((S[X]\\NP)\\((S[X]\\NP)/NP))'],
-        ['PP', '((S[X]\\NP)\\((S[X]\\NP)/PP))'],
-        ['NP', '(((S[X]\\NP)/NP)\\(((S[X]\\NP)/NP)/NP))'],
-        ['NP', '(((S[X]\\NP)/PP)\\(((S[X]\\NP)/PP)/NP))'],
-        ['(S[ng]\\NP)', 'NP']
-    ]
 
     parser = CCGParser(
         idx2category = idx2category,
@@ -326,7 +268,7 @@ if __name__ == '__main__':
     )
 
     import json
-    with open('../../data/instantiated_unary_rules_from_train_data.json', 'r', encoding = 'utf8') as f:
+    with open('../../data/instantiated_unary_rules_with_X.json', 'r', encoding = 'utf8') as f:
         instantiated_unary_rules = json.load(f)
     with open('../../data/instantiated_binary_rules_from_train_data.json', 'r', encoding = 'utf8') as f:
         instantiated_binary_rules = json.load(f)

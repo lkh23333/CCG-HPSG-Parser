@@ -100,6 +100,9 @@ class Atom(Category):
             return False
         return self.tag == other.tag
 
+    @property
+    def contain_X_feature(self) -> bool:
+        return repr(self.feature) == 'X'
 
 class Functor(Category):
     def __init__(self, left: Category, slash: str, right: Category):
@@ -138,6 +141,10 @@ class Functor(Category):
             and self.slash == other.slash
             and self.right ^ other.right
         )
+
+    @property
+    def contain_X_feature(self) -> bool:
+        return (self.left.contain_X_feature or self.right.contain_X_feature)
 
 class Token:
     def __init__(self, contents: str = None, lemma: str = None, POS: str = None, tag: Tag = None):
