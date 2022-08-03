@@ -17,13 +17,21 @@ InstantiatedUnaryRule = Tuple[CategoryStr, CategoryStr, RuleName]
 InstantiatedBinaryRule = Tuple[CategoryStr, CategoryStr, List[Tuple[CategoryStr, RuleName]]]
 
 
-class TableItem:
+class ChartItem:
     def __init__(self, constituent: ConstituentNode, log_probability: LogP):
         self.constituent = constituent
         self.log_probability = log_probability
 
     def __repr__(self):
         return str({'constituent': str(self.constituent), 'log_p': self.log_probability})
+
+class Chart:
+    def __init__(self, l_sent: int):
+        self.chart = [None] * l_sent
+        for i in range(l_sent):
+            self.chart[i] = [None] * (l_sent + 1)
+        # [0, ..., l_sent-1] * [0, 1, ..., l_sent]
+        self.l = len(self.chart)
 
 class Parser:
     
@@ -41,12 +49,12 @@ class Parser:
         tags_distributions: List[torch.Tensor]
         # B sentences, each of which is a tensor of the shape l_sent*C 
     ):
-        tables = list()
+        charts = list()
         for pretokenized_sent, tags_distribution in zip(pretokenized_sents, tags_distributions):
-            tables.append(
+            charts.append(
                 self.cky_parse(pretokenized_sent, tags_distribution)
             )
-        return tables
+        return charts
 
     def cky_parse(
         self,
@@ -54,10 +62,7 @@ class Parser:
         tags_distribution: torch.Tensor
         # a tensor of the shape l_sent * C
     ):
-        table = [None] * len(pretokenized_sent)
-        for i in range(len(pretokenized_sent)):
-            table[i] = [None] * (len(pretokenized_sent) + 1)
-        # [0, ..., l_sent-1] * [0, 1, ..., l_sent]
+        chart = Chart(len(pretokenized_sent))
 
         topk_ps, topk_ids = torch.topk(tags_distribution, k = min(tags_distribution.shape[1], self.beam_width), dim = 1)
         ktop_tags = [
@@ -79,20 +84,18 @@ class Parser:
             for (word, ktop) in zip(pretokenized_sent, ktop_tags)
         ] # l_sent*k tokens with correponding probabilities of the tag
 
-        for i in range(len(table)):
-            table = self._apply_unary_rules(table, tokens, i)
+        for i in range(chart.l):
+            self._apply_unary_rules(chart, tokens, i)
             for k in range(i - 1, -1, -1):
-                table = self._apply_binary_rules(table, k, i + 1)
+                self._apply_binary_rules(chart, k, i + 1)
 
-        return table
+        return chart
 
-    def _apply_unary_rules(self, table, tokens, i: int): # i is the start position of the token to be processed
+    def _apply_unary_rules(self, chart: Chart, tokens, i: int): # i is the start position of the token to be processed
         raise NotImplementedError('Please incorporate unary rules!!!')
-        return table
 
-    def _apply_binary_rules(self, table, i: int, k: int):
+    def _apply_binary_rules(self, chart: Chart, i: int, k: int):
         raise NotImplementedError('Please incorporate binary rules!!!')
-        return table
 
 class CCGParser(Parser):
 
@@ -133,10 +136,7 @@ class CCGParser(Parser):
         pretokenized_sent: List[str],
         categories_distribution: List[torch.Tensor] # l_sent * C
     ):
-        table = [None] * len(pretokenized_sent)
-        for i in range(len(pretokenized_sent)):
-            table[i] = [None] * (len(pretokenized_sent) + 1)
-        # [0, ..., L-1] * [0, 1, ..., L]
+        chart = Chart(len(pretokenized_sent))
 
         topk_ps, topk_ids = torch.topk(
             categories_distribution,
@@ -162,21 +162,21 @@ class CCGParser(Parser):
             for (word, ktop) in zip(pretokenized_sent, ktop_categories)
         ] # L*k tokens with correponding probabilities of the category
 
-        for i in range(len(table)):
-            table = self._apply_unary_rules(table, tokens, i)
+        for i in range(chart.l):
+            self._apply_unary_rules(chart, tokens, i)
             for k in range(i - 1, -1, -1):
                 # t0 = time.time()
-                table = self._apply_binary_rules(table, k, i + 1)
+                self._apply_binary_rules(chart, k, i + 1)
                 # print(f'applying binary rules - span[{k}][{i+1}]: {time.time()-t0}s')
 
-        return table
+        return chart
 
-    def _apply_unary_rules(self, table, tokens, i: int): # i is the start position of the token to be processed
-        if table[i][i + 1] is not None:
+    def _apply_unary_rules(self, chart: Chart, tokens, i: int): # i is the start position of the token to be processed
+        if chart.chart[i][i + 1] is not None:
             raise ValueError(f'Cell[{i}][{i+1}] has been taken up, please check!')
 
         results = [
-            TableItem(
+            ChartItem(
                 constituent = ConstituentNode(
                     tag = tokens[i][j]['token'].tag,
                     children = [tokens[i][j]['token']]
@@ -191,7 +191,7 @@ class CCGParser(Parser):
             if result.constituent.tag in self.apply_instantiated_unary_rules.keys():
                 results_.extend(
                     [
-                        TableItem(
+                        ChartItem(
                             constituent = ConstituentNode(
                                 tag = tag['result_cat'],
                                 children = [result.constituent],
@@ -203,25 +203,23 @@ class CCGParser(Parser):
                     ] 
                 )
         results.extend(results_)
-        table[i][i + 1] = results
+        chart.chart[i][i + 1] = results
 
-        return table
-
-    def _apply_binary_rules(self, table, i: int, k: int):
+    def _apply_binary_rules(self, chart: Chart, i: int, k: int):
         # i - start position, k - end position
-        if table[i][k] is not None:
+        if chart.chart[i][k] is not None:
             raise ValueError(f'Cell[{i}][{k}] has been taken up, please check!')
         results = list()
 
         for j in range(i + 1, k):
-            for left in table[i][j]:
-                for right in table[j][k]:
+            for left in chart.chart[i][j]:
+                for right in chart.chart[j][k]:
 
                     # apply instantiated rules first, otherwise search for binary rules if one of the two constituents contains the X feature, otherwise no results
                     if left.constituent.tag in self.apply_instantiated_binary_rules.keys():
                         if right.constituent.tag in self.apply_instantiated_binary_rules[left.constituent.tag].keys():
                             for result in self.apply_instantiated_binary_rules[left.constituent.tag][right.constituent.tag]:
-                                new_item = TableItem(
+                                new_item = ChartItem(
                                     constituent = ConstituentNode(
                                         tag = result['result_cat'],
                                         children = [left.constituent, right.constituent],
@@ -235,7 +233,7 @@ class CCGParser(Parser):
                                 for binary_rule in ccg_rules.binary_rules:
                                     result = binary_rule(left.constituent, right.constituent)
                                     if result:
-                                        new_item = TableItem(
+                                        new_item = ChartItem(
                                             constituent = result,
                                             log_probability = left.log_probability + right.log_probability
                                         )
@@ -245,15 +243,14 @@ class CCGParser(Parser):
                             for binary_rule in ccg_rules.binary_rules:
                                 result = binary_rule(left.constituent, right.constituent)
                                 if result:
-                                    new_item = TableItem(
+                                    new_item = ChartItem(
                                         constituent = result,
                                         log_probability = left.log_probability + right.log_probability
                                     )
                                     bisect.insort(results, new_item, key = lambda x: x.log_probability)
               
         results = results[-1 : len(results)-1-self.beam_width : -1] if len(results)-1-self.beam_width >= 0 else results[-1::-1]
-        table[i][k] = results
-        return table
+        chart.chart[i][k] = results
 
 if __name__ == '__main__':
     # sample use
@@ -275,8 +272,8 @@ if __name__ == '__main__':
     
     parser._get_instantiated_unary_rules(instantiated_unary_rules)
     parser._get_instantiated_binary_rules(instantiated_binary_rules)
-    table = parser.cky_parse(
+    chart = parser.cky_parse(
         pretokenized_sent = pretokenized_sent,
         categories_distribution = categories_distribution
-    )
-    print(table[0][-1])
+    ).chart
+    print(chart[0][-1])
