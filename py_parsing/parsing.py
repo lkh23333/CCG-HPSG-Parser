@@ -48,7 +48,7 @@ class Parser:
         pretokenized_sents: List[List[str]],
         tags_distributions: List[torch.Tensor]
         # B sentences, each of which is a tensor of the shape l_sent*C 
-    ):
+    ) -> List[Chart]:
         charts = list()
         for pretokenized_sent, tags_distribution in zip(pretokenized_sents, tags_distributions):
             charts.append(
@@ -61,7 +61,7 @@ class Parser:
         pretokenized_sent: List[str],
         tags_distribution: torch.Tensor
         # a tensor of the shape l_sent * C
-    ):
+    ) -> Chart:
         chart = Chart(len(pretokenized_sent))
 
         topk_ps, topk_ids = torch.topk(tags_distribution, k = min(tags_distribution.shape[1], self.beam_width), dim = 1)
@@ -135,7 +135,7 @@ class CCGParser(Parser):
         self,
         pretokenized_sent: List[str],
         categories_distribution: List[torch.Tensor] # l_sent * C
-    ):
+    ) -> Chart:
         chart = Chart(len(pretokenized_sent))
 
         topk_ps, topk_ids = torch.topk(
