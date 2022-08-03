@@ -1,3 +1,4 @@
+import time
 from typing import Tuple, List, Dict, Callable, Union, Optional, TypeVar
 from string import ascii_letters
 from base import Token, Atom, Functor, ConstituentNode, Category, UnaryRule, BinaryRule
@@ -360,25 +361,8 @@ binary_rules = [
 ]
 
 
-def apply_instantiated_unary_rules(x: ConstituentNode, unary_rule_pairs: List[Pair[str]]) -> List[ConstituentNode]:
-    results = list()
-
-    for unary_rule_pair in unary_rule_pairs:
-        input_cat, output_cat = unary_rule_pair
-        input_cat = Category.parse(input_cat)
-        if x.tag == input_cat:
-            results.append(
-                ConstituentNode(
-                    tag = Category.parse(output_cat),
-                    children = [x],
-                    used_rule = 'UNARY_INSTANCE' ### need to specify which rule is used later
-                )
-            )
-    return results
-
-
 if __name__ == '__main__':
-    
+    # sample use
     token_1 = Token(contents = 'like', lemma = 'like', POS = 'verb', tag = Category.parse('(X\\NP[nb])/(PP\\S)'))
     token_2 = Token(contents = 'apples', lemma = 'apple', POS = 'noun', tag = Category.parse('NP\\X'))
     token_3 = Token(contents = 'I', lemma = 'I', POS = 'pron', tag = Category.parse('PP\\S[dcl]'))
