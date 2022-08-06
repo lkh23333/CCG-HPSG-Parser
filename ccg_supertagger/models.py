@@ -23,14 +23,14 @@ def _setup_seed(seed):
     torch.backends.cudnn.benchmark = False
 _setup_seed(0)
 
-class CCGSupertaggerModel(nn.Module):
+class BaseSupertaggingModel(nn.Module):
     def __init__(
         self,
         model_path: str,
         n_classes: int,
         dropout_p: float = 0.2
     ):
-        super(CCGSupertaggerModel, self).__init__()
+        super().__init__()
         self.bert = BertModel.from_pretrained(model_path)
         self.w1 = nn.Linear(768, 1024)
         self.w2 = nn.Linear(1024, n_classes)

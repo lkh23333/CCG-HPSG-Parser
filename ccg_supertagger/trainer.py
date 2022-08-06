@@ -8,7 +8,7 @@ import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 from transformers import BertTokenizer
 
-from models.simple_model import CCGSupertaggerModel
+from models import BaseSupertaggingModel
 from utils import prepare_data
 
 sys.path.append('..')
@@ -230,7 +230,7 @@ class CCGSupertaggingTrainer:
 def main(args):
 
     print('================= parsing data =================\n')
-    # train_data_items, categories = load_auto_file(args.train_data_dir)
+    train_data_items, categories = load_auto_file(args.train_data_dir)
     dev_data_items, categories = load_auto_file(args.dev_data_dir)
     # test_data_items, _ = load_auto_file(args.test_data_dir)
 
@@ -241,16 +241,16 @@ def main(args):
 
     print('================= preparing data =================\n')
     tokenizer = BertTokenizer.from_pretrained(args.model_path)
-    # train_data = prepare_data(train_data_items, tokenizer, category2idx)
+    train_data = prepare_data(train_data_items, tokenizer, category2idx)
     dev_data = prepare_data(dev_data_items, tokenizer, category2idx)
     # test_data = prepare_data(test_data_items, tokenizer, category2idx)
 
-    # train_dataset = CCGSupertaggingDataset(
-    #     data = train_data['input_ids'],
-    #     mask = train_data['mask'],
-    #     word_piece_tracked = train_data['word_piece_tracked'],
-    #     target = train_data['target']
-    # )
+    train_dataset = CCGSupertaggingDataset(
+        data = train_data['input_ids'],
+        mask = train_data['mask'],
+        word_piece_tracked = train_data['word_piece_tracked'],
+        target = train_data['target']
+    )
     dev_dataset = CCGSupertaggingDataset(
         data = dev_data['input_ids'],
         mask = dev_data['mask'],
@@ -261,21 +261,21 @@ def main(args):
     trainer = CCGSupertaggingTrainer(
         n_epochs = args.n_epochs,
         device = args.device,
-        model = CCGSupertaggerModel(
+        model = BaseSupertaggingModel(
             model_path = args.model_path,
             n_classes = len(category2idx),
             dropout_p = args.dropout_p
         ),
         batch_size = args.batch_size,
         checkpoints_dir = args.checkpoints_dir,
-        train_dataset = dev_dataset,
+        train_dataset = train_dataset,
         dev_dataset = dev_dataset,
         lr = args.lr
     )
 
     print('================= supertagging training =================\n')
-    # trainer.train() # default training from the beginning
-    trainer.load_checkpoint_and_train(checkpoint_epoch=1) # train from (checkpoint_epoch + 1)
+    trainer.train() # default training from the beginning
+    # trainer.load_checkpoint_and_train(checkpoint_epoch=1) # train from (checkpoint_epoch + 1)
     # trainer.load_checkpoint_and_test(checkpoint_epoch=1, mode='train_eval')
     # trainer.test(dataset = self.test_dataset, mode = 'test_eval')
     
