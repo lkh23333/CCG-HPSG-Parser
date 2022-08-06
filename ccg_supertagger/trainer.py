@@ -277,7 +277,7 @@ def main(args):
     # trainer.train() # default training from the beginning
     trainer.load_checkpoint_and_train(checkpoint_epoch=1) # train from (checkpoint_epoch + 1)
     # trainer.load_checkpoint_and_test(checkpoint_epoch=1, mode='train_eval')
-    # trainer.test(dataset = self.test_dataset)
+    # trainer.test(dataset = self.test_dataset, mode = 'test_eval')
     
 
 if __name__ == '__main__':
@@ -291,7 +291,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_data_dir', type = str, default = '../data/ccgbank-wsj_02-21.auto')
     parser.add_argument('--dev_data_dir', type = str, default = '../data/ccgbank-wsj_00.auto')
     parser.add_argument('--test_data_dir', type = str, default = '../data/ccgbank-wsj_23.auto')
-    parser.add_argument('--model_path', type = str, default = './models/plms/bert-base-uncased')
+    parser.add_argument('--model_path', type = str, default = '../plms/bert-base-uncased')
     parser.add_argument('--checkpoints_dir', type = str, default = './checkpoints')
     args = parser.parse_args()
 
