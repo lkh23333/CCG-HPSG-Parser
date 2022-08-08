@@ -1,5 +1,5 @@
 from typing import Union, Optional, Dict, Callable, Any
-import sys, os, argparse, random
+import sys, os, argparse, random, json
 import numpy as np
 import torch
 import torch.nn as nn
@@ -231,13 +231,18 @@ def main(args):
 
     print('================= parsing data =================\n')
     train_data_items, categories = load_auto_file(args.train_data_dir)
-    dev_data_items, categories = load_auto_file(args.dev_data_dir)
+    dev_data_items, _ = load_auto_file(args.dev_data_dir)
     # test_data_items, _ = load_auto_file(args.test_data_dir)
 
-    categories = sorted(categories) # !!! to ensure the same order for reproducibility !!!
-    category2idx = {categories[idx]: idx for idx in range(len(categories))}
-    category2idx[UNK_CATEGORY] = len(category2idx)
+    with open(args.lexical_category2idx_dir, 'r', encoding = 'utf8') as f:
+        category2idx = json.load(f)
     idx2category = {idx: category for category, idx in category2idx.items()}
+
+    # # for testing codes
+    # categories = sorted(categories) # !!! to ensure the same order for reproducibility !!!
+    # category2idx = {categories[idx]: idx for idx in range(len(categories))}
+    # category2idx[UNK_CATEGORY] = len(category2idx)
+    # idx2category = {idx: category for category, idx in category2idx.items()}
 
     print('================= preparing data =================\n')
     tokenizer = BertTokenizer.from_pretrained(args.model_path)
@@ -291,6 +296,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_data_dir', type = str, default = '../data/ccgbank-wsj_02-21.auto')
     parser.add_argument('--dev_data_dir', type = str, default = '../data/ccgbank-wsj_00.auto')
     parser.add_argument('--test_data_dir', type = str, default = '../data/ccgbank-wsj_23.auto')
+    parser.add_argument('--lexical_category2idx_dir', type = str, default = '../data/lexical_category2idx_from_train_data.json')
     parser.add_argument('--model_path', type = str, default = '../plms/bert-base-uncased')
     parser.add_argument('--checkpoints_dir', type = str, default = './checkpoints')
     args = parser.parse_args()

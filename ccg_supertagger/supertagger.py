@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 
 from ccg_supertagger.utils import pre_tokenize_sent
-from ccg_supertagger.models.simple_model import CCGSupertaggerModel
+from ccg_supertagger.models import BaseSupertaggingModel
 
 sys.path.append('..')
 from data_loader import load_auto_file
@@ -105,18 +105,17 @@ class CCGSupertagger:
 
 
 if __name__ == '__main__':
-    dev_data_dir = '../data/ccgbank-wsj_00.auto'
-    _, categories = load_auto_file(dev_data_dir)
-    categories = sorted(categories)
-    category2idx = {categories[idx]: idx for idx in range(len(categories))}
-    UNK_CATEGORY = 'UNK_CATEGORY'
-    category2idx[UNK_CATEGORY] = len(category2idx)
+    # sample use
+    import json
+    lexical_category2idx_dir = '../data/lexical_category2idx_from_train_data.json'
+    with open(lexical_category2idx_dir, 'r', encoding = 'utf8') as f:
+        category2idx = json.load(f)
     idx2category = {idx: category for category, idx in category2idx.items()}
 
     from transformers import BertTokenizer
     model_path = './models/plms/bert-base-uncased'
     supertagger = CCGSupertagger(
-        model = CCGSupertaggerModel(model_path, len(category2idx)),
+        model = BaseSupertaggingModel(model_path, len(category2idx)),
         tokenizer = BertTokenizer.from_pretrained(model_path),
         idx2category = idx2category
     )
