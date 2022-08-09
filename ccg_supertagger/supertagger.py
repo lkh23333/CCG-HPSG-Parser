@@ -3,10 +3,9 @@ import os, sys, numpy, re
 import torch
 import torch.nn as nn
 
+sys.path.append('..')
 from ccg_supertagger.utils import pre_tokenize_sent
 from ccg_supertagger.models import BaseSupertaggingModel
-
-sys.path.append('..')
 from data_loader import load_auto_file
 
 CategoryStr = TypeVar('CategoryStr')
@@ -20,7 +19,7 @@ class CCGSupertagger:
         self,
         model: nn.Module,
         tokenizer,
-        idx2category: Dict[int, str],
+        idx2category: Dict[int, str] = None,
         top_k: int = 1
     ):
         self.model = model
@@ -61,6 +60,9 @@ class CCGSupertagger:
 
     def _convert_model_outputs(self, outputs: List[torch.Tensor]) -> List[SupertaggerOutput]:
         # outputs: a list of tensors, each of the shape of the length of one sentence * C
+        if self.idx2category == None:
+            raise RuntimeError('Please specify idx2category in the supertagger!!!')
+            
         batch_predicted = list()
         for output in outputs:
             predicted = list()
@@ -113,14 +115,14 @@ if __name__ == '__main__':
     idx2category = {idx: category for category, idx in category2idx.items()}
 
     from transformers import BertTokenizer
-    model_path = './models/plms/bert-base-uncased'
+    model_path = '../plms/bert-base-uncased'
     supertagger = CCGSupertagger(
         model = BaseSupertaggingModel(model_path, len(category2idx)),
         tokenizer = BertTokenizer.from_pretrained(model_path),
         idx2category = idx2category
     )
     checkpoints_dir = './checkpoints'
-    checkpoint_epoch = 5
+    checkpoint_epoch = 20
     supertagger._load_model_checkpoint(checkpoints_dir, checkpoint_epoch)
 
     sent = 'Mr. Vinken is chairman of Elsevier N.V., the Dutch publishing group'
