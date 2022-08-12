@@ -14,7 +14,6 @@ from utils import prepare_data
 sys.path.append('..')
 from data_loader import load_auto_file
 
-UNK_CATEGORY = 'UNK_CATEGORY'
 
 # to set the random seeds
 def _setup_seed(seed):
@@ -185,8 +184,7 @@ class CCGSupertaggingTrainer:
 
             total_cnt += sum(
                 [
-                    sum([1 if cat_id >= 0 else 0 for cat_id in tgt])
-                    for tgt in target
+                    len(word_pieces) for word_pieces in word_piece_tracked
                 ]
             )
             correct_cnt += (torch.argmax(outputs, dim = 2) == target).sum()
@@ -230,7 +228,7 @@ class CCGSupertaggingTrainer:
 def main(args):
 
     print('================= parsing data =================\n')
-    train_data_items, categories = load_auto_file(args.train_data_dir)
+    train_data_items, _ = load_auto_file(args.train_data_dir)
     dev_data_items, _ = load_auto_file(args.dev_data_dir)
     # test_data_items, _ = load_auto_file(args.test_data_dir)
 
@@ -241,7 +239,6 @@ def main(args):
     # # for testing codes
     # categories = sorted(categories) # !!! to ensure the same order for reproducibility !!!
     # category2idx = {categories[idx]: idx for idx in range(len(categories))}
-    # category2idx[UNK_CATEGORY] = len(category2idx)
     # idx2category = {idx: category for category, idx in category2idx.items()}
 
     print('================= preparing data =================\n')
@@ -296,7 +293,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_data_dir', type = str, default = '../data/ccgbank-wsj_02-21.auto')
     parser.add_argument('--dev_data_dir', type = str, default = '../data/ccgbank-wsj_00.auto')
     parser.add_argument('--test_data_dir', type = str, default = '../data/ccgbank-wsj_23.auto')
-    parser.add_argument('--lexical_category2idx_dir', type = str, default = '../data/lexical_category2idx_from_train_data.json')
+    parser.add_argument('--lexical_category2idx_dir', type = str, default = '../data/lexical_category2idx_cutoff.json')
     parser.add_argument('--model_path', type = str, default = '../plms/bert-base-uncased')
     parser.add_argument('--checkpoints_dir', type = str, default = './checkpoints')
     args = parser.parse_args()

@@ -360,6 +360,24 @@ binary_rules = [
     parenthetical_direct_speech
 ]
 
+abbreviated_rule_name = {
+    'forward_type_raising': 'FT',
+    'backward_type_raising': 'BT',
+    'forward_application': 'FA',
+    'backward_application': 'BA',
+    'forward_composition': 'FC',
+    'backward_composition': 'BC',
+    'generalized_forward_composition': 'GFC',
+    'generalized_backward_composition': 'GBC',
+    'conjunction': 'CONJ',
+    'conjunction2': 'CONJ',
+    'remove_punctuation1': 'LP',
+    'remove_punctuation2': 'RP',
+    'remove_punctuation_left': 'LP',
+    'comma_vp_to_adv': 'LP',
+    'parenthetical_direct_speech': 'LP'
+}
+
 
 if __name__ == '__main__':
     # sample use

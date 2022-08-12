@@ -165,3 +165,25 @@ if __name__ == '__main__':
         _iter(root)
 
     print(cats)
+
+
+    # train_dir = 'data/ccgbank-wsj_02-21.auto'
+    # items, _ = load_auto_file(train_dir)
+
+    # def _iter(node, instantiated_unary_rules):
+    #     if isinstance(node, ConstituentNode):
+    #         if len(node.children) == 1 and isinstance(node.children[0], ConstituentNode):
+    #             unary_pair = [str(node.children[0].tag), str(node.tag)]
+    #             if unary_pair not in instantiated_unary_rules:
+    #                 instantiated_unary_rules.append(unary_pair)
+    #         for child in node.children:
+    #             _iter(child, instantiated_unary_rules)
+
+    # instantiated_unary_rules = []
+    # for data_item in items:
+    #     root_node = data_item.tree_root
+    #     _iter(root_node, instantiated_unary_rules)
+    # instantiated_unary_rules = sorted(instantiated_unary_rules)
+    # import json
+    # with open('./data/instantiated_unary_rules_from_train_data.json', 'w', encoding='utf8') as f:
+    #     json.dump(instantiated_unary_rules, f, indent=2, ensure_ascii=False)

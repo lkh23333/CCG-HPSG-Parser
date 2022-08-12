@@ -1,65 +1,57 @@
-import time, sys, random
+import time, os, sys, random, argparse
 import torch
-from parsing import CCGParser
 
-sys.path.append('../ccg_supertagger')
-from supertagger import CCGSupertagger
-from models.simple_model import CCGSupertaggerModel
+from decoders import CCGBaseDecoder
+from ccg_parsing_models import BaseParsingModel
+from parsing import Parser
+
 sys.path.append('..')
 from data_loader import load_auto_file
 from utils import to_auto
 
-
-if __name__ == '__main__':
-
-    dev_data_dir = '../data/ccgbank-wsj_00.auto'
-    dev_data_items, categories = load_auto_file(dev_data_dir)
-    categories = sorted(categories)
-    category2idx = {categories[idx]: idx for idx in range(len(categories))}
-    UNK_CATEGORY = 'UNK_CATEGORY'
-    category2idx[UNK_CATEGORY] = len(category2idx)
-    idx2category = {idx: category for category, idx in category2idx.items()}
-
+def main(args):
+    dev_data_items, _ = load_auto_file(args.dev_data_dir)
     pretokenized_sents = list()
     for data_item in dev_data_items:
         pretokenized_sents.append([token.contents for token in data_item.tokens])
 
-    from transformers import BertTokenizer
-    model_path = '../ccg_supertagger/models/plms/bert-base-uncased'
-    supertagger = CCGSupertagger(
-        model = CCGSupertaggerModel(model_path, len(category2idx)),
-        tokenizer = BertTokenizer.from_pretrained(model_path),
-        idx2category = idx2category
-    )
-    checkpoints_dir = '../ccg_supertagger/checkpoints'
-    checkpoint_epoch = 5
-    supertagger._load_model_checkpoint(checkpoints_dir, checkpoint_epoch)
-
-    pyparser = CCGParser(
-        idx2category = idx2category,
-        beam_width = 3
-    )
-
     import json
-    with open('../data/instantiated_unary_rules_from_train_data.json', 'r', encoding = 'utf8') as f:
-        instantiated_unary_rules = json.load(f)
-    with open('../data/instantiated_binary_rules_from_train_data.json', 'r', encoding = 'utf8') as f:
-        instantiated_binary_rules = json.load(f)
-    pyparser._get_instantiated_unary_rules(instantiated_unary_rules)
-    pyparser._get_instantiated_binary_rules(instantiated_binary_rules)
+    with open(args.lexical_category2idx_dir, 'r', encoding = 'utf8') as f:
+        category2idx = json.load(f)
+    idx2category = {idx: cat for cat, idx in category2idx.items()}
 
-    batch_size = 10
+    decoder = CCGBaseDecoder(
+        beam_width = args.beam_width,
+        idx2tag = idx2category,
+        timeout = args.decoder_timeout
+    )
+    with open(args.instantiated_unary_rules_dir, 'r', encoding = 'utf8') as f:
+        instantiated_unary_rules = json.load(f)
+    with open(args.instantiated_binary_rules_dir, 'r', encoding = 'utf8') as f:
+        instantiated_binary_rules = json.load(f)
+    decoder._get_instantiated_unary_rules(instantiated_unary_rules)
+    decoder._get_instantiated_binary_rules(instantiated_binary_rules)
+
+    parsing_model = BaseParsingModel(
+        model_path = args.supertagging_model_path,
+        supertagging_n_classes = len(idx2category),
+        checkpoints_dir = args.supertagging_model_checkpoints_dir,
+        checkpoint_epoch = args.supertagging_model_checkpoint_epoch,
+        device = args.device
+    )
+
+    parser = Parser(
+        parsing_model = parsing_model,
+        decoder = decoder
+    )
+
     buffer = []
-    for i in range(0, len(pretokenized_sents), batch_size):
+    for i in range(0, len(pretokenized_sents), args.batch_size):
         print(f'======== {i} / {len(pretokenized_sents)} ========')
-        outputs = supertagger.get_model_outputs_for_batch(pretokenized_sents[i: i+batch_size])
-        data_ids = [data_item.id for data_item in dev_data_items[i: i+batch_size]]
+        data_ids = [data_item.id for data_item in dev_data_items[i: i + args.batch_size]]
 
         t0 = time.time()
-        charts = pyparser.batch_parse(
-            pretokenized_sents = pretokenized_sents[i: i+batch_size],
-            tags_distributions = outputs
-        )
+        charts = parser.batch_parse(pretokenized_sents[i: i + args.batch_size])
         print(f'time: {time.time() - t0}s')
         
         # for chart in charts:
@@ -67,7 +59,11 @@ if __name__ == '__main__':
 
         for j in range(len(charts)):
 
-            if len(charts[j].chart[0][-1]) == 0:
+            if charts[j] is None:
+                chart_item = None
+            elif charts[j].chart[0][-1] is None:
+                chart_item = None
+            elif len(charts[j].chart[0][-1]) == 0:
                 chart_item = None
             else:
                 chart_item = charts[j].chart[0][-1][random.randint(0, max(0, len(charts[j].chart[0][-1])-1))]
@@ -76,7 +72,37 @@ if __name__ == '__main__':
             if chart_item:
                 buffer.append(to_auto(chart_item.constituent) + '\n')
             else:
-                buffer.append('()\n')
+                buffer.append('(<L S None None None S>)\n')
     
-    with open('./evaluation/wsj_00.predicted.auto', 'w', encoding='utf8') as f:
+    predicted_auto_file_output_dir = os.path.join(
+        args.predicted_auto_files_dir,
+        '_'.join([
+            'unary_X_binary_seen',
+            'beam_width' + str(args.beam_width),
+            'timeout' + str(args.decoder_timeout)
+        ]) + '.auto'
+    )
+    with open(predicted_auto_file_output_dir, 'w', encoding='utf8') as f:
         f.writelines(buffer)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description = 'parsing')
+    parser.add_argument('--train_data_dir', type = str, default = '../data/ccgbank-wsj_02-21.auto')
+    parser.add_argument('--dev_data_dir', type = str, default = '../data/ccgbank-wsj_00.auto')
+    parser.add_argument('--test_data_dir', type = str, default = '../data/ccgbank-wsj_23.auto')
+    parser.add_argument('--lexical_category2idx_dir', type = str, default = '../data/lexical_category2idx_cutoff.json')
+    parser.add_argument('--instantiated_unary_rules_dir', type = str, default = '../data/instantiated_unary_rules_with_X.json')
+    parser.add_argument('--instantiated_binary_rules_dir', type = str, default = '../data/instantiated_seen_binary_rules.json')
+    parser.add_argument('--supertagging_model_path', type = str, default = '../plms/bert-base-uncased')
+    parser.add_argument('--supertagging_model_checkpoints_dir', type = str, default = '../ccg_supertagger/checkpoints')
+    parser.add_argument('--supertagging_model_checkpoint_epoch', type = str, default = 2)
+    parser.add_argument('--device', type = torch.device, default = torch.device('cuda:0'))
+    parser.add_argument('--batch_size', type = int, default = 10)
+    parser.add_argument('--beam_width', type = int, default = 5)
+    parser.add_argument('--decoder_timeout', help = 'time out value for decoding one sentence', type = float, default = 16.0)
+    parser.add_argument('--predicted_auto_files_dir', type = str, default = './evaluation')
+    args = parser.parse_args()
+
+    print(f'======== unary_X_binary_seen_beam_width{args.beam_width}_timeout{args.decoder_timeout} ========')
+    main(args)

@@ -20,12 +20,15 @@ class BaseParsingModel(nn.Module):
         model_path: str,
         supertagging_n_classes: int,
         checkpoints_dir: str,
-        checkpoint_epoch: int
+        checkpoint_epoch: int,
+        device: torch.device = torch.device('cuda:0')
     ):
         super().__init__()
+        self.device = device
         self.supertagger = CCGSupertagger(
             model = BaseSupertaggingModel(model_path, supertagging_n_classes),
-            tokenizer = BertTokenizer.from_pretrained(model_path)
+            tokenizer = BertTokenizer.from_pretrained(model_path),
+            device = self.device
         )
         self.supertagger._load_model_checkpoint(checkpoints_dir, checkpoint_epoch)
 

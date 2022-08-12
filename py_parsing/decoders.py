@@ -1,4 +1,4 @@
-import sys
+import sys, time
 import torch, bisect
 from typing import *
 
@@ -30,7 +30,6 @@ class Chart:
         # [0, ..., l_sent-1] * [0, 1, ..., l_sent]
         self.l = len(self.chart)
 
-
 class Decoder: # for testing directly, no need to train
     
     def __init__(
@@ -49,12 +48,7 @@ class Decoder: # for testing directly, no need to train
 
         charts = list()
         for i in range(len(pretokenized_sents)):
-            charts.append(
-                self.decode(
-                    pretokenized_sents[i],
-                    batch_representations[i]
-                )
-            )
+            charts.append(self.decode(pretokenized_sents[i], batch_representations[i]))
         return charts
 
     def decode(
@@ -105,12 +99,14 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
     def __init__(
         self,
         beam_width: int,
-        idx2tag: Dict[int, str]
+        idx2tag: Dict[int, str],
+        timeout: int = 4
     ):
         super().__init__(
             beam_width = beam_width,
             idx2tag = idx2tag
         )
+        self.timeout = timeout
 
     def _get_instantiated_unary_rules(self, instantiated_unary_rules: List[InstantiatedUnaryRule]):
         self.apply_instantiated_unary_rules = dict()
@@ -143,6 +139,7 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
         representations: SupertaggingRepresentations
     ) -> Chart:
 
+        t0 = time.time()
         chart = Chart(len(pretokenized_sent))
 
         topk_ps, topk_ids = torch.topk(representations, k = min(representations.shape[1], self.beam_width), dim = 1)
@@ -168,6 +165,10 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
         # CKY algorithm
         for i in range(chart.l):
             self._apply_unary_rules(chart, tokens, i)
+
+            if (time.time() - t0) >= self.timeout:
+                return None
+
             for k in range(i - 1, -1, -1):
                 # t0 = time.time()
                 self._apply_binary_rules(chart, k, i + 1)
@@ -232,26 +233,26 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
                                     score = left.score + right.score
                                 )
                                 bisect.insort(results, new_item, key = lambda x: x.score)
-                        else:
-                            if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
-                                for binary_rule in ccg_rules.binary_rules:
-                                    result = binary_rule(left.constituent, right.constituent)
-                                    if result:
-                                        new_item = ChartItem(
-                                            constituent = result,
-                                            score = left.score + right.score
-                                        )
-                                        bisect.insort(results, new_item, key = lambda x: x.score)
-                    else:
-                        if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
-                            for binary_rule in ccg_rules.binary_rules:
-                                result = binary_rule(left.constituent, right.constituent)
-                                if result:
-                                    new_item = ChartItem(
-                                        constituent = result,
-                                        score = left.score + right.score
-                                    )
-                                    bisect.insort(results, new_item, key = lambda x: x.score)
+                    #     else:
+                    #         if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
+                    #             for binary_rule in ccg_rules.binary_rules:
+                    #                 result = binary_rule(left.constituent, right.constituent)
+                    #                 if result:
+                    #                     new_item = ChartItem(
+                    #                         constituent = result,
+                    #                         score = left.score + right.score
+                    #                     )
+                    #                     bisect.insort(results, new_item, key = lambda x: x.score)
+                    # else:
+                    #     if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
+                    #         for binary_rule in ccg_rules.binary_rules:
+                    #             result = binary_rule(left.constituent, right.constituent)
+                    #             if result:
+                    #                 new_item = ChartItem(
+                    #                     constituent = result,
+                    #                     score = left.score + right.score
+                    #                 )
+                    #                 bisect.insort(results, new_item, key = lambda x: x.score)
               
         results = results[-1 : len(results)-1-self.beam_width : -1] if len(results)-1-self.beam_width >= 0 else results[-1::-1]
         chart.chart[i][k] = results

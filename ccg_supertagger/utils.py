@@ -6,7 +6,6 @@ from typing import List, Tuple, Dict
 sys.path.append('..')
 from data_loader import DataItem
 
-UNK_CATEGORY = 'UNK_CATEGORY'
 DATA_MASK_PADDING = 0
 TARGET_PADDING = -100
 
@@ -25,7 +24,7 @@ def pre_tokenize_sent(sent: str) -> List[str]:
 def get_cat_ids(categories: List[str], category2idx: Dict[str, int]) -> List[int]:
     # take one list of category strings and return a list of corresponding one-hot vectors
     return [
-        category2idx[category] if category in category2idx.keys() else category2idx[UNK_CATEGORY] 
+        category2idx[category] if category in category2idx.keys() else TARGET_PADDING
         for category in categories
     ]
 

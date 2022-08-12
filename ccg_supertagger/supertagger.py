@@ -20,12 +20,14 @@ class CCGSupertagger:
         model: nn.Module,
         tokenizer,
         idx2category: Dict[int, str] = None,
-        top_k: int = 1
+        top_k: int = 1,
+        device: torch.device = torch.device('cuda:0')
     ):
         self.model = model
         self.tokenizer = tokenizer
         self.idx2category = idx2category
         self.top_k = top_k
+        self.device = device
 
     def _prepare_batch_data(self, batch: List[List[str]]) -> Dict[str, Any]:
         # batch: a list of pretokenized sentences (a list of strings)
@@ -73,15 +75,23 @@ class CCGSupertagger:
         return batch_predicted
 
     def _load_model_checkpoint(self, checkpoints_dir: str, checkpoint_epoch: int):
-        checkpoint = torch.load(os.path.join(checkpoints_dir, f'epoch_{checkpoint_epoch}.pt'))
+        checkpoint = torch.load(
+            os.path.join(checkpoints_dir, f'epoch_{checkpoint_epoch}.pt'),
+            map_location = self.device
+        )
         self.model.load_state_dict(checkpoint['model_state_dict'])
 
     def get_model_outputs_for_batch(self, batch: List[Union[str, List[str]]]) -> List[torch.Tensor]:
+        
+        self.model.to(self.device)
+        
         for i in range(len(batch)):
             if isinstance(batch[i], str):
                 batch[i] = pre_tokenize_sent(batch[i])
         
         batch_data = self._prepare_batch_data(batch)
+        batch_data['input_ids'] = batch_data['input_ids'].to(self.device)
+        batch_data['mask'] = batch_data['mask'].to(self.device)
         outputs = self.model(
             encoded_batch = batch_data['input_ids'],
             mask = batch_data['mask'],

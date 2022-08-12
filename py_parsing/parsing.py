@@ -15,12 +15,10 @@ class Parser:
     def __init__(
         self,
         parsing_model: nn.Module,
-        decoder: Decoder,
-        idx2tag: Dict[int, Any]
+        decoder: Decoder
     ):
         self.parsing_model = parsing_model
         self.decoder = decoder
-        self.idx2tag = idx2tag
 
     def batch_parse(
         self,
@@ -28,9 +26,6 @@ class Parser:
     ) -> List[Chart]:
 
         batch_representations = self.parsing_model(pretokenized_sents)
-        for representation in batch_representations[0]:
-            topk_ps, topk_ids = torch.topk(representation, k=8)
-            print([self.idx2tag[int(idx.item())] for idx in topk_ids])
         charts = self.decoder.batch_decode(pretokenized_sents, batch_representations)
         
         return charts
@@ -45,7 +40,7 @@ if __name__ == '__main__':
     pretokenized_sent = ['I', 'like', 'apples']
 
     import json
-    with open('../data/lexical_category2idx_from_train_data.json', 'r', encoding = 'utf8') as f:
+    with open('../data/lexical_category2idx_cutoff.json', 'r', encoding = 'utf8') as f:
         category2idx = json.load(f)
     idx2category = {idx: cat for cat, idx in category2idx.items()}
     beam_width = 8
@@ -66,8 +61,7 @@ if __name__ == '__main__':
     )
     parser = Parser(
         parsing_model = parsing_model,
-        decoder = decoder,
-        idx2tag = idx2category
+        decoder = decoder
     )
 
 
