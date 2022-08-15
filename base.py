@@ -147,6 +147,7 @@ class Functor(Category):
         return (self.left.contain_X_feature or self.right.contain_X_feature)
 
 class Token:
+
     def __init__(self, contents: str = None, lemma: str = None, POS: str = None, tag: Tag = None):
         self.contents = contents
         self.lemma = lemma
@@ -155,6 +156,16 @@ class Token:
 
     def __repr__(self) -> str:
         return str({'contents': self.contents, 'lemma': self.lemma, 'POS': self.POS, 'tag': self.tag})
+
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Token):
+            return (
+                self.contents == other.contents
+                and self.lemma == other.lemma
+                and self.POS == other.POS
+                and self.tag == other.tag
+            )
+        return False
 
 UnaryRule = Callable[[Node], Union[Node, FALSE]]
 BinaryRule = Callable[[Node, Node], Union[Node, FALSE]]
