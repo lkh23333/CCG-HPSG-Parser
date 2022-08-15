@@ -97,7 +97,7 @@ if __name__ == '__main__':
     parser.add_argument('--supertagging_model_path', type = str, default = '../plms/bert-base-uncased')
     parser.add_argument('--supertagging_model_checkpoints_dir', type = str, default = '../ccg_supertagger/checkpoints')
     parser.add_argument('--supertagging_model_checkpoint_epoch', type = str, default = 2)
-    parser.add_argument('--device', type = torch.device, default = torch.device('cuda:0'))
+    parser.add_argument('--device', type = torch.device, default = torch.device('cuda:2'))
     parser.add_argument('--batch_size', type = int, default = 10)
     parser.add_argument('--beam_width', type = int, default = 5)
     parser.add_argument('--decoder_timeout', help = 'time out value for decoding one sentence', type = float, default = 16.0)

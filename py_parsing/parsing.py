@@ -57,7 +57,7 @@ if __name__ == '__main__':
         model_path = '../plms/bert-base-uncased',
         supertagging_n_classes = len(idx2category),
         checkpoints_dir = '../ccg_supertagger/checkpoints',
-        checkpoint_epoch = 20
+        checkpoint_epoch = 2
     )
     parser = Parser(
         parsing_model = parsing_model,
@@ -65,5 +65,5 @@ if __name__ == '__main__':
     )
 
 
-    chart = parser.parse(pretokenized_sent).chart
-    print(chart[0][-1])
+    chart = parser.parse(pretokenized_sent)
+    print([str(cell_item.constituent) for cell_item in chart.chart[0][-1].cell_items])

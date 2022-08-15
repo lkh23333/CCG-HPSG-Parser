@@ -153,6 +153,7 @@ class Token:
         self.lemma = lemma
         self.POS = POS
         self.tag = tag
+        self.start_end = None
 
     def __repr__(self) -> str:
         return str({'contents': self.contents, 'lemma': self.lemma, 'POS': self.POS, 'tag': self.tag})
@@ -177,6 +178,7 @@ class ConstituentNode:
         self.children = children
         self.used_rule = used_rule
         self.head_is_left = head_is_left
+        self.start_end = None
 
     def __repr__(self) -> str: # to represent the constituent structure
         return str({'tag': self.tag, 'children': self.children, 'used_rule': self.used_rule})

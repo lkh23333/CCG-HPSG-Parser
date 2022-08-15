@@ -63,7 +63,7 @@ ID=wsj_0003.28 PARSER=GOLD NUMPARSE=1
 ID=wsj_0003.29 PARSER=GOLD NUMPARSE=1
 (<T S 1 2> (<T S 1 2> (<T S 1 2> (<L S/S None None But S/S>) (<T S 1 2> (<L NP None None you NP>) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[to]\NP) None None have (S[dcl]\NP)/(S[to]\NP)>) (<T S[to]\NP 1 2> (<L (S[to]\NP)/(S[b]\NP) None None to (S[to]\NP)/(S[b]\NP)>) (<L S[b]\NP None None recognize S[b]\NP>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/S[dcl] None None that ((S\NP)\(S\NP))/S[dcl]>) (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None these NP/NP>) (<T NP 1 1> (<L N None None events N>) ) ) (<L S[dcl]\NP None None took S[dcl]\NP>) ) ) ) (<L (S\NP)\(S\NP) None None place (S\NP)\(S\NP)>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None 35 ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<L (S\NP)\(S\NP) None None years (S\NP)\(S\NP)>) ) ) ) ) (<L : None None ago :>) ) (<L . None None . .>) )
 ID=wsj_0003.30 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<L NP None None It NP>) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None has (S[dcl]\NP)/NP>) (<L NP/NP None None no NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None bearing N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None on (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None our NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None work N>) ) (<T NP\NP 1 2> (<L NP\NP None None force NP\NP>) (<L NP\NP None None today NP\NP>) ) ) ) ) ) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<L NP None None It NP>) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None has (S[dcl]\NP)/NP>) (<T NP 1 2> (<L NP/NP None None no NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None bearing N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None on (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None our NP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None work N>) ) (<L NP\NP None None force NP\NP>) ) (<L NP\NP None None today NP\NP>) ) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0004.1 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0004.2 PARSER=GOLD NUMPARSE=1
@@ -141,7 +141,7 @@ ID=wsj_0010.1 PARSER=GOLD NUMPARSE=1
 ID=wsj_0010.2 PARSER=GOLD NUMPARSE=1
 (<T NP\NP 1 2> (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None Not (NP\NP)/(NP\NP)>) (<T NP\NP 1 2> (<L (NP\NP)/N None None this (NP\NP)/N>) (<L N None None year N>) ) ) (<L . None None . .>) )
 ID=wsj_0010.3 PARSER=GOLD NUMPARSE=1
-(<L S None None None S>)
+(<T S 1 2> (<T NP 1 2> (<L NP/NP None None The NP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None National N>) ) (<L NP\NP None None Association NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None Manufacturers N>) ) ) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None settled S[dcl]\NP>) (<L (S\NP)\(S\NP) None None on (S\NP)\(S\NP)>) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/N 1 2> (<L ((S\NP)\(S\NP))/N None None the ((S\NP)\(S\NP))/N>) (<L N/N None None Hoosier N/N>) ) (<L N None None capital N>) ) (<T ((S\NP)\(S\NP))\((S\NP)\(S\NP)) 1 2> (<L (((S\NP)\(S\NP))\((S\NP)\(S\NP)))/NP None None of (((S\NP)\(S\NP))\((S\NP)\(S\NP)))/NP>) (<T NP 1 1> (<L N None None Indianapolis N>) ) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/NP None None for ((S\NP)\(S\NP))/NP>) (<L NP/NP None None its NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None fall N>) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None board (NP\NP)/(NP\NP)>) (<L NP\NP None None meeting NP\NP>) ) ) ) (<L . None None . .>) ) ) )
 ID=wsj_0010.4 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0010.5 PARSER=GOLD NUMPARSE=1
@@ -151,7 +151,7 @@ ID=wsj_0010.6 PARSER=GOLD NUMPARSE=1
 ID=wsj_0010.7 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0010.8 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Champagne N>) ) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP 1 1> (<L N None None dessert N>) ) ) ) (<T S[dcl]\NP 1 2> (<L S[dcl]\NP None None followed S[dcl]\NP>) (<L : None None . :>) ) )
+(<T S[b] 1 2> (<T S[b] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Champagne N>) ) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP 1 1> (<L N None None dessert N>) ) ) ) (<L S[b]\NP None None followed S[b]\NP>) ) (<L : None None . :>) )
 ID=wsj_0010.9 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0010.10 PARSER=GOLD NUMPARSE=1
@@ -199,7 +199,7 @@ ID=wsj_0012.2 PARSER=GOLD NUMPARSE=1
 ID=wsj_0012.3 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0012.4 PARSER=GOLD NUMPARSE=1
-(<L S None None None S>)
+(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Alan N>) ) (<L NP\NP None None Spoon NP\NP>) ) (<L , None None , ,>) ) (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None recently (S\NP)/(S\NP)>) (<T S\NP 1 2> (<T (S\NP)/(S\NP) 1 2> (<L ((S\NP)/(S\NP))/NP None None named ((S\NP)/(S\NP))/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Newsweek N>) ) (<L NP\NP None None president NP\NP>) ) (<L ; None None , ;>) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/S[dcl] None None said (S[dcl]\NP)/S[dcl]>) (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Newsweek N>) ) (<L NP\NP None None 's NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None ad (NP\NP)/(NP\NP)>) (<L NP\NP None None rates NP\NP>) ) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[b]\NP) None None would (S[dcl]\NP)/(S[b]\NP)>) (<L S[b]\NP None None increase S[b]\NP>) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None 5 ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<L (S\NP)\(S\NP) None None % (S\NP)\(S\NP)>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None in ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None January N>) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0012.5 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0012.6 PARSER=GOLD NUMPARSE=1
@@ -215,7 +215,7 @@ ID=wsj_0012.10 PARSER=GOLD NUMPARSE=1
 ID=wsj_0012.11 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0012.12 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T NP 1 2> (<L NP/NP None None Both NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Newsweek N>) ) (<T NP\NP 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None and (NP\NP)/(NP\NP)>) (<L (NP\NP)/(NP\NP) None None U.S. (NP\NP)/(NP\NP)>) ) (<L NP\NP None None News NP\NP>) ) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T (S\NP)/(S\NP) 1 2> (<L (S\NP)/(S\NP) None None have (S\NP)/(S\NP)>) (<L . None None been .>) ) (<T S[b]\NP 1 2> (<L (S[b]\NP)/NP None None gaining (S[b]\NP)/NP>) (<T NP 1 1> (<L N None None circulation N>) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None in ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None recent N>) ) (<L NP\NP None None years NP\NP>) ) (<T NP\NP 1 2> (<T (NP\NP)/NP 1 2> (<L (NP\NP)/NP None None without (NP\NP)/NP>) (<T NP\NP 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None heavy (NP\NP)/(NP\NP)>) (<L NP\NP None None use NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None electronic N>) ) ) ) ) (<T NP 1 2> (<T NP 1 1> (<L N None None giveaways N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None to (NP\NP)/NP>) (<L NP None None subscribers NP>) ) ) ) ) (<L , None None , ,>) ) (<L NP\NP None None such NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None as (NP\NP)/NP>) (<T NP 1 1> (<L N None None telephones N>) ) ) ) (<T NP\NP 1 2> (<L conj None None or conj>) (<L NP\NP None None watches NP\NP>) ) ) ) (<L : None None . :>) ) ) )
+(<L S None None None S>)
 ID=wsj_0012.13 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0012.14 PARSER=GOLD NUMPARSE=1
@@ -319,7 +319,7 @@ ID=wsj_0016.3 PARSER=GOLD NUMPARSE=1
 ID=wsj_0016.4 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0016.5 PARSER=GOLD NUMPARSE=1
-(<L S None None None S>)
+(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Sales N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None passenger NP/NP>) (<T NP 1 1> (<L N None None cars N>) ) ) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None grew S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None 22 ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<L (S\NP)\(S\NP) None None % (S\NP)\(S\NP)>) ) ) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/N 1 2> (<T ((S\NP)\(S\NP))/N 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None from ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<L ((S\NP)\(S\NP))/N None None a ((S\NP)\(S\NP))/N>) ) (<L N/N None None year N/N>) ) (<L N None None earlier N>) ) ) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/NP None None to ((S\NP)\(S\NP))/NP>) (<L NP/NP None None 361,376 NP/NP>) ) (<T NP 1 1> (<L N None None units N>) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0016.6 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0017.1 PARSER=GOLD NUMPARSE=1
@@ -361,7 +361,7 @@ ID=wsj_0018.15 PARSER=GOLD NUMPARSE=1
 ID=wsj_0018.16 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0018.17 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T S/S 1 2> (<L (S/S)/NP None None Besides (S/S)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None the NP/NP>) (<T NP[nb]/N 1 2> (<T NP 1 1> (<L N None None designer N>) ) (<L (NP[nb]/N)\NP None None 's (NP[nb]/N)\NP>) ) ) (<T N 1 2> (<L N None None age N>) (<T N\N 1 2> (<L , None None , ,>) (<T N 1 2> (<L N/N None None other N/N>) (<L N None None risk N>) ) ) ) ) ) (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None factors N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None for (NP\NP)/NP>) (<T NP 1 1> (<L N None None Mr. N>) ) ) ) (<T NP\NP 1 2> (<L NP\NP None None Cray NP\NP>) (<T NP\NP 1 2> (<L NP\NP None None 's NP\NP>) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None new (NP\NP)/(NP\NP)>) (<L NP\NP None None company NP\NP>) ) ) ) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None include (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None the NP/NP>) (<T NP[nb]/N 1 2> (<T NP[nb]/N 1 2> (<T NP[nb]/N 1 2> (<T NP 1 1> (<L N None None Cray-3 N>) ) (<L (NP[nb]/N)\NP None None 's (NP[nb]/N)\NP>) ) (<L N/N None None tricky N/N>) ) (<T N/N 1 2> (<L , None None , ,>) (<T N/N 1 2> (<L (N/N)/(N/N) None None unproven (N/N)/(N/N)>) (<L N/N None None chip N/N>) ) ) ) ) (<L N None None technology N>) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T S/S 1 2> (<L (S/S)/NP None None Besides (S/S)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None the NP/NP>) (<T NP[nb]/N 1 2> (<T NP 1 1> (<L N None None designer N>) ) (<L (NP[nb]/N)\NP None None 's (NP[nb]/N)\NP>) ) ) (<T N 1 2> (<L N None None age N>) (<T N\N 1 2> (<L , None None , ,>) (<T N 1 2> (<L N/N None None other N/N>) (<L N None None risk N>) ) ) ) ) ) (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None factors N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None for (NP\NP)/NP>) (<T NP 1 1> (<L N None None Mr. N>) ) ) ) (<L NP\NP None None Cray NP\NP>) ) (<L NP\NP None None 's NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None new (NP\NP)/(NP\NP)>) (<L NP\NP None None company NP\NP>) ) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None include (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None the NP/NP>) (<T NP[nb]/N 1 2> (<T NP[nb]/N 1 2> (<T NP[nb]/N 1 2> (<T NP 1 1> (<L N None None Cray-3 N>) ) (<L (NP[nb]/N)\NP None None 's (NP[nb]/N)\NP>) ) (<L N/N None None tricky N/N>) ) (<T N/N 1 2> (<L , None None , ,>) (<T N/N 1 2> (<L (N/N)/(N/N) None None unproven (N/N)/(N/N)>) (<L N/N None None chip N/N>) ) ) ) ) (<T N 1 2> (<L N None None technology N>) (<L . None None . .>) ) ) ) ) )
 ID=wsj_0018.18 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0018.19 PARSER=GOLD NUMPARSE=1
@@ -415,9 +415,9 @@ ID=wsj_0019.5 PARSER=GOLD NUMPARSE=1
 ID=wsj_0019.6 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0019.7 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<L S/S None None Previously S/S>) (<T S[dcl] 1 2> (<L NP None None he NP>) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None was (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None vice N>) ) (<L NP\NP None None president NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None Eastern N>) ) ) ) (<L NP\NP None None Edison NP\NP>) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<L S/S None None Previously S/S>) (<T S[dcl] 1 2> (<L NP None None he NP>) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None was (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None vice N>) ) (<L NP\NP None None president NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None Eastern N>) ) ) ) (<T NP\NP 1 2> (<L NP\NP None None Edison NP\NP>) (<L . None None . .>) ) ) ) ) )
 ID=wsj_0019.8 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None Robert NP/NP>) (<T NP 1 1> (<L N None None P. N>) ) ) (<L NP\NP None None Tassinari NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None , (NP\NP)/NP>) (<T NP 1 1> (<L N None None 63 N>) ) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L , None None , ,>) (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[pss]\NP) None None was (S[dcl]\NP)/(S[pss]\NP)>) (<L (S[pss]\NP)/NP None None named (S[pss]\NP)/NP>) ) ) (<L NP/NP None None senior NP/NP>) ) (<T NP 1 1> (<L N None None vice N>) ) ) (<L (S\NP)\(S\NP) None None president (S\NP)\(S\NP)>) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None of ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<L NP/NP None None Eastern NP/NP>) (<T NP 1 1> (<L N None None Utilities N>) ) ) ) (<L . None None . .>) ) ) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None Robert NP/NP>) (<T NP 1 1> (<L N None None P. N>) ) ) (<L NP\NP None None Tassinari NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None , (NP\NP)/NP>) (<T NP 1 1> (<L N None None 63 N>) ) ) ) (<T S[dcl]\NP 1 2> (<L , None None , ,>) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[pss]\NP) None None was (S[dcl]\NP)/(S[pss]\NP)>) (<T S[pss]\NP 1 2> (<L (S[pss]\NP)/NP None None named (S[pss]\NP)/NP>) (<T NP 1 2> (<L NP/NP None None senior NP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None vice N>) ) (<T NP\NP 1 1> (<L S[adj]\NP None None president S[adj]\NP>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None Eastern NP/NP>) (<T NP 1 1> (<L N None None Utilities N>) ) ) ) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0019.9 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0020.1 PARSER=GOLD NUMPARSE=1
@@ -485,7 +485,7 @@ ID=wsj_0022.2 PARSER=GOLD NUMPARSE=1
 ID=wsj_0022.3 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0022.4 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None The NP/NP>) (<T NP 1 1> (<L N None None computers N>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None were (S[dcl]\NP)/(S[adj]\NP)>) (<T (S[adj]\NP)/NP 1 2> (<L (S[adj]\NP)/PP None None crude (S[adj]\NP)/PP>) (<L PP/NP None None by PP/NP>) ) ) (<T NP 1 2> (<T NP 1 1> (<L N None None today N>) ) (<T NP\NP 1 2> (<L NP\NP None None 's NP\NP>) (<L NP\NP None None standards NP\NP>) ) ) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None The NP/NP>) (<T NP 1 1> (<L N None None computers N>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None were (S[dcl]\NP)/(S[adj]\NP)>) (<T (S[adj]\NP)/NP 1 2> (<L (S[adj]\NP)/PP None None crude (S[adj]\NP)/PP>) (<L PP/NP None None by PP/NP>) ) ) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None today N>) ) (<L NP\NP None None 's NP\NP>) ) (<T NP\NP 1 2> (<L NP\NP None None standards NP\NP>) (<L . None None . .>) ) ) ) )
 ID=wsj_0022.5 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0022.6 PARSER=GOLD NUMPARSE=1
@@ -545,7 +545,7 @@ ID=wsj_0026.1 PARSER=GOLD NUMPARSE=1
 ID=wsj_0026.2 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0026.3 PARSER=GOLD NUMPARSE=1
-(<L S None None None S>)
+(<T S[dcl] 1 2> (<T NP 1 2> (<T NP/NP 1 2> (<L NP/NP None None Previously NP/NP>) (<L , None None , ,>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None watch N>) ) (<L NP\NP None None imports NP\NP>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[pss]\NP) None None were (S[dcl]\NP)/(S[pss]\NP)>) (<L (S[pss]\NP)/NP None None denied (S[pss]\NP)/NP>) ) (<L NP/NP None None such NP/NP>) ) (<L NP/NP None None duty-free NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None treatment N>) ) (<L : None None . :>) ) ) )
 ID=wsj_0026.4 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0026.5 PARSER=GOLD NUMPARSE=1
@@ -573,7 +573,7 @@ ID=wsj_0027.7 PARSER=GOLD NUMPARSE=1
 ID=wsj_0027.8 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0027.9 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Analysts N>) ) (<T NP\NP 1 2> (<L conj None None said conj>) (<T NP 1 2> (<L NP/NP None None Mr. NP/NP>) (<T NP 1 1> (<L N None None Stronach N>) ) ) ) ) (<T S\NP 1 2> (<T S[b]\NP 1 2> (<L (S[b]\NP)/(S[to]\NP) None None wants (S[b]\NP)/(S[to]\NP)>) (<T S[to]\NP 1 2> (<L (S[to]\NP)/(S[b]\NP) None None to (S[to]\NP)/(S[b]\NP)>) (<L S[b]\NP None None resume S[b]\NP>) ) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/N 1 2> (<L ((S\NP)\(S\NP))/N None None a ((S\NP)\(S\NP))/N>) (<T N/N 1 2> (<L (N/N)/(N/N) None None more (N/N)/(N/N)>) (<L N/N None None influential N/N>) ) ) (<L N None None role N>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None in ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None running NP/NP>) (<L NP[nb]/N None None the NP[nb]/N>) ) (<T N 1 2> (<L N/N None None company N/N>) (<L N None None . N>) ) ) ) ) ) )
+(<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Analysts N>) ) (<T NP\NP 1 2> (<L conj None None said conj>) (<T NP 1 2> (<L NP/NP None None Mr. NP/NP>) (<T NP 1 1> (<L N None None Stronach N>) ) ) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S[pt]\NP 1 2> (<L (S[pt]\NP)/(S[to]\NP) None None wants (S[pt]\NP)/(S[to]\NP)>) (<T S[to]\NP 1 2> (<L (S[to]\NP)/(S[b]\NP) None None to (S[to]\NP)/(S[b]\NP)>) (<L S[b]\NP None None resume S[b]\NP>) ) ) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/N 1 2> (<L ((S\NP)\(S\NP))/N None None a ((S\NP)\(S\NP))/N>) (<T N/N 1 2> (<L (N/N)/(N/N) None None more (N/N)/(N/N)>) (<L N/N None None influential N/N>) ) ) (<L N None None role N>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None in ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None running NP/NP>) (<L NP[nb]/N None None the NP[nb]/N>) ) (<T N 1 2> (<L N/N None None company N/N>) (<L N None None . N>) ) ) ) ) )
 ID=wsj_0027.10 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0027.11 PARSER=GOLD NUMPARSE=1
@@ -641,7 +641,7 @@ ID=wsj_0034.3 PARSER=GOLD NUMPARSE=1
 ID=wsj_0034.5 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0034.6 PARSER=GOLD NUMPARSE=1
-(<T NP[nb] 1 2> (<L NP[nb]/N None None The NP[nb]/N>) (<T N 1 2> (<T N 1 2> (<L N/N None None next N/N>) (<L N None None province N>) ) (<L : None None ? :>) ) )
+(<T NP[nb] 1 2> (<T NP[nb]/N 1 2> (<L NP[nb]/N None None The NP[nb]/N>) (<L N/N None None next N/N>) ) (<T N 1 2> (<L N None None province N>) (<L : None None ? :>) ) )
 ID=wsj_0034.7 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0034.8 PARSER=GOLD NUMPARSE=1
@@ -691,7 +691,7 @@ ID=wsj_0034.29 PARSER=GOLD NUMPARSE=1
 ID=wsj_0034.30 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0034.31 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<L S/S None None And S/S>) (<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None several N>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<T (NP\NP)/(S[dcl]\NP) 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None new (NP\NP)/(NP\NP)>) (<L NP\NP None None funds NP\NP>) ) (<L (NP\NP)/(S[dcl]\NP) None None that (NP\NP)/(S[dcl]\NP)>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None are (S[dcl]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None n't (S[adj]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None even (S[adj]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None fully (S[adj]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None invested S[adj]\NP>) ) ) ) ) ) (<L NP\NP None None yet NP\NP>) ) ) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/PP 1 2> (<L (S[dcl]\NP)/(S[pt]\NP) None None have (S[dcl]\NP)/(S[pt]\NP)>) (<L (S[pt]\NP)/PP None None jumped (S[pt]\NP)/PP>) ) (<L PP/NP None None to PP/NP>) ) (<T NP 1 1> (<L N None None trade N>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None at ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None big N>) ) (<L NP\NP None None premiums NP\NP>) ) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<L S/S None None And S/S>) (<T S 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None several N>) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None new (NP\NP)/(NP\NP)>) (<L NP\NP None None funds NP\NP>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/(S[dcl]\NP) None None that (NP\NP)/(S[dcl]\NP)>) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None are (S[dcl]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None n't (S[adj]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None even (S[adj]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None fully (S[adj]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None invested S[adj]\NP>) ) ) ) ) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None yet (S\NP)/(S\NP)>) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[pt]\NP) None None have (S[dcl]\NP)/(S[pt]\NP)>) (<T S[pt]\NP 1 2> (<T (S[pt]\NP)/NP 1 2> (<L (S[pt]\NP)/PP None None jumped (S[pt]\NP)/PP>) (<L PP/NP None None to PP/NP>) ) (<T NP 1 1> (<L N None None trade N>) ) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None at ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None big N>) ) (<L NP\NP None None premiums NP\NP>) ) ) ) (<L . None None . .>) ) ) )
 ID=wsj_0034.32 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0034.33 PARSER=GOLD NUMPARSE=1
@@ -725,7 +725,7 @@ ID=wsj_0035.7 PARSER=GOLD NUMPARSE=1
 ID=wsj_0035.8 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0035.9 PARSER=GOLD NUMPARSE=1
-(<T S[b] 1 2> (<T NP 1 1> (<L N None None Moscow N>) ) (<T S[b]\NP 1 2> (<L (S[b]\NP)/(S[pt]\NP) None None has (S[b]\NP)/(S[pt]\NP)>) (<T S[pt]\NP 1 2> (<L (S[pt]\NP)/NP None None settled (S[pt]\NP)/NP>) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None pre-1917 NP/NP>) (<T NP 1 1> (<L N None None debts N>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None with (NP\NP)/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None other NP/NP>) (<T NP 1 1> (<L N None None countries N>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None in (NP\NP)/NP>) (<T NP 1 1> (<L N None None recent N>) ) ) ) (<L NP\NP None None years NP\NP>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<T (NP\NP)/NP 1 2> (<L (NP\NP)/NP None None at (NP\NP)/NP>) (<T NP\NP 1 2> (<T NP\NP 1 1> (<L S[adj]\NP None None less S[adj]\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None than (NP\NP)/NP>) (<T NP 1 1> (<L N None None face N>) ) ) ) ) (<T NP 1 1> (<L N None None value N>) ) ) (<L . None None . .>) ) ) ) ) ) ) )
+(<T S 1 2> (<T S 1 2> (<T NP 1 1> (<L N None None Moscow N>) ) (<T S\NP 1 2> (<T S[b]\NP 1 2> (<T (S[b]\NP)/NP 1 2> (<L (S[b]\NP)/(S[pt]\NP) None None has (S[b]\NP)/(S[pt]\NP)>) (<L (S[pt]\NP)/NP None None settled (S[pt]\NP)/NP>) ) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None pre-1917 NP/NP>) (<T NP 1 1> (<L N None None debts N>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None with (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None other NP/NP>) (<T NP 1 1> (<L N None None countries N>) ) ) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None in ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None recent N>) ) (<L NP\NP None None years NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None at (NP\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None less N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None than (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None face NP/NP>) (<T NP 1 1> (<L N None None value N>) ) ) ) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0035.10 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0035.11 PARSER=GOLD NUMPARSE=1
@@ -761,7 +761,7 @@ ID=wsj_0036.14 PARSER=GOLD NUMPARSE=1
 ID=wsj_0036.15 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0036.16 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Factory N>) ) (<L NP\NP None None payrolls NP\NP>) ) (<T S\NP 1 2> (<L S[dcl]\NP None None fell S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None in ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None September N>) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Factory N>) ) (<L NP\NP None None payrolls NP\NP>) ) (<T S\NP 1 2> (<L S[dcl]\NP None None fell S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None in ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None September N>) ) (<L . None None . .>) ) ) ) )
 ID=wsj_0036.17 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0036.18 PARSER=GOLD NUMPARSE=1
@@ -823,13 +823,13 @@ ID=wsj_0036.45 PARSER=GOLD NUMPARSE=1
 ID=wsj_0036.46 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0036.47 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<L S/S None None And S/S>) (<T S 1 2> (<T NP 1 2> (<L NP/NP None None 8 NP/NP>) (<T NP 1 1> (<L N None None % N>) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/S[dcl] None None said (S[dcl]\NP)/S[dcl]>) (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None export NP/NP>) (<T NP 1 1> (<L N None None orders N>) ) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None were (S[dcl]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None down S[adj]\NP>) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None last ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<L (S\NP)\(S\NP) None None month (S\NP)\(S\NP)>) ) (<L , None None , ,>) ) ) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/PP None None compared ((S\NP)\(S\NP))/PP>) (<L PP/NP None None with PP/NP>) ) (<L NP/NP None None 6 NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None % N>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L (NP\NP)/N None None the (NP\NP)/N>) (<L N None None month N>) ) (<L NP\NP None None before NP\NP>) ) ) ) ) (<L . None None . .>) ) ) )
+(<T S 1 2> (<L S/S None None And S/S>) (<T S 1 2> (<T NP 1 2> (<L NP/NP None None 8 NP/NP>) (<T NP 1 1> (<L N None None % N>) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/S[dcl] None None said (S[dcl]\NP)/S[dcl]>) (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None export NP/NP>) (<T NP 1 1> (<L N None None orders N>) ) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None were (S[dcl]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None down S[adj]\NP>) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None last ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<L (S\NP)\(S\NP) None None month (S\NP)\(S\NP)>) ) (<L , None None , ,>) ) ) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/PP None None compared ((S\NP)\(S\NP))/PP>) (<L PP/NP None None with PP/NP>) ) (<T NP 1 2> (<L NP/NP None None 6 NP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None % N>) ) (<T NP\NP 1 2> (<L (NP\NP)/N None None the (NP\NP)/N>) (<L N None None month N>) ) ) (<L NP\NP None None before NP\NP>) ) ) ) ) (<L . None None . .>) ) ) )
 ID=wsj_0036.48 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0036.49 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0036.50 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None The N>) ) (<L NP\NP None None decline NP\NP>) ) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None was (S[dcl]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None even (S[adj]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None steeper S[adj]\NP>) ) ) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/PP None None than ((S\NP)\(S\NP))/PP>) (<L PP/NP None None in PP/NP>) ) (<T NP 1 1> (<L N None None September N>) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None The N>) ) (<L NP\NP None None decline NP\NP>) ) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None was (S[dcl]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None even (S[adj]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None steeper S[adj]\NP>) ) ) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/PP None None than ((S\NP)\(S\NP))/PP>) (<L PP/NP None None in PP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None September N>) ) (<L . None None . .>) ) ) ) )
 ID=wsj_0036.51 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0036.52 PARSER=GOLD NUMPARSE=1
@@ -839,7 +839,7 @@ ID=wsj_0036.53 PARSER=GOLD NUMPARSE=1
 ID=wsj_0036.54 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0036.55 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<L NP None None Each NP>) (<T S\NP 1 2> (<T (S\NP)/(S\NP) 1 2> (<L ((S\NP)/(S\NP))/NP None None of ((S\NP)/(S\NP))/NP>) (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None survey N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None 's (NP\NP)/NP>) (<T NP 1 1> (<L N None None indicators N>) ) ) ) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None gauges (S[dcl]\NP)/NP>) (<L NP/NP None None the NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None difference N>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L (NP\NP)/NP None None between (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 1> (<L N None None number N>) ) ) ) (<T NP\NP 1 2> (<T (NP\NP)/NP 1 2> (<T (NP\NP)/NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP\NP 1 2> (<L NP\NP None None purchasers NP\NP>) (<T NP\NP 1 2> (<L (NP\NP)/NP None None reporting (NP\NP)/NP>) (<T NP 1 1> (<L N None None improvement N>) ) ) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None in (NP\NP)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None a NP/NP>) (<T NP[nb]/N 1 2> (<T NP[nb]/N 1 2> (<T NP[nb]/N 1 2> (<L NP[nb]/N None None particular NP[nb]/N>) (<T N/N 1 2> (<L N/N None None area N/N>) (<T (N/N)\(N/N) 1 2> (<L conj None None and conj>) (<L N/N None None the N/N>) ) ) ) (<T N/N 1 2> (<L N/N None None number N/N>) (<L N/N None None reporting N/N>) ) ) (<L N/N None None a N/N>) ) ) (<L N None None worsening N>) ) ) ) (<T NP 1 1> (<L N None None . N>) ) ) ) ) ) ) )
+(<L S None None None S>)
 ID=wsj_0036.56 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0036.57 PARSER=GOLD NUMPARSE=1
@@ -867,11 +867,11 @@ ID=wsj_0037.2 PARSER=GOLD NUMPARSE=1
 ID=wsj_0037.3 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0037.4 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<L NP None None They NP>) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None read (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Mickey N>) ) (<L NP\NP None None Spillane NP\NP>) ) ) (<T (S[dcl]\NP)\(S[dcl]\NP) 1 2> (<L conj None None and conj>) (<L S[dcl]\NP None None talk S[dcl]\NP>) ) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None about ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None Groucho N>) ) ) (<T ((S\NP)\(S\NP))\((S\NP)\(S\NP)) 1 2> (<L conj None None and conj>) (<L (S\NP)\(S\NP) None None Harpo (S\NP)\(S\NP)>) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T S 1 2> (<L NP None None They NP>) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None read (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Mickey N>) ) (<L NP\NP None None Spillane NP\NP>) ) ) (<T (S[dcl]\NP)\(S[dcl]\NP) 1 2> (<L conj None None and conj>) (<L S[dcl]\NP None None talk S[dcl]\NP>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None about ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Groucho N>) ) (<T NP\NP 1 2> (<L conj None None and conj>) (<L NP\NP None None Harpo NP\NP>) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0037.5 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0037.6 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<L NP None None This NP>) (<T S[dcl]\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None is (S[dcl]\NP)/NP>) (<L NP None None Japan NP>) ) (<L . None None ? .>) ) )
+(<T S[dcl] 1 2> (<L NP None None This NP>) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None is (S[dcl]\NP)/NP>) (<T NP 1 2> (<L NP None None Japan NP>) (<L . None None ? .>) ) ) )
 ID=wsj_0037.7 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0037.8 PARSER=GOLD NUMPARSE=1
@@ -901,7 +901,7 @@ ID=wsj_0037.19 PARSER=GOLD NUMPARSE=1
 ID=wsj_0037.20 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0037.21 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None Wa N>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/PP 1 2> (<L ((S[dcl]\NP)/PP)/NP None None is ((S[dcl]\NP)/PP)/NP>) (<T NP 1 1> (<L N None None Japanese N>) ) ) (<T PP 1 2> (<L PP/NP None None for PP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None team N>) ) (<L NP\NP None None spirit NP\NP>) ) ) ) ) (<T S[dcl]\S[dcl] 1 2> (<L conj None None and conj>) (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None Japanese NP/NP>) (<T NP 1 1> (<L N None None ballplayers N>) ) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None have (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None miles N>) ) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP 1 2> (<T NP 1 1> (<L N None None miles N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<L NP None None it NP>) ) ) ) ) ) ) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None Wa N>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/PP 1 2> (<L ((S[dcl]\NP)/PP)/NP None None is ((S[dcl]\NP)/PP)/NP>) (<T NP 1 1> (<L N None None Japanese N>) ) ) (<L PP/NP None None for PP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None team N>) ) (<L NP\NP None None spirit NP\NP>) ) ) ) (<T S[dcl]\S[dcl] 1 2> (<L conj None None and conj>) (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None Japanese NP/NP>) (<T NP 1 1> (<L N None None ballplayers N>) ) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None have (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None miles N>) ) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP 1 1> (<L N None None miles N>) ) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 2> (<L NP None None it NP>) (<L . None None . .>) ) ) ) ) ) ) )
 ID=wsj_0037.22 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0037.23 PARSER=GOLD NUMPARSE=1
@@ -1127,7 +1127,7 @@ ID=wsj_0041.8 PARSER=GOLD NUMPARSE=1
 ID=wsj_0041.9 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.10 PARSER=GOLD NUMPARSE=1
-(<T N 1 2> (<T N 1 2> (<T N/N 1 2> (<L (N/N)/(N/N) None None New (N/N)/(N/N)>) (<L N/N None None York N/N>) ) (<L N None None City N>) ) (<L : None None : :>) )
+(<T N 1 2> (<T N/N 1 2> (<L (N/N)/(N/N) None None New (N/N)/(N/N)>) (<L N/N None None York N/N>) ) (<T N 1 2> (<L N None None City N>) (<L : None None : :>) ) )
 ID=wsj_0041.11 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.12 PARSER=GOLD NUMPARSE=1
@@ -1149,7 +1149,7 @@ ID=wsj_0041.19 PARSER=GOLD NUMPARSE=1
 ID=wsj_0041.20 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.21 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP None None The NP>) (<L NP\NP None None other NP\NP>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[pt]\NP) None None has (S[dcl]\NP)/(S[pt]\NP)>) (<L (S[pt]\NP)/NP None None opposed (S[pt]\NP)/NP>) ) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None a NP/NP>) (<T NP 1 1> (<L N None None ban N>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None on (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None cop-killer NP/NP>) (<T NP 1 1> (<L N None None bullets N>) ) ) ) ) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP None None The NP>) (<L NP\NP None None other NP\NP>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[pt]\NP) None None has (S[dcl]\NP)/(S[pt]\NP)>) (<L (S[pt]\NP)/NP None None opposed (S[pt]\NP)/NP>) ) (<T NP 1 2> (<L NP/NP None None a NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None ban N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None on (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None cop-killer NP/NP>) (<T NP 1 1> (<L N None None bullets N>) ) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0041.22 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.23 PARSER=GOLD NUMPARSE=1
@@ -1181,7 +1181,7 @@ ID=wsj_0041.35 PARSER=GOLD NUMPARSE=1
 ID=wsj_0041.36 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.37 PARSER=GOLD NUMPARSE=1
-(<T N/N 1 2> (<L N/N None None Virginia N/N>) (<L : None None : :>) )
+(<T NP\NP 1 2> (<T NP\NP 1 1> (<L S[adj]\NP None None Virginia S[adj]\NP>) ) (<L : None None : :>) )
 ID=wsj_0041.38 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.39 PARSER=GOLD NUMPARSE=1
@@ -1211,7 +1211,7 @@ ID=wsj_0041.50 PARSER=GOLD NUMPARSE=1
 ID=wsj_0041.51 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.52 PARSER=GOLD NUMPARSE=1
-(<L S None None None S>)
+(<T S 1 2> (<T S 1 2> (<T S/S 1 2> (<L (S/S)/NP None None By (S/S)/NP>) (<T NP 1 1> (<L N None None Tuesday N>) ) ) (<T S 1 2> (<L S/S None None night S/S>) (<T S 1 2> (<L , None None , ,>) (<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None television N>) ) (<L NP\NP None None stations NP\NP>) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[ng]\NP) None None were (S[dcl]\NP)/(S[ng]\NP)>) (<L (S[ng]\NP)/NP None None carrying (S[ng]\NP)/NP>) ) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None new N>) ) (<L NP\NP None None ads NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None featuring (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None Mr. NP/NP>) (<T NP 1 1> (<L N None None Coleman N>) ) ) ) ) ) (<L (S\NP)\(S\NP) None None himself (S\NP)\(S\NP)>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None raising ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None questions N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None about (NP\NP)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None Mr. NP/NP>) (<T NP[nb]/N 1 2> (<T NP 1 1> (<L N None None Wilder N>) ) (<L (NP[nb]/N)\NP None None 's (NP[nb]/N)\NP>) ) ) (<L N None None sensitivity N>) ) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None to (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None rape NP/NP>) (<T NP 1 1> (<L N None None victims N>) ) ) ) ) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0041.53 PARSER=GOLD NUMPARSE=1
 (<T N 1 2> (<L N/N None None New N/N>) (<T N 1 2> (<L N None None Jersey N>) (<L : None None : :>) ) )
 ID=wsj_0041.54 PARSER=GOLD NUMPARSE=1
@@ -1219,13 +1219,13 @@ ID=wsj_0041.54 PARSER=GOLD NUMPARSE=1
 ID=wsj_0041.55 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.56 PARSER=GOLD NUMPARSE=1
-(<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None Consider (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Jim N>) ) (<T NP\NP 1 2> (<L NP\NP None None Courter NP\NP>) (<L RRB None None . RRB>) ) ) )
+(<T S[b]\NP 1 2> (<T S[b]\NP 1 2> (<L (S[b]\NP)/NP None None Consider (S[b]\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Jim N>) ) (<L NP\NP None None Courter NP\NP>) ) ) (<L RRB None None . RRB>) )
 ID=wsj_0041.57 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.58 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.59 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None And NP/NP>) (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 2> (<L NP None None nose NP>) (<T NP\NP 1 2> (<L (NP\NP)/NP None None on (NP\NP)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None Mr. NP/NP>) (<T NP[nb]/N 1 2> (<T NP 1 1> (<L N None None Courter N>) ) (<L (NP[nb]/N)\NP None None 's (NP[nb]/N)\NP>) ) ) (<L N None None face N>) ) ) ) ) ) (<L S[dcl]\NP None None grows S[dcl]\NP>) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None And NP/NP>) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<L NP None None nose NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None on (NP\NP)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None Mr. NP/NP>) (<T NP[nb]/N 1 2> (<T NP 1 1> (<L N None None Courter N>) ) (<L (NP[nb]/N)\NP None None 's (NP[nb]/N)\NP>) ) ) (<L N None None face N>) ) ) ) ) (<L S[dcl]\NP None None grows S[dcl]\NP>) ) (<L . None None . .>) )
 ID=wsj_0041.60 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0041.61 PARSER=GOLD NUMPARSE=1
@@ -1281,7 +1281,7 @@ ID=wsj_0043.12 PARSER=GOLD NUMPARSE=1
 ID=wsj_0043.13 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0043.14 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None But NP/NP>) (<L NP None None it NP>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[ng]\NP) None None resists (S[dcl]\NP)/(S[ng]\NP)>) (<T S[ng]\NP 1 2> (<L (S[ng]\NP)/NP None None yielding (S[ng]\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None political N>) ) (<L NP\NP None None ground NP\NP>) ) ) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None But NP/NP>) (<L NP None None it NP>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[ng]\NP) None None resists (S[dcl]\NP)/(S[ng]\NP)>) (<L (S[ng]\NP)/NP None None yielding (S[ng]\NP)/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None political N>) ) (<T NP\NP 1 2> (<L NP\NP None None ground NP\NP>) (<L . None None . .>) ) ) ) )
 ID=wsj_0043.15 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0043.16 PARSER=GOLD NUMPARSE=1
@@ -1343,7 +1343,7 @@ ID=wsj_0043.43 PARSER=GOLD NUMPARSE=1
 ID=wsj_0043.44 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.1 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Cathryn N>) ) (<L NP\NP None None Rice NP\NP>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[b]\NP) None None could (S[dcl]\NP)/(S[b]\NP)>) (<T (S[b]\NP)/NP 1 2> (<L (S[b]\NP)/(S[pt]\NP) None None hardly (S[b]\NP)/(S[pt]\NP)>) (<L (S[pt]\NP)/NP None None believe (S[pt]\NP)/NP>) ) ) (<L NP/NP None None her NP/NP>) ) (<T NP 1 1> (<L N None None eyes N>) ) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Cathryn N>) ) (<L NP\NP None None Rice NP\NP>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[b]\NP) None None could (S[dcl]\NP)/(S[b]\NP)>) (<T S[b]\NP 1 2> (<L (S[b]\NP)/(S[pt]\NP) None None hardly (S[b]\NP)/(S[pt]\NP)>) (<T S[pt]\NP 1 2> (<L (S[pt]\NP)/NP None None believe (S[pt]\NP)/NP>) (<T NP 1 2> (<L NP/NP None None her NP/NP>) (<T NP 1 1> (<L N None None eyes N>) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0044.2 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.3 PARSER=GOLD NUMPARSE=1
@@ -1351,7 +1351,7 @@ ID=wsj_0044.3 PARSER=GOLD NUMPARSE=1
 ID=wsj_0044.4 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.5 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T S 1 2> (<T S/S 1 2> (<L (S/S)/NP None None At (S/S)/NP>) (<T NP 1 2> (<L NP None None the NP>) (<T NP\NP 1 2> (<L NP\NP None None end NP\NP>) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None World N>) ) ) ) ) ) (<T S 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None War N>) ) (<L NP\NP None None II NP\NP>) ) (<T NP\NP 1 2> (<L , None None , ,>) (<L NP None None Germany NP>) ) ) (<T S\NP 1 2> (<L S[dcl]\NP None None surrendered S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None before ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None Japan N>) ) ) ) ) ) (<L . None None ... .>) ) (<L : None None . :>) )
+(<L S None None None S>)
 ID=wsj_0044.6 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.7 PARSER=GOLD NUMPARSE=1
@@ -1411,7 +1411,7 @@ ID=wsj_0044.33 PARSER=GOLD NUMPARSE=1
 ID=wsj_0044.34 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.35 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Use N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Scoring N>) ) (<T NP\NP 1 1> (<L S[adj]\NP None None High S[adj]\NP>) ) ) ) ) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[pss]\NP) None None is (S[dcl]\NP)/(S[pss]\NP)>) (<L S[pss]\NP None None widespread S[pss]\NP>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None in ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None South NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Carolina N>) ) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP\NP 1 1> (<L S[adj]\NP None None common S[adj]\NP>) ) ) ) ) (<T NP\NP 1 2> (<T (NP\NP)/NP 1 2> (<L (NP\NP)/NP None None in (NP\NP)/NP>) (<T NP\NP 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None Greenville (NP\NP)/(NP\NP)>) (<T NP\NP 1 2> (<L NP\NP None None County NP\NP>) (<T NP\NP 1 2> (<L ; None None , ;>) (<T NP 1 1> (<L N None None Mrs. N>) ) ) ) ) (<L NP\NP None None Yeargin NP\NP>) ) ) (<T NP 1 2> (<T NP 1 1> (<L N None None 's N>) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None school (NP\NP)/(NP\NP)>) (<L NP\NP None None district NP\NP>) ) ) ) ) ) ) ) (<L . None None . .>) )
+(<L S None None None S>)
 ID=wsj_0044.36 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.37 PARSER=GOLD NUMPARSE=1
@@ -1419,7 +1419,7 @@ ID=wsj_0044.37 PARSER=GOLD NUMPARSE=1
 ID=wsj_0044.38 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.39 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T NP 1 2> (<L . None None And .>) (<T NP 1 2> (<L NP/NP None None South NP/NP>) (<T NP 1 1> (<L N None None Carolina N>) ) ) ) (<T S[dcl]\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/S[dcl] None None says (S[dcl]\NP)/S[dcl]>) (<T S[dcl] 1 2> (<L NP None None it NP>) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[ng]\NP) None None is (S[dcl]\NP)/(S[ng]\NP)>) (<L (S[ng]\NP)/NP None None getting (S[ng]\NP)/NP>) ) (<T NP 1 1> (<L N None None results N>) ) ) ) ) (<L . None None . .>) ) )
+(<T S[dcl] 1 2> (<T NP 1 2> (<L . None None And .>) (<T NP 1 2> (<L NP/NP None None South NP/NP>) (<T NP 1 1> (<L N None None Carolina N>) ) ) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/S[dcl] None None says (S[dcl]\NP)/S[dcl]>) (<T S[dcl] 1 2> (<L NP None None it NP>) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[ng]\NP) None None is (S[dcl]\NP)/(S[ng]\NP)>) (<T S[ng]\NP 1 2> (<T S[ng]\NP 1 2> (<L (S[ng]\NP)/NP None None getting (S[ng]\NP)/NP>) (<T NP 1 1> (<L N None None results N>) ) ) (<L . None None . .>) ) ) ) ) )
 ID=wsj_0044.40 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.41 PARSER=GOLD NUMPARSE=1
@@ -1433,7 +1433,7 @@ ID=wsj_0044.44 PARSER=GOLD NUMPARSE=1
 ID=wsj_0044.45 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.46 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None South N>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L NP\NP None None Carolina NP\NP>) (<L NP\NP None None 's NP\NP>) ) (<L NP\NP None None reforms NP\NP>) ) ) (<T S[dcl]\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[pss]\NP) None None were (S[dcl]\NP)/(S[pss]\NP)>) (<T S[pss]\NP 1 2> (<L (S[pss]\NP)/PP None None designed (S[pss]\NP)/PP>) (<T PP 1 2> (<L PP/NP None None for PP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None schools N>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L (NP\NP)/NP None None like (NP\NP)/NP>) (<T NP 1 1> (<L N None None Greenville N>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None High (NP\NP)/(NP\NP)>) (<L NP\NP None None School NP\NP>) ) ) ) ) ) ) (<L . None None . .>) ) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None South N>) ) (<L NP\NP None None Carolina NP\NP>) ) (<L NP\NP None None 's NP\NP>) ) (<L NP\NP None None reforms NP\NP>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[pss]\NP) None None were (S[dcl]\NP)/(S[pss]\NP)>) (<T (S[pss]\NP)/NP 1 2> (<L (S[pss]\NP)/PP None None designed (S[pss]\NP)/PP>) (<L PP/NP None None for PP/NP>) ) ) (<T NP 1 2> (<T NP 1 1> (<L N None None schools N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None like (NP\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Greenville N>) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None High (NP\NP)/(NP\NP)>) (<L NP\NP None None School NP\NP>) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0044.47 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.48 PARSER=GOLD NUMPARSE=1
@@ -1485,7 +1485,7 @@ ID=wsj_0044.70 PARSER=GOLD NUMPARSE=1
 ID=wsj_0044.71 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.72 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T NP 1 1> (<L N None None You N>) ) (<T S\NP 1 2> (<L S[dcl]\NP None None 'd S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/(S[ng]\NP) 1 2> (<L (((S\NP)\(S\NP))/(S[ng]\NP))/NP None None see (((S\NP)\(S\NP))/(S[ng]\NP))/NP>) (<L NP None None her NP>) ) (<T S[ng]\NP 1 2> (<L (S[ng]\NP)/NP None None correcting (S[ng]\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None homework N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None in (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 1> (<L N None None stands N>) ) ) ) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/NP None None at ((S\NP)\(S\NP))/NP>) (<L NP/NP None None a NP/NP>) ) (<T NP 1 1> (<L N None None football N>) ) ) (<L (S\NP)\(S\NP) None None game (S\NP)\(S\NP)>) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T NP 1 1> (<L N None None You N>) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None 'd S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/(S[ng]\NP) 1 2> (<L (((S\NP)\(S\NP))/(S[ng]\NP))/NP None None see (((S\NP)\(S\NP))/(S[ng]\NP))/NP>) (<L NP None None her NP>) ) (<T S[ng]\NP 1 2> (<L (S[ng]\NP)/NP None None correcting (S[ng]\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None homework N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None in (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 1> (<L N None None stands N>) ) ) ) ) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/NP None None at ((S\NP)\(S\NP))/NP>) (<L NP/NP None None a NP/NP>) ) (<T NP 1 1> (<L N None None football N>) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<L (S\NP)\(S\NP) None None game (S\NP)\(S\NP)>) (<L . None None . .>) ) ) )
 ID=wsj_0044.73 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.74 PARSER=GOLD NUMPARSE=1
@@ -1527,7 +1527,7 @@ ID=wsj_0044.91 PARSER=GOLD NUMPARSE=1
 ID=wsj_0044.92 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.93 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None These NP/NP>) (<T NP 1 1> (<L N None None kids N>) ) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None broke (S[dcl]\NP)/NP>) (<T NP 1 2> (<L NP/NP None None my NP/NP>) (<T NP 1 1> (<L N None None heart N>) ) ) ) ) (<L RRB None None , RRB>) ) (<T S[dcl]\S[dcl] 1 2> (<T NP 1 1> (<L N None None she N>) ) (<L (S[dcl]\S[dcl])\NP None None says (S[dcl]\S[dcl])\NP>) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None These NP/NP>) (<T NP 1 1> (<L N None None kids N>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None broke (S[dcl]\NP)/NP>) (<L NP/NP None None my NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None heart N>) ) (<L RRB None None , RRB>) ) ) ) (<T S[dcl]\S[dcl] 1 2> (<T NP 1 1> (<L N None None she N>) ) (<L (S[dcl]\S[dcl])\NP None None says (S[dcl]\S[dcl])\NP>) ) ) (<L . None None . .>) )
 ID=wsj_0044.94 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.95 PARSER=GOLD NUMPARSE=1
@@ -1547,9 +1547,9 @@ ID=wsj_0044.101 PARSER=GOLD NUMPARSE=1
 ID=wsj_0044.102 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.103 PARSER=GOLD NUMPARSE=1
-(<T S[adj] 1 2> (<T S[adj] 1 2> (<L NP None None Not NP>) (<L S[adj]\NP None None really S[adj]\NP>) ) (<L . None None . .>) )
+(<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None Not (S[adj]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L S[adj]\NP None None really S[adj]\NP>) (<L . None None . .>) ) )
 ID=wsj_0044.104 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<L NP None None I NP>) (<T S\NP 1 2> (<L S[dcl]\NP None None believe S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L (S\NP)\(S\NP) None None in (S\NP)\(S\NP)>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None the ((S\NP)\(S\NP))/N>) (<L N None None system N>) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T S 1 2> (<L NP None None I NP>) (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None believe S[dcl]\NP>) (<L (S\NP)\(S\NP) None None in (S\NP)\(S\NP)>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None the ((S\NP)\(S\NP))/N>) (<L N None None system N>) ) ) ) (<L . None None . .>) )
 ID=wsj_0044.105 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.106 PARSER=GOLD NUMPARSE=1
@@ -1559,7 +1559,7 @@ ID=wsj_0044.107 PARSER=GOLD NUMPARSE=1
 ID=wsj_0044.108 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.109 PARSER=GOLD NUMPARSE=1
-(<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Mrs. N>) ) (<T NP\NP 1 2> (<T NP\NP 1 1> (<L S[adj]\NP None None Yeargin S[adj]\NP>) ) (<T NP\NP 1 1> (<L S[pss]\NP None None declined S[pss]\NP>) ) ) ) (<L . None None . .>) )
+(<L S None None None S>)
 ID=wsj_0044.110 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.111 PARSER=GOLD NUMPARSE=1
@@ -1593,7 +1593,7 @@ ID=wsj_0044.124 PARSER=GOLD NUMPARSE=1
 ID=wsj_0044.125 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0044.126 PARSER=GOLD NUMPARSE=1
-(<T S\S[dcl] 1 2> (<T S[dcl]\S[dcl] 1 2> (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None On NP/NP>) (<L NP[nb]/N None None the NP[nb]/N>) ) (<T N 1 2> (<L N None None back N>) (<T N\N 1 2> (<L , None None , ,>) (<T N 1 2> (<L N/N None None the N/N>) (<L N None None shirts N>) ) ) ) ) (<L (S[dcl]\S[dcl])\NP None None read (S[dcl]\S[dcl])\NP>) ) (<T S\S 1 2> (<T S\S 1 2> (<L , None None , ,>) (<T S 1 2> (<L NP None None We NP>) (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None have S[dcl]\NP>) (<L (S\NP)\(S\NP) None None all (S\NP)\(S\NP)>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None the ((S\NP)\(S\NP))/N>) (<L N None None answers N>) ) ) ) ) (<L . None None . .>) ) )
+(<T S 1 2> (<T S 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None On NP/NP>) (<L NP[nb]/N None None the NP[nb]/N>) ) (<T N 1 2> (<L N None None back N>) (<T N\N 1 2> (<L , None None , ,>) (<T N 1 2> (<L N/N None None the N/N>) (<L N None None shirts N>) ) ) ) ) (<L S[dcl]\NP None None read S[dcl]\NP>) ) (<T S\S 1 2> (<L , None None , ,>) (<T S 1 2> (<L NP None None We NP>) (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None have S[dcl]\NP>) (<L (S\NP)\(S\NP) None None all (S\NP)\(S\NP)>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None the ((S\NP)\(S\NP))/N>) (<L N None None answers N>) ) ) ) ) ) (<L : None None . :>) )
 ID=wsj_0044.127 PARSER=GOLD NUMPARSE=1
 (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None Many NP/NP>) (<T NP 1 1> (<L N None None colleagues N>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None are (S[dcl]\NP)/(S[adj]\NP)>) (<T (S[adj]\NP)/NP 1 2> (<L (S[adj]\NP)/PP None None angry (S[adj]\NP)/PP>) (<L PP/NP None None at PP/NP>) ) ) (<L NP/NP None None Mrs. NP/NP>) ) (<T NP 1 1> (<L N None None Yeargin N>) ) ) ) (<L . None None . .>) )
 ID=wsj_0044.128 PARSER=GOLD NUMPARSE=1
@@ -1667,7 +1667,7 @@ ID=wsj_0045.26 PARSER=GOLD NUMPARSE=1
 ID=wsj_0045.27 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0045.28 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None But NP/NP>) (<L NP[nb]/N None None Learning NP[nb]/N>) ) (<L N None None Materials N>) ) (<T S\NP 1 2> (<L S[dcl]\NP None None matched S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None on ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None 66.5 N>) ) (<T NP\NP 1 2> (<T (NP\NP)/NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP\NP 1 1> (<L S[adj]\NP None None 69 S[adj]\NP>) ) ) (<T NP 1 1> (<L N None None subskills N>) ) ) ) ) ) ) (<L : None None . :>) )
+(<L S None None None S>)
 ID=wsj_0045.29 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0045.30 PARSER=GOLD NUMPARSE=1
@@ -1681,7 +1681,7 @@ ID=wsj_0045.33 PARSER=GOLD NUMPARSE=1
 ID=wsj_0045.34 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0045.35 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None McGraw-Hill N>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None was (S[dcl]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None outraged S[adj]\NP>) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None McGraw-Hill N>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[pss]\NP) None None was (S[dcl]\NP)/(S[pss]\NP)>) (<L S[pss]\NP None None outraged S[pss]\NP>) ) ) (<L . None None . .>) )
 ID=wsj_0045.36 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0045.37 PARSER=GOLD NUMPARSE=1
@@ -1761,7 +1761,7 @@ ID=wsj_0048.6 PARSER=GOLD NUMPARSE=1
 ID=wsj_0048.7 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0048.8 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T NP 1 2> (<L NP/NP None None But NP/NP>) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 1> (<L N None None broader N>) ) ) (<T NP\NP 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None Nasdaq (NP\NP)/(NP\NP)>) (<L (NP\NP)/(NP\NP) None None bank (NP\NP)/(NP\NP)>) ) (<T NP\NP 1 2> (<L NP\NP None None index NP\NP>) (<T NP\NP 1 2> (<L ; None None , ;>) (<L NP None None which NP>) ) ) ) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None tracks (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None thrift N>) ) (<L NP\NP None None issues NP\NP>) ) ) (<T (S[dcl]\NP)\(S[dcl]\NP) 1 2> (<L , None None , ,>) (<L S[dcl]\NP None None jumped S[dcl]\NP>) ) ) (<L (S\NP)\(S\NP) None None 3.23 (S\NP)\(S\NP)>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None to ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None 436.01 N>) ) ) ) (<L . None None . .>) ) )
+(<L S None None None S>)
 ID=wsj_0048.9 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0048.10 PARSER=GOLD NUMPARSE=1
@@ -1809,7 +1809,7 @@ ID=wsj_0048.30 PARSER=GOLD NUMPARSE=1
 ID=wsj_0048.31 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0048.32 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T S/S 1 2> (<L S/S None None Also S/S>) (<T S/S 1 2> (<L (S/S)/NP None None on (S/S)/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None takeover N>) ) (<L NP\NP None None front NP\NP>) ) ) (<T NP\NP 1 2> (<L , None None , ,>) (<T NP 1 1> (<L N None None Jaguar N>) ) ) ) (<L NP\NP None None 's NP\NP>) ) ) ) (<T S 1 2> (<T NP 1 1> (<L N None None ADRs N>) ) (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None rose S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None 1/4 ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None to ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None 13 N>) ) ) ) (<L (S\NP)\(S\NP) None None 7/8 (S\NP)\(S\NP)>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None on ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None turnover N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None 4.4 N>) ) (<L NP\NP None None million NP\NP>) ) ) ) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T S 1 2> (<T S/S 1 2> (<L S/S None None Also S/S>) (<T S/S 1 2> (<L (S/S)/NP None None on (S/S)/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None takeover N>) ) (<L NP\NP None None front NP\NP>) ) ) (<T NP\NP 1 2> (<L , None None , ,>) (<T NP 1 1> (<L N None None Jaguar N>) ) ) ) (<L NP\NP None None 's NP\NP>) ) ) ) (<T S 1 2> (<T NP 1 1> (<L N None None ADRs N>) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None rose S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None 1/4 ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None to ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None 13 N>) ) ) ) ) (<L (S\NP)\(S\NP) None None 7/8 (S\NP)\(S\NP)>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None on ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None turnover N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None 4.4 N>) ) (<L NP\NP None None million NP\NP>) ) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0048.33 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0048.34 PARSER=GOLD NUMPARSE=1
@@ -1817,7 +1817,7 @@ ID=wsj_0048.34 PARSER=GOLD NUMPARSE=1
 ID=wsj_0048.35 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0048.36 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Rally N>) ) (<L NP\NP None None 's NP\NP>) ) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None lost S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None 1 ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<L (S\NP)\(S\NP) None None 3/4 (S\NP)\(S\NP)>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None to ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None 21 N>) ) ) ) (<L (S\NP)\(S\NP) None None 3/4 (S\NP)\(S\NP)>) ) ) (<L : None None . :>) )
+(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Rally N>) ) (<L NP\NP None None 's NP\NP>) ) (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None lost S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None 1 ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None 3/4 ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<L ((S\NP)\(S\NP))/NP None None to ((S\NP)\(S\NP))/NP>) ) (<T NP 1 1> (<L N None None 21 N>) ) ) ) ) (<L (S\NP)\(S\NP) None None 3/4 (S\NP)\(S\NP)>) ) ) (<L : None None . :>) )
 ID=wsj_0048.37 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0048.38 PARSER=GOLD NUMPARSE=1
@@ -1845,7 +1845,7 @@ ID=wsj_0049.6 PARSER=GOLD NUMPARSE=1
 ID=wsj_0049.7 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0049.8 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T S/S 1 2> (<L (S/S)/NP None None Until (S/S)/NP>) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None last NP/NP>) (<T NP 1 1> (<L N None None week N>) ) ) (<L , None None , ,>) ) ) (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None IRS N>) ) (<L NP\NP None None rarely NP\NP>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/PP None None acted (S[dcl]\NP)/PP>) (<L PP/NP None None on PP/NP>) ) (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None incomplete N>) ) (<L NP\NP None None forms NP\NP>) ) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T S 1 2> (<T S/S 1 2> (<L (S/S)/NP None None Until (S/S)/NP>) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None last NP/NP>) (<T NP 1 1> (<L N None None week N>) ) ) (<L , None None , ,>) ) ) (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None IRS N>) ) (<L NP\NP None None rarely NP\NP>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/PP None None acted (S[dcl]\NP)/PP>) (<T PP/NP 1 2> (<L PP/NP None None on PP/NP>) (<L NP/NP None None the NP/NP>) ) ) (<T NP 1 2> (<T NP 1 1> (<L N None None incomplete N>) ) (<L NP\NP None None forms NP\NP>) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0049.9 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0049.10 PARSER=GOLD NUMPARSE=1
@@ -1905,7 +1905,7 @@ ID=wsj_0049.36 PARSER=GOLD NUMPARSE=1
 ID=wsj_0049.37 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0049.38 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<L NP None None You NP>) (<T S\NP 1 2> (<L S[dcl]\NP None None look S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/PP None None around ((S\NP)\(S\NP))/PP>) (<T PP 1 2> (<L PP/NP None None at PP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None professional N>) ) (<L NP\NP None None ballplayers NP\NP>) ) ) ) ) ) (<T S\S 1 2> (<L conj None None or conj>) (<T S 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP None None accountants NP>) (<L : None None ... :>) ) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP 1 1> (<L N None None nobody N>) ) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None blinks S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None an ((S\NP)\(S\NP))/N>) (<L N None None eye N>) ) ) (<L . None None . .>) ) ) ) )
+(<T S 1 2> (<T S 1 2> (<L NP None None You NP>) (<T S\NP 1 2> (<L S[dcl]\NP None None look S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/PP None None around ((S\NP)\(S\NP))/PP>) (<T PP 1 2> (<L PP/NP None None at PP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None professional N>) ) (<L NP\NP None None ballplayers NP\NP>) ) ) ) ) ) (<T S\S 1 2> (<L conj None None or conj>) (<T S 1 2> (<T NP 1 2> (<L NP None None accountants NP>) (<T NP\NP 1 2> (<L : None None ... :>) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP 1 1> (<L N None None nobody N>) ) ) ) ) (<T S\NP 1 2> (<L S[dcl]\NP None None blinks S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None an ((S\NP)\(S\NP))/N>) (<T N 1 2> (<L N None None eye N>) (<L . None None . .>) ) ) ) ) ) )
 ID=wsj_0049.39 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0049.40 PARSER=GOLD NUMPARSE=1
@@ -1913,7 +1913,7 @@ ID=wsj_0049.40 PARSER=GOLD NUMPARSE=1
 ID=wsj_0049.41 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0049.42 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None DOONESBURY NP/NP>) (<T NP 1 1> (<L N None None CREATOR'S N>) ) ) (<L NP\NP None None UNION NP\NP>) ) (<L NP\NP None None TROUBLES NP\NP>) ) (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None are S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None no ((S\NP)\(S\NP))/N>) (<T N 1 2> (<L N None None laughing N>) (<L N\N None None matter N\N>) ) ) ) (<L . None None . .>) ) )
+(<L S None None None S>)
 ID=wsj_0049.43 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0049.44 PARSER=GOLD NUMPARSE=1
@@ -1937,7 +1937,7 @@ ID=wsj_0049.52 PARSER=GOLD NUMPARSE=1
 ID=wsj_0049.53 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0049.54 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None ABORTION NP/NP>) (<T NP 1 1> (<L N None None RULING N>) ) ) (<L S[dcl]\NP None None UPHELD S[dcl]\NP>) ) (<L : None None : :>) )
+(<T NP 1 2> (<T NP 1 2> (<L NP/NP None None ABORTION NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None RULING N>) ) (<L NP\NP None None UPHELD NP\NP>) ) ) (<L : None None : :>) )
 ID=wsj_0049.55 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0049.56 PARSER=GOLD NUMPARSE=1
@@ -1963,7 +1963,7 @@ ID=wsj_0049.65 PARSER=GOLD NUMPARSE=1
 ID=wsj_0049.66 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0049.67 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T NP 1 2> (<L NP/NP None None GAF NP/NP>) (<T NP 1 1> (<L N None None TRIAL N>) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None goes S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None to ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None round N>) ) (<L NP\NP None None three NP\NP>) ) ) ) (<L . None None . .>) ) )
+(<T S 1 2> (<T NP 1 2> (<L NP/NP None None GAF NP/NP>) (<T NP 1 1> (<L N None None TRIAL N>) ) ) (<T S\NP 1 2> (<L S[dcl]\NP None None goes S[dcl]\NP>) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None to ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None round N>) ) (<L NP\NP None None three NP\NP>) ) (<L . None None . .>) ) ) ) )
 ID=wsj_0049.68 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0049.69 PARSER=GOLD NUMPARSE=1
@@ -2053,11 +2053,11 @@ ID=wsj_0051.31 PARSER=GOLD NUMPARSE=1
 ID=wsj_0051.32 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0051.33 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None One N>) ) (<L NP\NP None None yen NP\NP>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None is (S[dcl]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None not (S[adj]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None ethical S[adj]\NP>) ) ) ) (<T S[dcl]\S[dcl] 1 2> (<T NP 1 2> (<T NP 1 2> (<L ; None None , ;>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Michio N>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L NP\NP None None Sasaki NP\NP>) (<T NP\NP 1 2> (<L ; None None , ;>) (<T NP\NP 1 2> (<L (NP\NP)/N None None an (NP\NP)/N>) (<L N None None official N>) ) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None at (NP\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Keidanren N>) ) (<L ; None None , ;>) ) ) ) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None the (NP\NP)/(NP\NP)>) (<T NP\NP 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None Japan (NP\NP)/(NP\NP)>) (<L NP\NP None None Federation NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None Economic N>) ) ) ) (<L NP\NP None None Organizations NP\NP>) ) ) ) ) (<L , None None , ,>) ) (<L (S[dcl]\S[dcl])\NP None None said (S[dcl]\S[dcl])\NP>) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None One N>) ) (<L NP\NP None None yen NP\NP>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None is (S[dcl]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None not (S[adj]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None ethical S[adj]\NP>) ) ) ) (<T S[dcl]\S[dcl] 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L ; None None , ;>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Michio N>) ) (<L NP\NP None None Sasaki NP\NP>) ) (<L ; None None , ;>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/N None None an (NP\NP)/N>) (<L N None None official N>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None at (NP\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Keidanren N>) ) (<L ; None None , ;>) ) ) ) (<T NP\NP 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None the (NP\NP)/(NP\NP)>) (<L (NP\NP)/(NP\NP) None None Japan (NP\NP)/(NP\NP)>) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None Federation (NP\NP)/(NP\NP)>) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None Economic N>) ) ) ) ) ) (<L NP\NP None None Organizations NP\NP>) ) (<L , None None , ,>) ) (<L (S[dcl]\S[dcl])\NP None None said (S[dcl]\S[dcl])\NP>) ) ) (<L . None None . .>) )
 ID=wsj_0051.34 PARSER=GOLD NUMPARSE=1
 (<T S 1 2> (<T S 1 2> (<T NP 1 1> (<L N None None Profit N>) ) (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None may (S\NP)/(S\NP)>) (<T S[b]\NP 1 2> (<L (S[b]\NP)/(S[adj]\NP) None None be (S[b]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None low S[adj]\NP>) ) ) ) (<T S\S 1 2> (<L , None None , ,>) (<T S 1 2> (<L S/S None None but S/S>) (<T S 1 2> (<T S/S 1 2> (<L (S/S)/(S/S) None None at (S/S)/(S/S)>) (<L S/S None None least S/S>) ) (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None costs N>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[b]\NP) None None should (S[dcl]\NP)/(S[b]\NP)>) (<T (S[b]\NP)/NP 1 2> (<L (S[b]\NP)/(S[pt]\NP) None None be (S[b]\NP)/(S[pt]\NP)>) (<L (S[pt]\NP)/NP None None covered (S[pt]\NP)/NP>) ) ) (<T NP 1 1> (<L N None None . N>) ) ) ) ) ) ) )
 ID=wsj_0052.1 PARSER=GOLD NUMPARSE=1
-(<T NP 1 2> (<T NP 1 1> (<L N None None PAPERS N>) ) (<L : None None : :>) )
+(<T NP 1 2> (<T NP 1 1> (<L N None None PAPERS N>) ) (<L RRB None None : RRB>) )
 ID=wsj_0052.2 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0052.3 PARSER=GOLD NUMPARSE=1
@@ -2065,7 +2065,7 @@ ID=wsj_0052.3 PARSER=GOLD NUMPARSE=1
 ID=wsj_0052.4 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0052.5 PARSER=GOLD NUMPARSE=1
-(<T NP\NP 1 2> (<T NP\NP 1 1> (<L S[adj]\NP None None TV S[adj]\NP>) ) (<L : None None : :>) )
+(<T N/N 1 2> (<L N/N None None TV N/N>) (<L : None None : :>) )
 ID=wsj_0052.6 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0052.7 PARSER=GOLD NUMPARSE=1
@@ -2085,7 +2085,7 @@ ID=wsj_0054.4 PARSER=GOLD NUMPARSE=1
 ID=wsj_0055.1 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0056.1 PARSER=GOLD NUMPARSE=1
-(<T S[X]/(S[X]\NP) 1 1> (<L NP None None @ NP>) )
+(<L N None None @ N>)
 ID=wsj_0056.2 PARSER=GOLD NUMPARSE=1
 (<T N/N 1 2> (<T N/N 1 2> (<L N/N None None Money N/N>) (<T N/N 1 2> (<T N/N 1 2> (<L N/N None None Market N/N>) (<L N/N None None Deposits-a N/N>) ) (<L N/N None None 6.21 N/N>) ) ) (<L N/N None None % N/N>) )
 ID=wsj_0056.3 PARSER=GOLD NUMPARSE=1
@@ -2117,13 +2117,13 @@ ID=wsj_0057.11 PARSER=GOLD NUMPARSE=1
 ID=wsj_0057.12 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0057.13 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None A NP/NP>) (<T NP 1 1> (<L N None None spokesman N>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[to]\NP) None None declined (S[dcl]\NP)/(S[to]\NP)>) (<T (S[to]\NP)/NP 1 2> (<L (S[to]\NP)/(S[b]\NP) None None to (S[to]\NP)/(S[b]\NP)>) (<T (S[b]\NP)/NP 1 2> (<L (S[b]\NP)/PP None None speculate (S[b]\NP)/PP>) (<T PP/NP 1 2> (<L PP/NP None None about PP/NP>) (<L NP/NP None None possible NP/NP>) ) ) ) ) (<T NP 1 2> (<T NP 1 1> (<L N None None reductions N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None in (NP\NP)/NP>) (<T NP 1 1> (<L N None None force N>) ) ) ) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None A NP/NP>) (<T NP 1 1> (<L N None None spokesman N>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[to]\NP) None None declined (S[dcl]\NP)/(S[to]\NP)>) (<T (S[to]\NP)/NP 1 2> (<L (S[to]\NP)/(S[b]\NP) None None to (S[to]\NP)/(S[b]\NP)>) (<T (S[b]\NP)/NP 1 2> (<L (S[b]\NP)/PP None None speculate (S[b]\NP)/PP>) (<L PP/NP None None about PP/NP>) ) ) ) (<L NP/NP None None possible NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None reductions N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None in (NP\NP)/NP>) (<T NP 1 1> (<L N None None force N>) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0057.14 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0057.15 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0057.16 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Yesterday N>) ) (<L NP\NP None None 's NP\NP>) ) (<L NP\NP None None announcement NP\NP>) ) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[pss]\NP) None None was (S[dcl]\NP)/(S[pss]\NP)>) (<L S[pss]\NP None None made S[pss]\NP>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/S[dcl] None None after ((S\NP)\(S\NP))/S[dcl]>) (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None markets N>) ) (<L S[dcl]\NP None None closed S[dcl]\NP>) ) (<L . None None . .>) ) ) ) )
+(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Yesterday N>) ) (<L NP\NP None None 's NP\NP>) ) (<L NP\NP None None announcement NP\NP>) ) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[pss]\NP) None None was (S[dcl]\NP)/(S[pss]\NP)>) (<L S[pss]\NP None None made S[pss]\NP>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/S[dcl] None None after ((S\NP)\(S\NP))/S[dcl]>) (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None markets N>) ) (<L S[dcl]\NP None None closed S[dcl]\NP>) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0057.17 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0057.18 PARSER=GOLD NUMPARSE=1
@@ -2177,7 +2177,7 @@ ID=wsj_0059.21 PARSER=GOLD NUMPARSE=1
 ID=wsj_0059.22 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0059.23 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Estimated N>) ) (<L NP\NP None None volume NP\NP>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None was (S[dcl]\NP)/NP>) (<L NP/NP None None a NP/NP>) ) (<L NP/NP None None moderate NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None 3.5 N>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None million (NP\NP)/(NP\NP)>) (<L NP\NP None None ounces NP\NP>) ) (<L . None None . .>) ) ) ) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Estimated N>) ) (<L NP\NP None None volume NP\NP>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None was (S[dcl]\NP)/NP>) (<L NP/NP None None a NP/NP>) ) (<L NP/NP None None moderate NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None 3.5 N>) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None million (NP\NP)/(NP\NP)>) (<L NP\NP None None ounces NP\NP>) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0059.24 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0060.1 PARSER=GOLD NUMPARSE=1
@@ -2221,7 +2221,7 @@ ID=wsj_0060.19 PARSER=GOLD NUMPARSE=1
 ID=wsj_0060.20 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0061.1 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None The NP/NP>) (<T NP 1 2> (<L NP/NP None None Life NP/NP>) (<T NP 1 1> (<L N None None Insurance N>) ) ) ) (<L NP\NP None None Co. NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None Georgia N>) ) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None has (S\NP)/(S\NP)>) (<T S\NP 1 2> (<T (S\NP)/NP 1 2> (<L (S\NP)/(S\NP) None None officially (S\NP)/(S\NP)>) (<L (S[pt]\NP)/NP None None opened (S[pt]\NP)/NP>) ) (<T NP 1 2> (<L NP/NP None None an NP/NP>) (<T NP 1 1> (<L N None None office N>) ) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None in ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None Taipei N>) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None The NP/NP>) (<T NP 1 2> (<L NP/NP None None Life NP/NP>) (<T NP 1 1> (<L N None None Insurance N>) ) ) ) (<L NP\NP None None Co. NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None Georgia N>) ) ) ) (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None has (S\NP)/(S\NP)>) (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None officially (S\NP)/(S\NP)>) (<T S\NP 1 2> (<T S[pt]\NP 1 2> (<L (S[pt]\NP)/NP None None opened (S[pt]\NP)/NP>) (<T NP 1 2> (<L NP/NP None None an NP/NP>) (<T NP 1 1> (<L N None None office N>) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None in ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None Taipei N>) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0061.2 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0061.3 PARSER=GOLD NUMPARSE=1
@@ -2289,7 +2289,7 @@ ID=wsj_0062.30 PARSER=GOLD NUMPARSE=1
 ID=wsj_0062.31 PARSER=GOLD NUMPARSE=1
 (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None Ad NP/NP>) (<T NP 1 1> (<L N None None Notes N>) ) ) (<L . None None ... .>) ) (<L : None None . :>) )
 ID=wsj_0062.32 PARSER=GOLD NUMPARSE=1
-(<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None INTERPUBLIC N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None ON (NP\NP)/NP>) (<L NP None None TV NP>) ) ) (<L RRB None None : RRB>) )
+(<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None INTERPUBLIC N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None ON (NP\NP)/NP>) (<L NP None None TV NP>) ) ) (<L : None None : :>) )
 ID=wsj_0062.33 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0062.34 PARSER=GOLD NUMPARSE=1
@@ -2301,7 +2301,7 @@ ID=wsj_0062.36 PARSER=GOLD NUMPARSE=1
 ID=wsj_0062.37 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0062.38 PARSER=GOLD NUMPARSE=1
-(<T N 1 2> (<L N/N None None NEW N/N>) (<T N 1 2> (<L N None None ACCOUNT N>) (<L : None None : :>) ) )
+(<T N 1 2> (<T N 1 2> (<L N/N None None NEW N/N>) (<L N None None ACCOUNT N>) ) (<L : None None : :>) )
 ID=wsj_0062.39 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0062.40 PARSER=GOLD NUMPARSE=1
@@ -2313,7 +2313,7 @@ ID=wsj_0062.42 PARSER=GOLD NUMPARSE=1
 ID=wsj_0062.43 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0062.44 PARSER=GOLD NUMPARSE=1
-(<T N 1 2> (<L N/N None None FIRST N/N>) (<T N 1 2> (<L N None None CAMPAIGN N>) (<L : None None : :>) ) )
+(<T NP[nb] 1 2> (<L NP[nb]/N None None FIRST NP[nb]/N>) (<T N 1 2> (<L N None None CAMPAIGN N>) (<L : None None : :>) ) )
 ID=wsj_0062.45 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0062.46 PARSER=GOLD NUMPARSE=1
@@ -2321,11 +2321,11 @@ ID=wsj_0062.46 PARSER=GOLD NUMPARSE=1
 ID=wsj_0062.47 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0062.48 PARSER=GOLD NUMPARSE=1
-(<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None LANDOR N>) ) (<L NP\NP None None ASSOCIATES NP\NP>) ) (<L RRB None None : RRB>) )
+(<T N/N 1 2> (<L N/N None None LANDOR N/N>) (<T N/N 1 2> (<L N/N None None ASSOCIATES N/N>) (<L RRB None None : RRB>) ) )
 ID=wsj_0062.49 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None Young NP/NP>) (<T NP 1 1> (<L N None None & N>) ) ) (<L NP\NP None None Rubicam NP\NP>) ) (<T NP\NP 1 2> (<L conj None None said conj>) (<L NP None None it NP>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None completed (S[dcl]\NP)/NP>) (<L NP/NP None None its NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None acquisition N>) ) (<T NP\NP 1 2> (<T (NP\NP)/NP 1 2> (<T (NP\NP)/NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None Landor (NP\NP)/(NP\NP)>) (<L NP\NP None None Associates NP\NP>) ) (<L , None None , ,>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/N None None a (NP\NP)/N>) (<T N 1 2> (<L N/N None None San N/N>) (<T N 1 2> (<L N/N None None Francisco N/N>) (<L N None None identity-management N>) ) ) ) ) (<T NP 1 1> (<L N None None firm N>) ) ) ) ) ) (<L . None None . .>) )
+(<L S None None None S>)
 ID=wsj_0062.50 PARSER=GOLD NUMPARSE=1
-(<T NP\NP 1 2> (<L NP\NP None None ACQUISITION NP\NP>) (<L : None None : :>) )
+(<T N\N 1 2> (<L N\N None None ACQUISITION N\N>) (<L : None None : :>) )
 ID=wsj_0062.51 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0062.52 PARSER=GOLD NUMPARSE=1
@@ -2365,7 +2365,7 @@ ID=wsj_0063.16 PARSER=GOLD NUMPARSE=1
 ID=wsj_0063.17 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0063.18 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None Mr. NP/NP>) (<T NP 1 1> (<L N None None Sherwood N>) ) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/S[dcl] None None said (S[dcl]\NP)/S[dcl]>) (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None reaction N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None to (NP\NP)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None Sea NP/NP>) (<T NP[nb]/N 1 2> (<T NP 1 1> (<L N None None Containers N>) ) (<L (NP[nb]/N)\NP None None ' (NP[nb]/N)\NP>) ) ) (<L N None None proposal N>) ) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/(S[adj]\NP) 1 2> (<L (S[dcl]\NP)/(S[b]\NP) None None has (S[dcl]\NP)/(S[b]\NP)>) (<L (S[b]\NP)/(S[adj]\NP) None None been (S[b]\NP)/(S[adj]\NP)>) ) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None very (S[adj]\NP)/(S[adj]\NP)>) (<T S[adj]\NP 1 2> (<L S[adj]\NP None None positive S[adj]\NP>) (<L . None None . .>) ) ) ) ) ) )
+(<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None Mr. NP/NP>) (<T NP 1 1> (<L N None None Sherwood N>) ) ) (<T S[dcl]\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/S[dcl] None None said (S[dcl]\NP)/S[dcl]>) (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None reaction N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None to (NP\NP)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None Sea NP/NP>) (<T NP[nb]/N 1 2> (<T NP 1 1> (<L N None None Containers N>) ) (<L (NP[nb]/N)\NP None None ' (NP[nb]/N)\NP>) ) ) (<L N None None proposal N>) ) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/(S[adj]\NP) 1 2> (<L (S[dcl]\NP)/(S[b]\NP) None None has (S[dcl]\NP)/(S[b]\NP)>) (<L (S[b]\NP)/(S[adj]\NP) None None been (S[b]\NP)/(S[adj]\NP)>) ) (<T S[adj]\NP 1 2> (<L (S[adj]\NP)/(S[adj]\NP) None None very (S[adj]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None positive S[adj]\NP>) ) ) ) ) (<L . None None . .>) ) )
 ID=wsj_0063.19 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0064.1 PARSER=GOLD NUMPARSE=1
@@ -2517,7 +2517,7 @@ ID=wsj_0071.21 PARSER=GOLD NUMPARSE=1
 ID=wsj_0071.22 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0071.23 PARSER=GOLD NUMPARSE=1
-(<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<T (S\NP)/(S\NP) 1 2> (<L ((S\NP)/(S\NP))/NP None None With ((S\NP)/(S\NP))/NP>) (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None 1985 N>) ) (<L NP\NP None None vintage NP\NP>) ) (<T NP\NP 1 2> (<L , None None , ,>) (<L NP None None they NP>) ) ) ) ) (<L S[dcl]\NP None None soared S[dcl]\NP>) ) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None higher ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<L ((S\NP)\(S\NP))/NP None None : ((S\NP)\(S\NP))/NP>) ) (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None La N>) ) (<L NP\NP None None Tache NP\NP>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L , None None , ,>) (<T NP 1 2> (<T NP 1 1> (<L N None None $ N>) ) (<T NP\NP 1 2> (<L NP\NP None None 195 NP\NP>) (<T NP\NP 1 2> (<L ; None None ; ;>) (<T NP 1 1> (<L N None None Richebourg N>) ) ) ) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None , (NP\NP)/NP>) (<T NP 1 1> (<L N None None $ N>) ) ) ) ) (<L NP\NP None None 180 NP\NP>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L ; None None ; ;>) (<T NP 1 1> (<L N None None Romanee-Conti N>) ) ) (<T NP\NP 1 2> (<L , None None , ,>) (<T NP 1 1> (<L N None None $ N>) ) ) ) ) (<L NP\NP None None 225 NP\NP>) ) ) ) (<L . None None . .>) )
+(<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<T (S\NP)/(S\NP) 1 2> (<L ((S\NP)/(S\NP))/NP None None With ((S\NP)/(S\NP))/NP>) (<T NP 1 2> (<L NP/NP None None the NP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None 1985 N>) ) (<L NP\NP None None vintage NP\NP>) ) (<T NP\NP 1 2> (<L , None None , ,>) (<L NP None None they NP>) ) ) ) ) (<L S[dcl]\NP None None soared S[dcl]\NP>) ) (<T (S\NP)\(S\NP) 1 2> (<T ((S\NP)\(S\NP))/NP 1 2> (<L ((S\NP)\(S\NP))/((S\NP)\(S\NP)) None None higher ((S\NP)\(S\NP))/((S\NP)\(S\NP))>) (<L ((S\NP)\(S\NP))/NP None None : ((S\NP)\(S\NP))/NP>) ) (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None La N>) ) (<L NP\NP None None Tache NP\NP>) ) (<T NP\NP 1 2> (<L , None None , ,>) (<T NP 1 1> (<L N None None $ N>) ) ) ) (<L NP\NP None None 195 NP\NP>) ) (<T NP\NP 1 2> (<L ; None None ; ;>) (<T NP 1 2> (<T NP 1 1> (<L N None None Richebourg N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None , (NP\NP)/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None $ N>) ) (<L NP\NP None None 180 NP\NP>) ) ) ) ) ) (<T NP\NP 1 2> (<L ; None None ; ;>) (<T NP 1 1> (<L N None None Romanee-Conti N>) ) ) ) (<T NP\NP 1 2> (<L , None None , ,>) (<T NP 1 1> (<L N None None $ N>) ) ) ) (<L NP\NP None None 225 NP\NP>) ) ) ) (<L . None None . .>) )
 ID=wsj_0071.24 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0071.25 PARSER=GOLD NUMPARSE=1
@@ -2535,7 +2535,7 @@ ID=wsj_0071.30 PARSER=GOLD NUMPARSE=1
 ID=wsj_0071.31 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0071.32 PARSER=GOLD NUMPARSE=1
-(<T (S[dcl]\NP)/PP 1 2> (<L ((S[dcl]\NP)/PP)/NP None None Take ((S[dcl]\NP)/PP)/NP>) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None Lake NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Vineyard N>) ) (<T NP\NP 1 2> (<T NP\NP 1 1> (<L S[adj]\NP None None Cabernet S[adj]\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None from (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None Diamond NP/NP>) (<T NP 1 1> (<L N None None Creek N>) ) ) ) ) ) ) (<L . None None . .>) ) )
+(<T (S[dcl]\NP)/PP 1 2> (<L ((S[dcl]\NP)/PP)/NP None None Take ((S[dcl]\NP)/PP)/NP>) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None Lake NP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Vineyard N>) ) (<T NP\NP 1 1> (<L S[adj]\NP None None Cabernet S[adj]\NP>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None from (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None Diamond NP/NP>) (<T NP 1 1> (<L N None None Creek N>) ) ) ) ) ) (<L . None None . .>) ) )
 ID=wsj_0071.33 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0071.34 PARSER=GOLD NUMPARSE=1
@@ -2691,7 +2691,7 @@ ID=wsj_0076.3 PARSER=GOLD NUMPARSE=1
 ID=wsj_0077.1 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0077.2 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T NP 1 2> (<L NP/NP None None Bond NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None prices N>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP\NP 1 2> (<L (NP\NP)/N None None the (NP\NP)/N>) (<L N None None dollar N>) ) ) (<L NP\NP None None both NP\NP>) ) ) ) (<T S\NP 1 2> (<L S[dcl]\NP None None gained S[dcl]\NP>) (<L (S\NP)\(S\NP) None None modestly (S\NP)\(S\NP)>) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T NP 1 2> (<L NP/NP None None Bond NP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None prices N>) ) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP\NP 1 2> (<L (NP\NP)/N None None the (NP\NP)/N>) (<L N None None dollar N>) ) ) ) (<L NP\NP None None both NP\NP>) ) ) (<T S\NP 1 2> (<T S\NP 1 2> (<L S[dcl]\NP None None gained S[dcl]\NP>) (<L (S\NP)\(S\NP) None None modestly (S\NP)\(S\NP)>) ) (<L . None None . .>) ) )
 ID=wsj_0077.3 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0077.4 PARSER=GOLD NUMPARSE=1
@@ -2717,9 +2717,9 @@ ID=wsj_0077.13 PARSER=GOLD NUMPARSE=1
 ID=wsj_0077.14 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0077.15 PARSER=GOLD NUMPARSE=1
-(<L S None None None S>)
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L NP/NP None None Big NP/NP>) (<T NP 1 2> (<L NP/NP None None Board NP/NP>) (<T NP 1 1> (<L N None None volume N>) ) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None totaled (S[dcl]\NP)/NP>) (<L NP/NP None None 154.2 NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None million N>) ) (<L NP\NP None None shares NP\NP>) ) ) ) (<L . None None . .>) )
 ID=wsj_0077.16 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Bond N>) ) (<L NP\NP None None prices NP\NP>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None were (S[dcl]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None up S[adj]\NP>) ) ) (<L : None None . :>) )
+(<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Bond N>) ) (<L NP\NP None None prices NP\NP>) ) (<T S[dcl]\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None were (S[dcl]\NP)/(S[adj]\NP)>) (<L S[adj]\NP None None up S[adj]\NP>) ) (<L : None None . :>) ) )
 ID=wsj_0077.17 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0077.18 PARSER=GOLD NUMPARSE=1
@@ -2753,7 +2753,7 @@ ID=wsj_0080.5 PARSER=GOLD NUMPARSE=1
 ID=wsj_0080.6 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0080.7 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<L NP None None It NP>) (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None did (S\NP)/(S\NP)>) (<T S\NP 1 2> (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None n't (S\NP)/(S\NP)>) (<L S[b]\NP None None elaborate S[b]\NP>) ) (<L . None None . .>) ) ) )
+(<T S 1 2> (<L NP None None It NP>) (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None did (S\NP)/(S\NP)>) (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None n't (S\NP)/(S\NP)>) (<T S[b]\NP 1 2> (<L S[b]\NP None None elaborate S[b]\NP>) (<L . None None . .>) ) ) ) )
 ID=wsj_0080.8 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0080.9 PARSER=GOLD NUMPARSE=1
@@ -2847,7 +2847,7 @@ ID=wsj_0082.20 PARSER=GOLD NUMPARSE=1
 ID=wsj_0082.21 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0082.22 PARSER=GOLD NUMPARSE=1
-(<T PP 1 2> (<T PP 1 2> (<L PP/NP None None Among PP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None them N>) ) (<T NP\NP 1 2> (<L , None None are ,>) (<T NP\NP 1 2> (<L NP\NP None None differences NP\NP>) (<T NP\NP 1 2> (<T (NP\NP)/NP 1 2> (<L (NP\NP)/NP None None in (NP\NP)/NP>) (<T NP\NP 1 2> (<L NP\NP None None savings NP\NP>) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None investment (NP\NP)/(NP\NP)>) (<T NP\NP 1 1> (<L S[adj]\NP None None rates S[adj]\NP>) ) ) ) ) ) (<T NP 1 2> (<L ; None None , ;>) (<T NP 1 2> (<L NP/NP None None corporate NP/NP>) (<T NP 1 1> (<L N None None structures N>) ) ) ) ) ) ) ) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP 1 1> (<L N None None management N>) ) ) ) (<L , None None , ,>) ) (<T NP\NP 1 2> (<L conj None None and conj>) (<T NP 1 2> (<L NP/NP None None government NP/NP>) (<T NP 1 1> (<L N None None spending N>) ) ) ) ) ) (<L : None None . :>) )
+(<L S None None None S>)
 ID=wsj_0082.23 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0082.24 PARSER=GOLD NUMPARSE=1
@@ -2877,9 +2877,9 @@ ID=wsj_0082.35 PARSER=GOLD NUMPARSE=1
 ID=wsj_0082.36 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0082.37 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Both N>) ) (<L NP\NP None None sides NP\NP>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[ng]\NP) None None are (S[dcl]\NP)/(S[ng]\NP)>) (<T S[ng]\NP 1 2> (<T S[ng]\NP 1 2> (<L (S[ng]\NP)/NP None None taking (S[ng]\NP)/NP>) (<T NP 1 1> (<L N None None action N>) ) ) (<L . None None . .>) ) ) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Both N>) ) (<L NP\NP None None sides NP\NP>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[ng]\NP) None None are (S[dcl]\NP)/(S[ng]\NP)>) (<L (S[ng]\NP)/NP None None taking (S[ng]\NP)/NP>) ) (<T NP 1 1> (<L N None None action N>) ) ) ) (<L . None None . .>) )
 ID=wsj_0082.38 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Elisabeth N>) ) (<L NP\NP None None Rubinfien NP\NP>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/PP None None contributed (S[dcl]\NP)/PP>) (<L PP/NP None None to PP/NP>) ) (<L NP/NP None None this NP/NP>) ) (<T NP 1 1> (<L N None None article N>) ) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None Elisabeth N>) ) (<L NP\NP None None Rubinfien NP\NP>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/PP None None contributed (S[dcl]\NP)/PP>) (<L PP/NP None None to PP/NP>) ) (<T NP 1 2> (<L NP/NP None None this NP/NP>) (<T NP 1 1> (<L N None None article N>) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0083.1 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0083.2 PARSER=GOLD NUMPARSE=1
@@ -2941,7 +2941,7 @@ ID=wsj_0083.29 PARSER=GOLD NUMPARSE=1
 ID=wsj_0083.30 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0083.31 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<L NP None None They NP>) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None operate (S[dcl]\NP)/NP>) (<T NP 1 1> (<L N None None ships N>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None and ((S\NP)\(S\NP))/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None banks N>) ) (<L : None None . :>) ) ) ) )
+(<T S 1 2> (<T S 1 2> (<L NP None None They NP>) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None operate (S[dcl]\NP)/NP>) (<T NP 1 1> (<L N None None ships N>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None and ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None banks N>) ) ) ) ) (<L : None None . :>) )
 ID=wsj_0083.32 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0083.33 PARSER=GOLD NUMPARSE=1
@@ -2993,7 +2993,7 @@ ID=wsj_0085.4 PARSER=GOLD NUMPARSE=1
 ID=wsj_0085.5 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0085.6 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<L NP None None I NP>) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/PP 1 2> (<L ((S[dcl]\NP)/PP)/NP None None deserve ((S[dcl]\NP)/PP)/NP>) (<L NP None None something NP>) ) (<T PP 1 2> (<L PP/NP None None for PP/NP>) (<L NP None None my NP>) ) ) ) (<T S[dcl]\S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None loyalty N>) ) (<T NP\NP 1 2> (<L , None None , ,>) (<L NP None None she NP>) ) ) (<L (S[dcl]\S[dcl])\NP None None says (S[dcl]\S[dcl])\NP>) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<L NP None None I NP>) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/PP 1 2> (<L ((S[dcl]\NP)/PP)/NP None None deserve ((S[dcl]\NP)/PP)/NP>) (<L NP None None something NP>) ) (<L PP/NP None None for PP/NP>) ) (<L NP None None my NP>) ) ) (<T S[dcl]\S[dcl] 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None loyalty N>) ) (<T NP\NP 1 2> (<L , None None , ,>) (<L NP None None she NP>) ) ) (<L (S[dcl]\S[dcl])\NP None None says (S[dcl]\S[dcl])\NP>) ) ) (<L . None None . .>) )
 ID=wsj_0085.7 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0085.8 PARSER=GOLD NUMPARSE=1
@@ -3035,7 +3035,7 @@ ID=wsj_0085.25 PARSER=GOLD NUMPARSE=1
 ID=wsj_0085.26 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0085.27 PARSER=GOLD NUMPARSE=1
-(<T NP\NP 1 2> (<T NP\NP 1 2> (<T NP\NP 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None One (NP\NP)/(NP\NP)>) (<L (NP\NP)/(NP\NP) None None big (NP\NP)/(NP\NP)>) ) (<L NP\NP None None reason NP\NP>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None : (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None thin NP/NP>) (<T NP 1 1> (<L N None None margins N>) ) ) ) ) (<L . None None . .>) )
+(<T NP 1 2> (<L NP/NP None None One NP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None big N>) ) (<L NP\NP None None reason NP\NP>) ) (<T NP\NP 1 2> (<T NP\NP 1 2> (<L (NP\NP)/NP None None : (NP\NP)/NP>) (<T NP 1 2> (<L NP/NP None None thin NP/NP>) (<T NP 1 1> (<L N None None margins N>) ) ) ) (<L . None None . .>) ) ) )
 ID=wsj_0085.28 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0085.29 PARSER=GOLD NUMPARSE=1
@@ -3069,7 +3069,7 @@ ID=wsj_0085.42 PARSER=GOLD NUMPARSE=1
 ID=wsj_0085.43 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0085.44 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None Packaging N>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None has (S[dcl]\NP)/NP>) (<L NP/NP None None some NP/NP>) ) (<T NP 1 1> (<L N None None drawbacks N>) ) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T NP 1 1> (<L N None None Packaging N>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None has (S[dcl]\NP)/NP>) (<L NP/NP None None some NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None drawbacks N>) ) (<L . None None . .>) ) ) )
 ID=wsj_0085.45 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0085.46 PARSER=GOLD NUMPARSE=1
@@ -3085,17 +3085,17 @@ ID=wsj_0085.50 PARSER=GOLD NUMPARSE=1
 ID=wsj_0085.51 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0085.52 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<L S/S None None Soon S/S>) (<T S 1 2> (<L , None None , ,>) (<T S 1 2> (<L NP None None it NP>) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/(S[b]\NP) None None will (S[dcl]\NP)/(S[b]\NP)>) (<T S[b]\NP 1 2> (<L (S[b]\NP)/NP None None split (S[b]\NP)/NP>) (<T NP 1 1> (<L N None None those N>) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None into ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None 30 N>) ) ) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T S 1 2> (<T S/S 1 2> (<L S/S None None Soon S/S>) (<L , None None , ,>) ) (<T S 1 2> (<L NP None None it NP>) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[b]\NP) None None will (S[dcl]\NP)/(S[b]\NP)>) (<L (S[b]\NP)/NP None None split (S[b]\NP)/NP>) ) (<T NP 1 1> (<L N None None those N>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None into ((S\NP)\(S\NP))/NP>) (<T NP 1 1> (<L N None None 30 N>) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0085.53 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0085.54 PARSER=GOLD NUMPARSE=1
-(<T NP 1 2> (<T NP 1 1> (<L N None None IRAs N>) ) (<L . None None . .>) )
+(<T N 1 2> (<L N None None IRAs N>) (<L . None None . .>) )
 ID=wsj_0086.1 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0086.2 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0086.3 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<L S/S None None Currently S/S>) (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 2> (<L ; None None , ;>) (<T NP 1 1> (<L N None None ShareData N>) ) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None has (S[dcl]\NP)/NP>) (<L NP/NP None None about NP/NP>) ) (<L NP/NP None None 4.1 NP/NP>) ) (<T NP 1 2> (<T NP 1 1> (<L N None None million N>) ) (<T NP\NP 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None common (NP\NP)/(NP\NP)>) (<L NP\NP None None shares NP\NP>) ) (<T NP\NP 1 1> (<L S[adj]\NP None None outstanding S[adj]\NP>) ) ) ) ) ) (<L : None None . :>) ) )
+(<L S None None None S>)
 ID=wsj_0086.4 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0087.1 PARSER=GOLD NUMPARSE=1
@@ -3107,7 +3107,7 @@ ID=wsj_0087.3 PARSER=GOLD NUMPARSE=1
 ID=wsj_0087.4 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0087.5 PARSER=GOLD NUMPARSE=1
-(<T S[b] 1 2> (<T S[b] 1 2> (<T NP 1 2> (<L NP None None 4 NP>) (<L . None None . .>) ) (<T S[b]\NP 1 2> (<T (S[b]\NP)/NP 1 2> (<L (S[b]\NP)/NP None None Buy (S[b]\NP)/NP>) (<L NP/NP None None a NP/NP>) ) (<T NP 1 2> (<L NP/NP None None diamond NP/NP>) (<T NP 1 1> (<L N None None necklace N>) ) ) ) ) (<L : None None . :>) )
+(<T S[b] 1 2> (<T S[b] 1 2> (<T NP 1 2> (<L NP None None 4 NP>) (<L . None None . .>) ) (<T S[b]\NP 1 2> (<T (S[b]\NP)/NP 1 2> (<T (S[b]\NP)/NP 1 2> (<L (S[b]\NP)/NP None None Buy (S[b]\NP)/NP>) (<L NP/NP None None a NP/NP>) ) (<L NP/NP None None diamond NP/NP>) ) (<T NP 1 1> (<L N None None necklace N>) ) ) ) (<L : None None . :>) )
 ID=wsj_0087.6 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0087.7 PARSER=GOLD NUMPARSE=1
@@ -3119,9 +3119,9 @@ ID=wsj_0087.9 PARSER=GOLD NUMPARSE=1
 ID=wsj_0087.10 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0087.11 PARSER=GOLD NUMPARSE=1
-(<T (NP\NP)/NP 1 2> (<L (NP\NP)/NP None None Like (NP\NP)/NP>) (<T NP\NP 1 2> (<T NP\NP 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None healthy (NP\NP)/(NP\NP)>) (<L (NP\NP)/(NP\NP) None None regulatory (NP\NP)/(NP\NP)>) ) (<T NP\NP 1 1> (<L S[adj]\NP None None capital S[adj]\NP>) ) ) (<L : None None . :>) ) )
+(<L S None None None S>)
 ID=wsj_0087.12 PARSER=GOLD NUMPARSE=1
-(<T NP[nb] 1 2> (<T NP[nb]/N 1 2> (<L NP[nb]/N None None A NP[nb]/N>) (<T N/N 1 2> (<L (N/N)/(N/N) None None steady (N/N)/(N/N)>) (<L N/N None None deposit N/N>) ) ) (<T N 1 2> (<L N None None base N>) (<L . None None . .>) ) )
+(<T NP[nb] 1 2> (<L NP[nb]/N None None A NP[nb]/N>) (<T N 1 2> (<T N/N 1 2> (<L (N/N)/(N/N) None None steady (N/N)/(N/N)>) (<L N/N None None deposit N/N>) ) (<T N 1 2> (<L N None None base N>) (<L . None None . .>) ) ) )
 ID=wsj_0087.13 PARSER=GOLD NUMPARSE=1
 (<T N/N 1 2> (<T N/N 1 2> (<L N/N None None Performing N/N>) (<L N/N None None loans N/N>) ) (<L : None None . :>) )
 ID=wsj_0087.14 PARSER=GOLD NUMPARSE=1
@@ -3211,7 +3211,7 @@ ID=wsj_0089.1 PARSER=GOLD NUMPARSE=1
 ID=wsj_0089.2 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0089.3 PARSER=GOLD NUMPARSE=1
-(<T N 1 2> (<L N/N None None ASLACTON N/N>) (<T N 1 2> (<L , None None , ,>) (<L N None None England N>) ) )
+(<T NP 1 2> (<T NP 1 1> (<L N None None ASLACTON N>) ) (<T NP\NP 1 2> (<L , None None , ,>) (<T NP 1 1> (<L N None None England N>) ) ) )
 ID=wsj_0089.4 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0089.5 PARSER=GOLD NUMPARSE=1
@@ -3383,7 +3383,7 @@ ID=wsj_0090.22 PARSER=GOLD NUMPARSE=1
 ID=wsj_0090.23 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0090.24 PARSER=GOLD NUMPARSE=1
-(<T NP\NP 1 2> (<T NP\NP 1 1> (<L S[adj]\NP None None Always S[adj]\NP>) ) (<L . None None . .>) )
+(<T NP 1 2> (<L NP None None Always NP>) (<L . None None . .>) )
 ID=wsj_0090.25 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0090.26 PARSER=GOLD NUMPARSE=1
@@ -3443,7 +3443,7 @@ ID=wsj_0090.52 PARSER=GOLD NUMPARSE=1
 ID=wsj_0091.1 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0091.2 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None Such N>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None is (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None hardly NP/NP>) (<L NP[nb]/N None None the NP[nb]/N>) ) (<L N None None case N>) ) ) ) (<L . None None . .>) )
+(<T S[dcl] 1 2> (<T NP 1 1> (<L N None None Such N>) ) (<T S[dcl]\NP 1 2> (<L (S[dcl]\NP)/NP None None is (S[dcl]\NP)/NP>) (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None hardly NP/NP>) (<L NP[nb]/N None None the NP[nb]/N>) ) (<T N 1 2> (<L N None None case N>) (<L . None None . .>) ) ) ) )
 ID=wsj_0091.3 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0091.4 PARSER=GOLD NUMPARSE=1
@@ -3455,7 +3455,7 @@ ID=wsj_0091.6 PARSER=GOLD NUMPARSE=1
 ID=wsj_0091.7 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0091.8 PARSER=GOLD NUMPARSE=1
-(<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None Oliver NP/NP>) (<T NP 1 1> (<L N None None Berliner N>) ) ) (<T NP\NP 1 2> (<L NP\NP None None Beverly NP\NP>) (<L NP\NP None None Hills NP\NP>) ) ) (<L , None None , ,>) ) (<T NP\NP 1 2> (<L NP\NP None None Calif NP\NP>) (<L . None None . .>) ) )
+(<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None Oliver NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None Berliner N>) ) (<L NP\NP None None Beverly NP\NP>) ) ) (<L NP\NP None None Hills NP\NP>) ) (<L , None None , ,>) ) (<T NP\NP 1 2> (<L NP\NP None None Calif NP\NP>) (<L . None None . .>) ) )
 ID=wsj_0092.1 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0092.2 PARSER=GOLD NUMPARSE=1
@@ -3507,7 +3507,7 @@ ID=wsj_0093.12 PARSER=GOLD NUMPARSE=1
 ID=wsj_0093.13 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0093.14 PARSER=GOLD NUMPARSE=1
-(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None China N>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None was (S[dcl]\NP)/NP>) (<L NP/NP None None the NP/NP>) ) (<L NP/NP None None real NP/NP>) ) (<T NP 1 1> (<L N None None victim N>) ) ) ) (<T S[dcl]\S[dcl] 1 2> (<L conj None None and conj>) (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<L NP None None it NP>) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None is (S[dcl]\NP)/(S[adj]\NP)>) (<T (S[adj]\NP)/NP 1 2> (<L (S[adj]\NP)/(S[to]\NP) None None unjust (S[adj]\NP)/(S[to]\NP)>) (<T (S[to]\NP)/NP 1 2> (<L (S[to]\NP)/(S[b]\NP) None None to (S[to]\NP)/(S[b]\NP)>) (<L (S[b]\NP)/NP None None reprove (S[b]\NP)/NP>) ) ) ) (<T NP 1 2> (<T NP 1 1> (<L N None None China N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None for (NP\NP)/NP>) (<L NP None None it NP>) ) ) ) ) (<L . None None . .>) ) ) )
+(<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T S[dcl] 1 2> (<T NP 1 1> (<L N None None China N>) ) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None was (S[dcl]\NP)/NP>) (<L NP/NP None None the NP/NP>) ) (<L NP/NP None None real NP/NP>) ) (<T NP 1 1> (<L N None None victim N>) ) ) ) (<T S[dcl]\S[dcl] 1 2> (<L conj None None and conj>) (<T S[dcl] 1 2> (<L NP None None it NP>) (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/(S[adj]\NP) None None is (S[dcl]\NP)/(S[adj]\NP)>) (<T (S[adj]\NP)/NP 1 2> (<L (S[adj]\NP)/(S[to]\NP) None None unjust (S[adj]\NP)/(S[to]\NP)>) (<T (S[to]\NP)/NP 1 2> (<L (S[to]\NP)/(S[b]\NP) None None to (S[to]\NP)/(S[b]\NP)>) (<L (S[b]\NP)/NP None None reprove (S[b]\NP)/NP>) ) ) ) (<T NP 1 2> (<T NP 1 1> (<L N None None China N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None for (NP\NP)/NP>) (<L NP None None it NP>) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0093.15 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0093.16 PARSER=GOLD NUMPARSE=1
@@ -3581,7 +3581,7 @@ ID=wsj_0094.12 PARSER=GOLD NUMPARSE=1
 ID=wsj_0094.13 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0094.14 PARSER=GOLD NUMPARSE=1
-(<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None Hiroshi (NP\NP)/(NP\NP)>) (<L (NP\NP)/(NP\NP) None None Asada (NP\NP)/(NP\NP)>) )
+(<T N 1 2> (<L N/N None None Hiroshi N/N>) (<L N None None Asada N>) )
 ID=wsj_0095.1 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0095.2 PARSER=GOLD NUMPARSE=1
@@ -3595,11 +3595,11 @@ ID=wsj_0095.5 PARSER=GOLD NUMPARSE=1
 ID=wsj_0095.6 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0095.7 PARSER=GOLD NUMPARSE=1
-(<T S[pt] 1 2> (<T S[pt] 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None Such NP/NP>) (<T NP[nb]/N 1 2> (<L NP[nb]/N None None an NP[nb]/N>) (<L N/N None None editorial N/N>) ) ) (<L N None None point N>) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None view N>) ) ) ) (<T S[pt]\NP 1 2> (<L (S[pt]\NP)/NP None None perpetuates (S[pt]\NP)/NP>) (<T NP 1 2> (<L NP/NP None None an NP/NP>) (<T NP 1 2> (<T NP 1 2> (<T NP 1 1> (<L N None None insidious N>) ) (<L , None None , ,>) ) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None stereotyped (NP\NP)/(NP\NP)>) (<L NP\NP None None perspective NP\NP>) ) ) ) ) ) (<L . None None . .>) )
+(<T S[pt] 1 2> (<T S[pt] 1 2> (<T NP 1 2> (<T NP 1 2> (<T NP/N 1 2> (<L NP/NP None None Such NP/NP>) (<L NP[nb]/N None None an NP[nb]/N>) ) (<T N 1 2> (<L N/N None None editorial N/N>) (<L N None None point N>) ) ) (<T NP\NP 1 2> (<L (NP\NP)/NP None None of (NP\NP)/NP>) (<T NP 1 1> (<L N None None view N>) ) ) ) (<T S[pt]\NP 1 2> (<L (S[pt]\NP)/NP None None perpetuates (S[pt]\NP)/NP>) (<T NP 1 2> (<L NP/NP None None an NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None insidious N>) ) (<T NP\NP 1 2> (<L , None None , ,>) (<T NP\NP 1 2> (<L (NP\NP)/(NP\NP) None None stereotyped (NP\NP)/(NP\NP)>) (<L NP\NP None None perspective NP\NP>) ) ) ) ) ) ) (<L . None None . .>) )
 ID=wsj_0095.8 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0095.9 PARSER=GOLD NUMPARSE=1
-(<T (NP\NP)/(NP\NP) 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None Preston (NP\NP)/(NP\NP)>) (<T NP\NP 1 2> (<T (NP\NP)/(NP\NP) 1 2> (<L (NP\NP)/(NP\NP) None None G. (NP\NP)/(NP\NP)>) (<L NP\NP None None Foster NP\NP>) ) (<T NP\NP 1 2> (<L NP\NP None None Birmingham NP\NP>) (<L NP\NP None None , NP\NP>) ) ) ) (<T NP\NP 1 2> (<L NP\NP None None Ala NP\NP>) (<L . None None . .>) ) )
+(<T N 1 2> (<T N 1 2> (<T N 1 2> (<T N 1 2> (<T N/N 1 2> (<T N/N 1 2> (<L N/N None None Preston N/N>) (<L N/N None None G. N/N>) ) (<L N/N None None Foster N/N>) ) (<L N None None Birmingham N>) ) (<L RRB None None , RRB>) ) (<L N\N None None Ala N\N>) ) (<L . None None . .>) )
 ID=wsj_0096.1 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0096.2 PARSER=GOLD NUMPARSE=1
@@ -3623,7 +3623,7 @@ ID=wsj_0096.10 PARSER=GOLD NUMPARSE=1
 ID=wsj_0096.11 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0096.12 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<T NP 1 1> (<L N None None Biscayne N>) ) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None has (S[dcl]\NP)/NP>) (<L NP/NP None None n't NP/NP>) ) (<L NP/NP None None any NP/NP>) ) (<T NP 1 2> (<L NP/NP None None telephone NP/NP>) (<T NP 1 2> (<T NP 1 1> (<L N None None listing N>) ) (<L , None None , ,>) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None an ((S\NP)\(S\NP))/N>) (<L N None None operator N>) ) (<L : None None said :>) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T S 1 2> (<T NP 1 1> (<L N None None Biscayne N>) ) (<T S\NP 1 2> (<T S[dcl]\NP 1 2> (<T (S[dcl]\NP)/NP 1 2> (<L (S[dcl]\NP)/NP None None has (S[dcl]\NP)/NP>) (<L NP/NP None None n't NP/NP>) ) (<T NP 1 2> (<L NP/NP None None any NP/NP>) (<T NP 1 2> (<T NP 1 2> (<L NP/NP None None telephone NP/NP>) (<T NP 1 1> (<L N None None listing N>) ) ) (<L , None None , ,>) ) ) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None an ((S\NP)\(S\NP))/N>) (<L N None None operator N>) ) (<L : None None said :>) ) ) ) (<L . None None . .>) )
 ID=wsj_0096.13 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0096.14 PARSER=GOLD NUMPARSE=1
@@ -3697,7 +3697,7 @@ ID=wsj_0096.47 PARSER=GOLD NUMPARSE=1
 ID=wsj_0096.48 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0096.49 PARSER=GOLD NUMPARSE=1
-(<T S 1 2> (<T S 1 2> (<L NP None None I NP>) (<T S\NP 1 2> (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None never (S\NP)/(S\NP)>) (<L S[dcl]\NP None None had S[dcl]\NP>) ) (<T (S\NP)\(S\NP) 1 2> (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None any ((S\NP)\(S\NP))/N>) (<L N None None clients N>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None at ((S\NP)\(S\NP))/NP>) (<L NP None None all NP>) ) ) ) ) (<L . None None . .>) )
+(<T S 1 2> (<T S 1 2> (<L NP None None I NP>) (<T S\NP 1 2> (<T S\NP 1 2> (<T S\NP 1 2> (<L (S\NP)/(S\NP) None None never (S\NP)/(S\NP)>) (<L S[dcl]\NP None None had S[dcl]\NP>) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/N None None any ((S\NP)\(S\NP))/N>) (<L N None None clients N>) ) ) (<T (S\NP)\(S\NP) 1 2> (<L ((S\NP)\(S\NP))/NP None None at ((S\NP)\(S\NP))/NP>) (<L NP None None all NP>) ) ) ) (<L . None None . .>) )
 ID=wsj_0096.50 PARSER=GOLD NUMPARSE=1
 (<L S None None None S>)
 ID=wsj_0097.1 PARSER=GOLD NUMPARSE=1
