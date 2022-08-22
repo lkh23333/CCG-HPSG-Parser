@@ -4,7 +4,8 @@ import torch
 import torch.nn as nn
 
 from ccg_parsing_models import BaseParsingModel, SpanParsingModel
-from decoders import Chart, Decoder, CCGBaseDecoder, CCGSpanDecoder
+from decoders.decoder import Chart, Decoder
+from decoders.ccg_base_decoder import CCGBaseDecoder
 
 sys.path.append('..')
 from ccg_supertagger.utils import pre_tokenize_sent
@@ -61,9 +62,16 @@ if __name__ == '__main__':
     with open('../data/lexical_category2idx_cutoff.json', 'r', encoding = 'utf8') as f:
         category2idx = json.load(f)
     idx2category = {idx: cat for cat, idx in category2idx.items()}
-    beam_width = 50
+    beam_width = 3
+    with open('../data/cat_dict.json', 'r', encoding = 'utf8') as f:
+        cat_dict = json.load(f)
 
-    decoder = CCGBaseDecoder(top_k = 1, beam_width = beam_width, idx2tag = idx2category)
+    decoder = CCGBaseDecoder(
+        top_k = 50,
+        beam_width = beam_width,
+        idx2tag = idx2category,
+        cat_dict = cat_dict
+    )
     with open('../data/instantiated_unary_rules_with_X.json', 'r', encoding = 'utf8') as f:
         instantiated_unary_rules = json.load(f)
     with open('../data/instantiated_seen_binary_rules.json', 'r', encoding = 'utf8') as f:
@@ -83,7 +91,8 @@ if __name__ == '__main__':
     )
 
 
-    chart = parser.sanity_check(pretokenized_sent, golden_supertags, print_cell_items=True)
+    # chart = parser.sanity_check(pretokenized_sent, golden_supertags, print_cell_items=True)
+    chart = parser.parse(pretokenized_sent)
     
     for cell_item in chart.chart[0][-1].cell_items:
         print(to_auto(cell_item.constituent))

@@ -1,7 +1,7 @@
 import time, os, sys, random, argparse
 import torch
 
-from decoders import CCGBaseDecoder
+from decoders.ccg_base_decoder import CCGBaseDecoder
 from ccg_parsing_models import BaseParsingModel
 from parser import Parser
 
@@ -24,12 +24,16 @@ def main(args):
     with open(args.lexical_category2idx_dir, 'r', encoding = 'utf8') as f:
         category2idx = json.load(f)
     idx2category = {idx: cat for cat, idx in category2idx.items()}
+    with open(args.cat_dict_dir, 'r', encoding = 'utf8') as f:
+        cat_dict = json.load(f)
 
     decoder = CCGBaseDecoder(
         beam_width = args.beam_width,
-        top_k = args.top_k_supertags,
         idx2tag = idx2category,
-        timeout = args.decoder_timeout
+        cat_dict = cat_dict,
+        top_k = args.top_k_supertags,
+        timeout = args.decoder_timeout,
+        apply_cat_filtering = args.apply_cat_filtering
     )
     with open(args.instantiated_unary_rules_dir, 'r', encoding = 'utf8') as f:
         instantiated_unary_rules = json.load(f)
@@ -51,21 +55,25 @@ def main(args):
         decoder = decoder
     )
 
+    accumulated_time = 0
     buffer = []
     for i in range(0, len(pretokenized_sents), args.batch_size):
         print(f'======== {i} / {len(pretokenized_sents)} ========')
 
         t0 = time.time()
 
-        # charts = parser.batch_parse(
-        #     pretokenized_sents[i: i + args.batch_size]
-        # )
-        charts = parser.batch_sanity_check(
-            pretokenized_sents[i: i + args.batch_size],
-            golden_supertags[i: i + args.batch_size],
-            print_cell_items = False
+        charts = parser.batch_parse(
+            pretokenized_sents[i: i + args.batch_size]
         )
-        print(f'time: {time.time() - t0}s')
+        # charts = parser.batch_sanity_check(
+        #     pretokenized_sents[i: i + args.batch_size],
+        #     golden_supertags[i: i + args.batch_size],
+        #     print_cell_items = False
+        # )
+
+        time_cost = time.time() - t0
+        print(f'time: {time_cost}s')
+        accumulated_time += time_cost
         
         # for chart in charts:
         #     print(chart.chart[0][-1])
@@ -95,6 +103,8 @@ def main(args):
             else:
                 buffer.append('(<L S None None None S>)\n')
     
+    print(f'averaged parsing time of each sentence: {accumulated_time / len(pretokenized_sents)}')
+
     predicted_auto_file_output_dir = os.path.join(
         args.predicted_auto_files_dir,
         '_'.join([
@@ -102,7 +112,7 @@ def main(args):
             'topk' + str(args.top_k_supertags),
             'beam_width' + str(args.beam_width),
             'timeout' + str(args.decoder_timeout)
-        ]) + '_GOLD.auto'
+        ]) + '.auto'
     )
     with open(predicted_auto_file_output_dir, 'w', encoding='utf8') as f:
         f.writelines(buffer)
@@ -117,13 +127,15 @@ if __name__ == '__main__':
     parser.add_argument('--lexical_category2idx_dir', type = str, default = '../data/lexical_category2idx_cutoff.json')
     parser.add_argument('--instantiated_unary_rules_dir', type = str, default = '../data/instantiated_unary_rules_with_X.json')
     parser.add_argument('--instantiated_binary_rules_dir', type = str, default = '../data/instantiated_seen_binary_rules.json')
+    parser.add_argument('--cat_dict_dir', type = str, default = '../data/cat_dict.json')
+    parser.add_argument('--apply_cat_filtering', type = bool, default = False)
     parser.add_argument('--supertagging_model_path', type = str, default = '../plms/bert-base-uncased')
     parser.add_argument('--supertagging_model_checkpoints_dir', type = str, default = '../ccg_supertagger/checkpoints')
     parser.add_argument('--supertagging_model_checkpoint_epoch', type = str, default = 2)
-    parser.add_argument('--device', type = torch.device, default = torch.device('cuda:5'))
+    parser.add_argument('--device', type = torch.device, default = torch.device('cpu'))
     parser.add_argument('--batch_size', type = int, default = 10)
-    parser.add_argument('--top_k_supertags', type = int, default = 1)
-    parser.add_argument('--beam_width', type = int, default = 30)
+    parser.add_argument('--top_k_supertags', type = int, default = 3)
+    parser.add_argument('--beam_width', type = int, default = 4)
     parser.add_argument('--decoder_timeout', help = 'time out value for decoding one sentence', type = float, default = 16.0)
     parser.add_argument('--predicted_auto_files_dir', type = str, default = './evaluation')
     args = parser.parse_args()
