@@ -91,6 +91,7 @@ class CCGSupertaggingTrainer:
         self.optimizer = optimizer
         self.lr = lr
         self.criterion = nn.CrossEntropyLoss()
+        self.softmax = nn.Softmax(dim = 2)
 
     def train(self, checkpoint_epoch: int = 0):
 
@@ -187,6 +188,8 @@ class CCGSupertaggingTrainer:
                     len(word_pieces) for word_pieces in word_piece_tracked
                 ]
             )
+
+            outputs = self.softmax(outputs)
             correct_cnt += (torch.argmax(outputs, dim = 2) == target).sum()
 
         loss_sum /= len(dataloader)
@@ -224,6 +227,7 @@ class CCGSupertaggingTrainer:
             self.test(self.test_dataset, mode = 'test_eval')
         else:
             raise ValueError('the mode should be one of train_eval, dev_eval and test_eval')
+
 
 def main(args):
 
@@ -276,16 +280,16 @@ def main(args):
     )
 
     print('================= supertagging training =================\n')
-    trainer.train() # default training from the beginning
-    # trainer.load_checkpoint_and_train(checkpoint_epoch=1) # train from (checkpoint_epoch + 1)
-    # trainer.load_checkpoint_and_test(checkpoint_epoch=1, mode='train_eval')
+    # trainer.train() # default training from the beginning
+    trainer.load_checkpoint_and_train(checkpoint_epoch=2) # train from (checkpoint_epoch + 1)
+    # trainer.load_checkpoint_and_test(checkpoint_epoch=1, mode='dev_eval')
     # trainer.test(dataset = self.test_dataset, mode = 'test_eval')
     
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'supertagging')
     parser.add_argument('--n_epochs', type = int, default = 20)
-    parser.add_argument('--device', type = torch.device, default = torch.device('cuda:0'))
+    parser.add_argument('--device', type = torch.device, default = torch.device('cuda:7'))
     parser.add_argument('--batch_size', type = int, default = 10)
     parser.add_argument('--lr', type = float, default = 1e-5)
     parser.add_argument('--dropout_p', type = float, default = 0.2)

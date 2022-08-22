@@ -6,6 +6,7 @@ import torch.nn as nn
 sys.path.append('..')
 from ccg_supertagger.utils import pre_tokenize_sent
 from ccg_supertagger.models import BaseSupertaggingModel
+from base import Category
 from data_loader import load_auto_file
 
 CategoryStr = TypeVar('CategoryStr')
@@ -26,8 +27,11 @@ class CCGSupertagger:
         self.model = model
         self.tokenizer = tokenizer
         self.idx2category = idx2category
+        if idx2category is not None:
+            self.category2idx = {idx: cat for idx, cat in idx2category.items()}
         self.top_k = top_k
         self.device = device
+        self.softmax = nn.Softmax(dim = 2)
 
     def _prepare_batch_data(self, batch: List[List[str]]) -> Dict[str, Any]:
         # batch: a list of pretokenized sentences (a list of strings)
@@ -70,7 +74,7 @@ class CCGSupertagger:
             predicted = list()
             for i in range(output.shape[0]):
                 topk_ids = torch.topk(output[i], self.top_k)[1]
-                predicted.append([self.idx2category[int(idx.item())] for idx in topk_ids])
+                predicted.append([str(Category.parse(self.idx2category[idx.item()])) for idx in topk_ids])
             batch_predicted.append(predicted)
         return batch_predicted
 
@@ -84,6 +88,7 @@ class CCGSupertagger:
     def get_model_outputs_for_batch(self, batch: List[Union[str, List[str]]]) -> List[torch.Tensor]:
         
         self.model.to(self.device)
+        self.model.eval()
         
         for i in range(len(batch)):
             if isinstance(batch[i], str):
@@ -97,11 +102,12 @@ class CCGSupertagger:
             mask = batch_data['mask'],
             word_piece_tracked = batch_data['word_piece_tracked']
         ) # B*L*C
+        outputs = self.softmax(outputs)
+
         sents_lengths = [len(word_piece_tracked) for word_piece_tracked in batch_data['word_piece_tracked']]
-        
-        softmax = nn.Softmax(dim = 1)
+
         return [
-            softmax(outputs[i, :sents_lengths[i], :])
+            outputs[i, :sents_lengths[i], :]
             for i in range(len(batch))
         ] # a list, each of the shape l_sent * C
 
@@ -115,11 +121,37 @@ class CCGSupertagger:
     def predict_sent(self, sent: Union[str, List[str]]) -> SupertaggerOutput:
         return self.predict_batch([sent])[0]
 
+    def sanity_check(
+        self,
+        pretokenized_sents: List[List[str]],
+        golden_supertags: List[List[str]],
+        batch_size = 10
+    ) -> None:
+        # check the supertagger through re-calculation of the acc
+        correct_cnt = 0
+        total_cnt = 0
+
+        for i in range(0, len(pretokenized_sents), batch_size):
+            if i % 50 == 0:
+                print(f'progress: {i} / {len(pretokenized_sents)}')
+            sents = pretokenized_sents[i : i + batch_size]
+            supertags = golden_supertags[i : i + batch_size]
+
+            predicted = supertagger.predict_batch(sents)
+
+            total_cnt += sum([len(golden) for golden in supertags])
+            for j in range(len(supertags)):
+                for k in range(len(supertags[j])):
+                    if supertags[j][k] in predicted[j][k]:
+                        correct_cnt += 1
+
+        print(f'per-word acc of the supertagger = {(correct_cnt / total_cnt) * 100: .3f} (correct if the golden tag is in the top k predicted ones)')
+
 
 if __name__ == '__main__':
     # sample use
     import json
-    lexical_category2idx_dir = '../data/lexical_category2idx_from_train_data.json'
+    lexical_category2idx_dir = '../data/lexical_category2idx_cutoff.json'
     with open(lexical_category2idx_dir, 'r', encoding = 'utf8') as f:
         category2idx = json.load(f)
     idx2category = {idx: category for category, idx in category2idx.items()}
@@ -129,12 +161,15 @@ if __name__ == '__main__':
     supertagger = CCGSupertagger(
         model = BaseSupertaggingModel(model_path, len(category2idx)),
         tokenizer = BertTokenizer.from_pretrained(model_path),
-        idx2category = idx2category
+        idx2category = idx2category,
+        top_k = 8
     )
     checkpoints_dir = './checkpoints'
-    checkpoint_epoch = 20
+    checkpoint_epoch = 2
     supertagger._load_model_checkpoint(checkpoints_dir, checkpoint_epoch)
 
-    sent = 'Mr. Vinken is chairman of Elsevier N.V., the Dutch publishing group'
-    predicted = supertagger.predict_batch([sent, sent])
-    print(predicted)
+    data_items, _ = load_auto_file('../data/ccgbank-wsj_00.auto')
+    pretokenized_sents = [[token.contents for token in item.tokens] for item in data_items]
+    golden_supertags = [[str(token.tag) for token in item.tokens] for item in data_items]
+    
+    supertagger.sanity_check(pretokenized_sents, golden_supertags)

@@ -22,9 +22,9 @@ def pre_tokenize_sent(sent: str) -> List[str]:
     return returned
 
 def get_cat_ids(categories: List[str], category2idx: Dict[str, int]) -> List[int]:
-    # take one list of category strings and return a list of corresponding one-hot vectors
+    # take one list of category strings and return a list of corresponding ids
     return [
-        category2idx[category] if category in category2idx.keys() else TARGET_PADDING
+        category2idx[category] if category in category2idx else TARGET_PADDING
         for category in categories
     ]
 
@@ -69,8 +69,3 @@ def prepare_data(data_items: List[DataItem], tokenizer, category2idx: Dict[str, 
         'word_piece_tracked': word_piece_tracked,
         'target': torch.LongTensor(target)
     }
-
-
-if __name__ == '__main__':
-    text = 'I haven\'t done that before.'
-    pre_tokenize_sent(text)

@@ -1,4 +1,4 @@
-import time
+import time, copy
 from typing import Tuple, List, Dict, Callable, Union, Optional, TypeVar
 from string import ascii_letters
 from base import Token, Atom, Functor, ConstituentNode, Category, UnaryRule, BinaryRule
@@ -41,30 +41,30 @@ UNARY RULES
 def forward_type_raising(x: ConstituentNode, T: Category) -> Union[ConstituentNode, FALSE]:
     return ConstituentNode(
         tag = Functor(
-            left = T,
+            left = copy.deepcopy(T),
             slash = '/',
             right = Functor(
-                T, '\\', x.tag
+                copy.deepcopy(T), '\\', copy.deepcopy(x.tag)
             )
         ),
         children = [x],
         used_rule = 'FT',
-        head_is_left=True
+        head_is_left = True
     )
 
 
 def backward_type_raising(x: ConstituentNode, T: Category) -> Union[ConstituentNode, FALSE]:
     return ConstituentNode(
         tag = Functor(
-            left = T,
+            left = copy.deepcopy(T),
             slash = '\\',
             right = Functor(
-                T, '/', x.tag
+                copy.deepcopy(T), '/', copy.deepcopy(x.tag)
             )
         ),
         children = [x],
         used_rule = 'BT',
-        head_is_left=True
+        head_is_left = True
     )
 
 
@@ -74,175 +74,129 @@ BINARY RULES
 
 
 def forward_application(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
+    
     pattern = ('a/b', 'b')
-    unified_pair = unification(x.tag, y.tag, pattern)
-
-    if _is_modifier(x.tag) or _is_type_raised(x.tag):
-        head_is_left = False
-    else:
-        head_is_left = True
+    unified_pair = unification(copy.deepcopy(x.tag), copy.deepcopy(y.tag), pattern)
 
     if unified_pair:
+        result = copy.deepcopy(y.tag) if _is_modifier(x.tag) else unified_pair[0].left
         return ConstituentNode(
-            tag = unified_pair[0].left,
+            tag = result,
             children = [x, y],
             used_rule = 'FA',
-            head_is_left=head_is_left
+            head_is_left = True
         )
     return False
 
 
 def backward_application(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pattern = ('b', 'a\\b')
-    unified_pair = unification(x.tag, y.tag, pattern)
-
-    if _is_modifier(y.tag) or _is_type_raised(y.tag):
-        head_is_left = True
+    
+    if str(x.tag) == 'S[dcl]' and str(y.tag) == 'S[em]\\S[em]':
+        result = copy.deepcopy(x.tag)
     else:
-        head_is_left = False
+        pattern = ('b', 'a\\b')
+        unified_pair = unification(copy.deepcopy(x.tag), copy.deepcopy(y.tag), pattern)
+        if unified_pair:
+            result = copy.deepcopy(x.tag) if _is_modifier(y.tag) else unified_pair[1].left
+        else:
+            return False
 
-    if unified_pair:
-        return ConstituentNode(
-            tag = unified_pair[1].left,
-            children = [x, y],
-            used_rule = 'BA',
-            head_is_left=head_is_left
-        )
-    return False
+    return ConstituentNode(
+        tag = result,
+        children = [x, y],
+        used_rule = 'BA',
+        head_is_left = True
+    )
 
 
 def forward_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pattern = ('a/b', 'b/c')
-    unified_pair = unification(x.tag, y.tag, pattern)
 
-    if _is_modifier(x.tag) or _is_type_raised(x.tag):
-        head_is_left = False
-    else:
-        head_is_left = True
+    pattern = ('a/b', 'b/c')
+    unified_pair = unification(copy.deepcopy(x.tag), copy.deepcopy(y.tag), pattern)
 
     if unified_pair:
+        result = copy.deepcopy(y.tag) if _is_modifier(x.tag) else Functor(unified_pair[0].left, '/', unified_pair[1].right)
         return ConstituentNode(
-            tag = Functor(
-                left = unified_pair[0].left,
-                slash = '/',
-                right = unified_pair[1].right
-            ),
+            tag = result,
             children = [x, y],
             used_rule = 'FC',
-            head_is_left=head_is_left
+            head_is_left = True
         )
     return False
 
 
-def backward_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pattern = ('b\\c', 'a\\b')
-    unified_pair = unification(x.tag, y.tag, pattern)
+def backward_crossing_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
 
-    if _is_modifier(y.tag) or _is_type_raised(y.tag):
-        head_is_left = True
-    else:
-        head_is_left = False
+    pattern = ('b/c', 'a\\b')
+    unified_pair = unification(copy.deepcopy(x.tag), copy.deepcopy(y.tag), pattern)
 
     if unified_pair:
+        if unified_pair[0].left in [Category.parse('N'), Category.parse('NP')]:
+            return False
+        result = copy.deepcopy(x.tag) if _is_modifier(y.tag) else Functor(unified_pair[1].left, '/', unified_pair[0].right)
         return ConstituentNode(
-            tag = Functor(
-                left = unified_pair[1].left,
-                slash = '\\',
-                right = unified_pair[0].right
-            ),
+            tag = result,
             children = [x, y],
-            used_rule = 'BC',
-            head_is_left=head_is_left
+            used_rule = 'BX',
+            head_is_left = True
         )
     return False
 
 
 def generalized_forward_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
+
     pattern_0 = ('a/b', '(b/c)/$')
     pattern_1 = ('a/b', '(b/c)\\$')
-    unified_pair = unification(x.tag, y.tag, pattern_0)
 
-    if _is_modifier(x.tag) or _is_type_raised(x.tag):
-        head_is_left = False
-    else:
-        head_is_left = True
-
+    unified_pair = unification(copy.deepcopy(x.tag), copy.deepcopy(y.tag), pattern_0)
     if unified_pair:
+        result = copy.deepcopy(y.tag) if _is_modifier(x.tag) else Functor(Functor(unified_pair[0].left, '/', unified_pair[1].left.right), '/', unified_pair[1].right)
         return ConstituentNode(
-            tag = Functor(
-                left = Functor(
-                    unified_pair[0].left,
-                    '/',
-                    unified_pair[1].left.right
-                ),
-                slash = '/',
-                right = unified_pair[1].right
-            ),
+            tag = result,
             children = [x, y],
             used_rule = 'GFC',
-            head_is_left=head_is_left
+            head_is_left = True
         )
     else:
-        unified_pair = unification(x.tag, y.tag, pattern_1)
+        unified_pair = unification(copy.deepcopy(x.tag), copy.deepcopy(y.tag), pattern_1)
         if unified_pair:
+            result = copy.deepcopy(y.tag) if _is_modifier(x.tag) else Functor(Functor(unified_pair[0].left, '/', unified_pair[1].left.right), '\\', unified_pair[1].right)
             return ConstituentNode(
-                tag = Functor(
-                    left = Functor(
-                        unified_pair[0].left,
-                        '/',
-                        unified_pair[1].left.right
-                    ),
-                    slash = '\\',
-                    right = unified_pair[1].right
-                ),
+                tag = result,
                 children = [x, y],
                 used_rule = 'GFC',
-                head_is_left=head_is_left
+                head_is_left = True
             )
     return False
 
 
-def generalized_backward_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    pattern_0 = ('(b\\c)/$', 'a\\b')
-    pattern_1 = ('(b\\c)\\$', 'a\\b')
-    unified_pair = unification(x.tag, y.tag, pattern_0)
+def generalized_backward_crossing_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
+    
+    pattern_0 = ('(b/c)/$', 'a/b')
+    pattern_1 = ('(b/c)\\$', 'a/b')
 
-    if _is_modifier(y.tag) or _is_type_raised(y.tag):
-        head_is_left = True
-    else:
-        head_is_left = False
-
+    unified_pair = unification(copy.deepcopy(x.tag), copy.deepcopy(y.tag), pattern_0)
     if unified_pair:
+        if unified_pair[1].right in [Category.parse('N'), Category.parse('NP')]:
+            return False
+        result = copy.deepcopy(x.tag) if _is_modifier(y.tag) else Functor(Functor(unified_pair[1].left, '/', unified_pair[0].left.right), '/', unified_pair[0].right)
         return ConstituentNode(
-            tag = Functor(
-                left = Functor(
-                    unified_pair[1].left,
-                    '\\',
-                    unified_pair[0].left.right
-                ),
-                slash = '/',
-                right = unified_pair[0].right
-            ),
+            tag = result,
             children = [x, y],
-            used_rule = 'GBC',
-            head_is_left=head_is_left
+            used_rule = 'GBX',
+            head_is_left = True
         )
     else:
-        unified_pair = unification(x.tag, y.tag, pattern_1)
+        unified_pair = unification(copy.deepcopy(x.tag), copy.deepcopy(y.tag), pattern_1)
         if unified_pair:
+            if unified_pair[1].right in [Category.parse('N'), Category.parse('NP')]:
+                return False
+            result = copy.deepcopy(x.tag) if _is_modifier(y.tag) else Functor(Functor(unified_pair[1].left, '/', unified_pair[0].left.right), '\\', unified_pair[0].right)
             return ConstituentNode(
-                tag = Functor(
-                    left = Functor(
-                        unified_pair[1].left,
-                        '\\',
-                        unified_pair[0].left.right
-                    ),
-                    slash = '\\',
-                    right = unified_pair[0].right
-                ),
+                tag = result,
                 children = [x, y],
-                used_rule = 'GBC',
-                head_is_left=head_is_left
+                used_rule = 'GBX',
+                head_is_left = True
             )
     return False
 
@@ -251,90 +205,91 @@ def conjunction(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode
     if (
         not _is_punct(y.tag)
         and not _is_type_raised(y.tag)
-        and x.tag in (
-            Category.parse(','),
-            Category.parse(';'),
-            Category.parse('conj')
-        )
+        and str(x.tag) in (',', ';', 'conj')
         and not (y.tag ^ Category.parse('NP\\NP'))
+        and not (y.tag ^ Category.parse('N'))
     ):
+        result = Functor(copy.deepcopy(y.tag), '\\', copy.deepcopy(y.tag))
         return ConstituentNode(
-            tag = Functor(y.tag, '\\', y.tag),
+            tag = result,
             children = [x, y],
             used_rule = 'CONJ',
-            head_is_left=False
+            head_is_left = True
         )
     return False
 
 
 def conjunction2(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    if x.tag == Category.parse('conj') and y.tag == Category.parse('NP\\NP'):
+    if str(x.tag) == 'conj' and y.tag == Category.parse('NP\\NP'):
+        result = copy.deepcopy(y.tag)
         return ConstituentNode(
-            tag = y.tag,
+            tag = result,
             children = [x, y],
             used_rule = 'CONJ',
-            head_is_left=False
+            head_is_left = True
         )
     return False
 
 
 def remove_punctuation1(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     if _is_punct(x.tag):
+        result = copy.deepcopy(y.tag)
         return ConstituentNode(
-            tag = y.tag,
+            tag = result,
             children = [x, y],
             used_rule = 'LP',
-            head_is_left=False
+            head_is_left = True
         )
     return False
 
 
 def remove_punctuation2(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     if _is_punct(y.tag):
+        result = copy.deepcopy(x.tag)
         return ConstituentNode(
-            tag = x.tag,
+            tag = result,
             children = [x, y],
             used_rule = 'RP',
-            head_is_left=True
+            head_is_left = True
         )
     return False
 
 
 def remove_punctuation_left(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    if x.tag in (Category.parse('LQU'), Category.parse('LRB')):
+    if str(x.tag) in ('LQU', 'LRB'):
+        result = Functor(copy.deepcopy(y.tag), '\\', copy.deepcopy(y.tag))
         return ConstituentNode(
-            tag = Functor(y.tag, '\\', y.tag),
+            tag = result,
             children = [x, y],
             used_rule = 'LP',
-            head_is_left=False
+            head_is_left = True
         )
     return False
 
 
 def comma_vp_to_adv(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     if (
-        x.tag == Category.parse(',')
-        and y.tag in (
-            Category.parse('S[ng]\\NP'),
-            Category.parse('S[pss]\\NP')
-        )
+        str(x.tag) == ','
+        and str(y.tag) in ('S[ng]\\NP', 'S[pss]\\NP')
     ):
+        result = Category.parse('(S\\NP)\\(S\\NP)')
         return ConstituentNode(
-            tag = Category.parse('(S\\NP)\\(S\\NP)'),
+            tag = result,
             children = [x, y],
             used_rule = 'LP',
-            head_is_left=False
+            head_is_left = True
         )
     return False
 
 
 def parenthetical_direct_speech(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
-    if x.tag == Category.parse(',') and y.tag == Category.parse('S[dcl]/S[dcl]'):
+    if str(x.tag) == ',' and str(y.tag) == 'S[dcl]/S[dcl]':
+        result = Category.parse('(S\\NP)/(S\\NP)')
         return ConstituentNode(
-            tag = Category.parse('(S\\NP)/(S\\NP)'),
+            tag = result,
             children = [x, y],
             used_rule = 'LP',
-            head_is_left=False
+            head_is_left = True
         )
     return False
 
@@ -348,9 +303,9 @@ binary_rules = [
     forward_application,
     backward_application,
     forward_composition,
-    backward_composition,
+    backward_crossing_composition,
     generalized_forward_composition,
-    generalized_backward_composition,
+    generalized_backward_crossing_composition,
     conjunction,
     conjunction2,
     remove_punctuation1,
@@ -366,9 +321,9 @@ abbreviated_rule_name = {
     'forward_application': 'FA',
     'backward_application': 'BA',
     'forward_composition': 'FC',
-    'backward_composition': 'BC',
+    'backward_crossing_composition': 'BX',
     'generalized_forward_composition': 'GFC',
-    'generalized_backward_composition': 'GBC',
+    'generalized_backward_crossing_composition': 'GBX',
     'conjunction': 'CONJ',
     'conjunction2': 'CONJ',
     'remove_punctuation1': 'LP',
@@ -392,9 +347,15 @@ if __name__ == '__main__':
     
     T = Category.parse('S/NP')
     constituent_1_ = backward_type_raising(constituent_1, T)
-    print(str(constituent_1_))
-    
-    constituent_12 = generalized_backward_composition(constituent_1, constituent_2)
-    print(str(constituent_12))
-    constituent_123 = forward_application(constituent_12, constituent_3)
-    print(str(constituent_123))
+    # print(str(constituent_1_))
+
+    t1 = Category.parse("(S[dcl]\\NP)/(S[b]\\NP)")
+    t2 = Category.parse("S[b]\\NP")
+
+    for binary_rule in binary_rules:
+        result = binary_rule(
+            ConstituentNode(tag=t1),
+            ConstituentNode(tag=t2)
+        )
+        if result:
+            print(str(result.tag), result.used_rule)

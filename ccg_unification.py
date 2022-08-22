@@ -1,3 +1,4 @@
+import time
 from typing import Tuple, Union, Optional, TypeVar
 from base import Category, Atom, Functor
 
@@ -35,14 +36,14 @@ def unification(x: Category, y: Category, pattern: Pair[str]) -> Union[Pair[Cate
         if x.tag == y.tag:
             if x.feature == y.feature:
                 return (x, y)
-            elif x.feature == None and y.feature != None:
+            elif x.feature.is_ignorable and (not y.feature.is_ignorable):
                 return (y, y)
-            elif x.feature != None and y.feature == None:
+            elif (not x.feature.is_ignorable) and y.feature.is_ignorable:
                 return (x, x)
-            elif x.feature != None and repr(y.feature) == 'X':
+            elif (not x.feature.is_ignorable) and repr(y.feature) == 'X':
                 y.feature.feature[0] = x.feature.feature[0]
                 return (x, y)
-            elif y.feature != None and repr(x.feature) == 'X':
+            elif (not y.feature.is_ignorable) and repr(x.feature) == 'X':
                 x.feature.feature[0] = y.feature.feature[0]
                 return (x, y)
         return False

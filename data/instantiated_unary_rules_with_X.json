@@ -8,10 +8,8 @@
     ["S[to]\\NP", "(S/S)", "TC"],
     ["S[pss]\\NP", "(S/S)", "TC"],
     ["S[ng]\\NP", "(S/S)", "TC"],
-    ["NP", "(S[X]/(S[X]\\NP))", "FT"],
-    ["NP", "((S[X]\\NP)\\((S[X]\\NP)/NP))", "BT"],
-    ["PP", "((S[X]\\NP)\\((S[X]\\NP)/PP))", "BT"],
-    ["NP", "(((S[X]\\NP)/NP)\\(((S[X]\\NP)/NP)/NP))", "BT"],
-    ["NP", "(((S[X]\\NP)/PP)\\(((S[X]\\NP)/PP)/NP))", "BT"],
+    ["NP", "(S/(S\\NP))", "FT"],
+    ["NP", "((S\\NP)\\((S\\NP)/NP))", "BT"],
+    ["PP", "((S\\NP)\\((S\\NP)/PP))", "BT"],
     ["(S[ng]\\NP)", "NP", "TC"]
 ]

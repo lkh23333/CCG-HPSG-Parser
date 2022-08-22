@@ -43,7 +43,7 @@ class BaseSupertaggingModel(nn.Module):
             input_ids = encoded_batch,
             attention_mask = mask
         ).last_hidden_state # B*L*H
-
+        
         for i in range(f0.shape[0]):
             k = 0
             for j in range(len(word_piece_tracked[i])):

@@ -90,10 +90,11 @@ class SpanParsingModel(BaseParsingModel):
             'word_piece_tracked': word_piece_tracked
         }
 
-    def forward(self, pretokenized_sents: List[List[str]]) -> Tuple[List[SupertaggingRepresentations], List[SpanRepresentations]]:
+    def forward(self, pretokenized_sents: List[List[str]]) -> List[SpanRepresentations]:
         # return the supertagging outputs for the sentences
         # and the embeddings of each word, [SEP] (start) and [CLS] (end) token in every sentence from the BERT in the supertagger
-        batch_supertagging_outputs = self.supertagger.get_model_outputs_for_batch(pretokenized_sents)
+        
+        # batch_supertagging_outputs = self.supertagger.get_model_outputs_for_batch(pretokenized_sents)
         
         batch_data = self._prepare_batch_data(pretokenized_sents)
         batch_input_ids = data['input_ids'] # B * (1([CLS]) + n_word_pieces + 1([SEP]) + n_paddings)
@@ -154,4 +155,4 @@ class SpanParsingModel(BaseParsingModel):
             )
             batch_span_representations.append(span_representations)
 
-        return batch_supertagging_outputs, batch_span_representations
+        return batch_span_representations

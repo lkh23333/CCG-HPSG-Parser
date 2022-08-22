@@ -1,19 +1,22 @@
-import sys
+import sys, json
 import torch
 import torch.nn as nn
 from torch.optim import AdamW
 from torch.utils.data import Dataset, DataLoader
 
-from decoders import Decoder, ChartItem
+from ccg_parsing_models import SpanParsingModel
+from decoders import ChartItem, Decoder, CCGSpanDecoder
+from utils import get_pretokenized_sents
 
 sys.path.append('..')
 from base import ConstituentNode
+from data_loader import DataItem, load_auto_file
 
 
 class CCGParsingDataset(Dataset):
-    def __init__(self, pretokenized_sents, golden_trees):
+    def __init__(self, pretokenized_sents: List[List[str]], data_items: List[DataItem]):
         self.pretokenized_sents = pretokenized_sents
-        self.golden_trees = golden_trees
+        self.data_items = data_items
     
     def __getitem__(self, idx):
         return (self.pretokenized_sents[idx], self.golden_trees[idx])
@@ -67,16 +70,21 @@ class CCGParsingTrainer:
 
         for epoch in range(checkpoint_epoch + 1, self.n_epochs + 1):
             i = 0
-            for pretokenized_sents, golden_trees in train_dataloader:
+            for pretokenized_sents, data_items in train_dataloader:
                 i += 1
 
+                batch_representations = self.parsing_model(pretokenized_sents)
+                golden_charts = [
+                    self.decoder.get_golden_chart(data_items[i], batch_representations[i])
+                    for i in range(len(batch_representations))
+                ]
                 predicted_charts = self.decoder.batch_decode(
                     pretokenized_sents = pretokenized_sents,
-                    batch_representations = self.parsing_model(pretokenized_sents)
+                    batch_representations = batch_representations,
+                    golden_charts = golden_charts
                 )
-                predicted_trees = [chart[0][-1][0] for chart in predicted_charts]
 
-                loss = self._get_hinge_loss(predicted_trees, golden_trees)
+                loss = self._get_loss(predicted_charts, golden_charts)
                 print(f'[epoch {epoch}/{self.n_epochs}] averaged training loss of batch {i}/{len(train_dataloader)} = {loss.item()}')
 
                 self.optimizer.zero_grad()
@@ -113,36 +121,39 @@ class CCGParsingTrainer:
         loss_sum = 0.
 
         i = 0
-        for pretokenized_sents, golden_trees in dataloader:
+        for pretokenized_sents, data_items in dataloader:
             i += 1
             if i % 50 == 0:
                 print(f'{mode} progress: {i}/{len(dataloader)}')
 
+            batch_representations = self.parsing_model(pretokenized_sents)
+            golden_charts = [
+                self.decoder.get_golden_chart(data_items[i], batch_representations[i])
+                for i in range(len(batch_representations))
+            ]
             predicted_charts = self.decoder.batch_decode(
-                    pretokenized_sents = pretokenized_sents,
-                    batch_representations = self.parsing_model(pretokenized_sents)
-                )
-            predicted_trees = [chart[0][-1][0] for chart in predicted_charts]
+                pretokenized_sents = pretokenized_sents,
+                batch_representations = batch_representations,
+                golden_charts = golden_charts
+            )
 
-            loss = self._get_hinge_loss(predicted_trees, golden_trees)
+            loss = self._get_loss(predicted_charts, golden_charts)
             loss_sum += loss.item()
 
         loss_sum /= len(dataloader)
         print(f'averaged {mode} loss = {loss_sum}')
 
     @staticmethod
-    def _get_hinge_loss(predicted_trees: List[ChartItem], golden_trees: List[ChartItem]):
+    def _get_loss(predicted_charts: List[Chart], golden_charts: List[Chart]):
         loss = 0.
-        for predicted_tree, golden_tree in zip(predicted_trees, golden_trees):
+        for predicted_chart, golden_chart in zip(predicted_charts, golden_charts):
+            predicted_score = predicted_chart.chart[0][-1].cell_items[0].score
+            golden_score = golden_chart.chart[0][-1].cell_items[0].score
             loss += max(
                 0,
-                predicted_tree.score + _get_hamming_loss(predicted_tree, golden_tree) - golden_tree.score
+                predicted_score - golden_score
             )
         return loss
-
-    @staticmethod
-    def _get_hamming_loss(predicted_tree: ChartItem, golden_tree: ChartItem):
-        pass
 
     def load_checkpoint_and_train(self, checkpoint_epoch: int): # set the epoch from which to restart training
         checkpoint = torch.load(
@@ -175,3 +186,82 @@ class CCGParsingTrainer:
             self.test(self.test_dataset, mode = 'test_eval')
         else:
             raise ValueError('the mode should be one of train_eval, dev_eval and test_eval')
+
+def main(args):
+
+    print('================= parsing data =================\n')
+    # train_data_items, _ = load_auto_file(args.train_data_dir)
+    dev_data_items, _ = load_auto_file(args.dev_data_dir)
+    # test_data_items, _ = load_auto_file(args.test_data_dir)
+
+    print('================= getting pretokenized sents =================\n')
+    # train_pretokenized_sents = get_pretokenized_sents(train_data_items)
+    dev_pretokenized_sents = get_pretokenized_sents(dev_data_items)
+    # test_pretokenized_sents = get_pretokenized_sents(test_data_items)
+
+    with open(args.lexical_category2idx_dir, 'r', encoding = 'utf8') as f:
+        lexical_category2idx = json.load(f)
+
+    with open(args.parsing_category2idx_dir, 'r', encoding = 'utf8') as f:
+        parsing_category2idx = json.load(f)
+    parsing_idx2category = {idx: category for category, idx in category2idx.items()}
+
+    # train_dataset = CCGParsingDataset(
+    #     pretokenized_sents = train_pretokenized_sents,
+    #     data_items = train_data_items
+    # )
+    dev_dataset = CCGParsingDataset(
+        pretokenized_sents = dev_pretokenized_sents,
+        data_items = dev_data_items
+    )
+
+    trainer = CCGParsingTrainer(
+        parsing_model = SpanParsingModel(
+            model_path = args.supertagging_model_path,
+            supertagging_n_classes = len(lexical_category2idx),
+            parsing_n_classes = len(parsing_category2idx),
+            checkpoints_dir = args.supertagging_model_checkpoints_dir,
+            checkpoint_epoch = args.supertagging_model_checkpoint_epoch
+        ),
+        decoder = CCGSpanDecoder(
+            beam_width = args.beam_width,
+            idx2tag = parsing_idx2category
+        ),
+        n_epochs = args.n_epochs,
+        device = args.device,
+        batch_size = args.batch_size,
+        checkpoints_dir = args.parsing_model_checkpoints_dir,
+        train_dataset = train_dataset,
+        dev_dataset = dev_dataset,
+        lr = args.lr
+    )
+
+    print('================= parsing training =================\n')
+    trainer.train() # default training from the beginning
+    # trainer.load_checkpoint_and_train(checkpoint_epoch=1) # train from (checkpoint_epoch + 1)
+    # trainer.load_checkpoint_and_test(checkpoint_epoch=1, mode='train_eval')
+    # trainer.test(dataset = self.test_dataset, mode = 'test_eval')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description = 'parsing')
+    parser.add_argument('--train_data_dir', type = str, default = '../data/ccgbank-wsj_02-21.auto')
+    parser.add_argument('--dev_data_dir', type = str, default = '../data/ccgbank-wsj_00.auto')
+    parser.add_argument('--test_data_dir', type = str, default = '../data/ccgbank-wsj_23.auto')
+    parser.add_argument('--lexical_category2idx_dir', type = str, default = '../data/lexical_category2idx_cutoff.json')
+    parser.add_argument('--parsing_category2idx_dir', type = str, default = '../data/parsing_categoey2idx.json')
+    parser.add_argument('--instantiated_unary_rules_dir', type = str, default = '../data/instantiated_unary_rules_with_X.json')
+    parser.add_argument('--instantiated_binary_rules_dir', type = str, default = '../data/instantiated_seen_binary_rules.json')
+    parser.add_argument('--supertagging_model_path', type = str, default = '../plms/bert-base-uncased')
+    parser.add_argument('--supertagging_model_checkpoints_dir', type = str, default = '../ccg_supertagger/checkpoints')
+    parser.add_argument('--supertagging_model_checkpoint_epoch', type = str, default = 2)
+    parser.add_argument('--device', type = torch.device, default = torch.device('cuda:2'))
+    parser.add_argument('--batch_size', type = int, default = 10)
+    parser.add_argument('--beam_width', type = int, default = 5)
+    parser.add_argument('--parsing_model_checkpoints_dir', type = str, default = './checkpoints')
+    parser.add_argument('--parsing_model_checkpoint_epoch', type = str, default = 2)
+    parser.add_argument('--decoder_timeout', help = 'time out value for decoding one sentence', type = float, default = 16.0)
+    parser.add_argument('--predicted_auto_files_dir', type = str, default = './evaluation')
+    args = parser.parse_args()
+
+    main(args)

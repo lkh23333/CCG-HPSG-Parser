@@ -1,5 +1,5 @@
 import sys, time
-import torch, bisect
+import torch, bisect, math
 from typing import *
 
 from ccg_parsing_models import SupertaggingRepresentations, SpanRepresentations
@@ -91,9 +91,11 @@ class Decoder: # for testing directly, no need to train
     
     def __init__(
         self,
+        top_k: int,
         beam_width: int,
         idx2tag: Dict[int, Any]
     ):
+        self.top_k = top_k
         self.beam_width = beam_width
         self.idx2tag = idx2tag
 
@@ -119,7 +121,7 @@ class Decoder: # for testing directly, no need to train
             idx2tag = self.idx2tag
         )
         
-        topk_ps, topk_ids = torch.topk(representations, k = min(representations.shape[1], self.beam_width), dim = 1)
+        topk_ps, topk_ids = torch.topk(representations, k = min(representations.shape[1], self.top_k), dim = 1)
         ktop_tags = [
             [
                 {'tag': self.idx2tag[int(idx.item())], 'p': p}
@@ -159,11 +161,13 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
 
     def __init__(
         self,
+        top_k: int,
         beam_width: int,
         idx2tag: Dict[int, str],
         timeout: float = 4.0
     ):
         super().__init__(
+            top_k = top_k,
             beam_width = beam_width,
             idx2tag = idx2tag
         )
@@ -175,7 +179,7 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
         for instantiated_unary_rule in instantiated_unary_rules:
             initial_cat = Category.parse(instantiated_unary_rule[0])
             final_cat = Category.parse(instantiated_unary_rule[1])
-            if initial_cat not in self.apply_instantiated_unary_rules.keys():
+            if initial_cat not in self.apply_instantiated_unary_rules:
                 self.apply_instantiated_unary_rules[initial_cat] = list()
             self.apply_instantiated_unary_rules[initial_cat].append(
                 {'result_cat': final_cat, 'used_rule': instantiated_unary_rule[2]}
@@ -185,10 +189,10 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
         self.apply_instantiated_binary_rules = dict()
         for instantiated_binary_rule in instantiated_binary_rules:
             left_cat = Category.parse(instantiated_binary_rule[0])
-            if left_cat not in self.apply_instantiated_binary_rules.keys():
+            if left_cat not in self.apply_instantiated_binary_rules:
                 self.apply_instantiated_binary_rules[left_cat] = dict()
             right_cat = Category.parse(instantiated_binary_rule[1])
-            if right_cat not in self.apply_instantiated_binary_rules[left_cat].keys():
+            if right_cat not in self.apply_instantiated_binary_rules[left_cat]:
                 self.apply_instantiated_binary_rules[left_cat][right_cat] = list()
             for result in instantiated_binary_rule[2]:
                 self.apply_instantiated_binary_rules[left_cat][right_cat].append(
@@ -207,10 +211,10 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
             idx2tag = self.idx2tag
         )
 
-        topk_ps, topk_ids = torch.topk(representations, k = min(representations.shape[1], self.beam_width), dim = 1)
+        topk_ps, topk_ids = torch.topk(representations, k = min(representations.shape[1], self.top_k), dim = 1)
         ktop_categories = [
             [
-                {'category_str': self.idx2tag[int(idx.item())], 'p': p}
+                {'category_str': self.idx2tag[int(idx.item())], 'p': float(p)}
                 for p, idx in zip(topk_p, topk_idx)
             ]
             for topk_p, topk_idx in zip(topk_ps, topk_ids)
@@ -241,6 +245,39 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
 
         return chart
 
+    def sanity_check(
+        self,
+        pretokenized_sent: List[str],
+        golden_supertags: List[str],
+        print_cell_items: bool = False
+    ):
+        chart = Chart(
+            l_sent = len(pretokenized_sent),
+            idx2tag = self.idx2tag
+        )
+
+        tokens = [
+            [{
+                'token': Token(contents = token, tag = Category.parse(golden_supertag)),
+                'p': 1.0
+            }]
+            for (token, golden_supertag) in zip(pretokenized_sent, golden_supertags)
+        ]
+
+        for i in range(chart.l):
+            self._apply_token_ops(chart, tokens, i)
+            if chart.chart[i][i+1].cell_items and print_cell_items:
+                print(f'span[{i}][{i+1}]', [str(cell_item.constituent.tag) for cell_item in chart.chart[i][i+1].cell_items])
+            for k in range(i - 1, -1, -1):
+                # t0 = time.time()
+                self._apply_span_ops(chart, k, i + 1)
+                if chart.chart[k][i+1].cell_items and print_cell_items:
+                    print(f'span[{k}][{i+1}]', [str(cell_item.constituent.tag) for cell_item in chart.chart[k][i+1].cell_items])
+                # print(f'applying binary rules - span[{k}][{i+1}]: {time.time()-t0}s')
+
+        return chart
+
+
     def _apply_token_ops(self, chart: Chart, tokens, i: int): # i is the start position of the token to be processed
         if not chart.chart[i][i + 1]._is_null:
             raise ValueError(f'Cell[{i}][{i+1}] has been taken up, please check!')
@@ -251,28 +288,12 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
                     tag = tokens[i][j]['token'].tag,
                     children = [tokens[i][j]['token']]
                 ),
-                score = torch.log(tokens[i][j]['p'])
+                score = math.log(tokens[i][j]['p'])
             )
             for j in range(len(tokens[i]))
         ]
 
-        results_ = list()
-        for result in results:
-            if result.constituent.tag in self.apply_instantiated_unary_rules.keys():
-                results_.extend(
-                    [
-                        CellItem(
-                            constituent = ConstituentNode(
-                                tag = tag['result_cat'],
-                                children = [result.constituent],
-                                used_rule = tag['used_rule']
-                            ),
-                            score = result.score
-                        )
-                        for tag in self.apply_instantiated_unary_rules[result.constituent.tag]
-                    ]
-                )
-        results.extend(results_)
+        results.extend(self._apply_unary_rules(results))
         chart.chart[i][i + 1].cell_items = results
 
     def _apply_span_ops(self, chart: Chart, i: int, k: int):
@@ -284,44 +305,70 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
         for j in range(i + 1, k):
             for left in chart.chart[i][j].cell_items:
                 for right in chart.chart[j][k].cell_items:
-
-                    # apply instantiated rules first, otherwise search for binary rules if one of the two constituents contains the X feature, otherwise no results
-                    if left.constituent.tag in self.apply_instantiated_binary_rules.keys():
-                        if right.constituent.tag in self.apply_instantiated_binary_rules[left.constituent.tag].keys():
-                            for result in self.apply_instantiated_binary_rules[left.constituent.tag][right.constituent.tag]:
-                                new_item = CellItem(
-                                    constituent = ConstituentNode(
-                                        tag = result['result_cat'],
-                                        children = [left.constituent, right.constituent],
-                                        used_rule = result['used_rule']
-                                    ),
-                                    score = left.score + right.score
-                                )
-                                bisect.insort(results, new_item, key = lambda x: x.score)
-                    #     else:
-                    #         if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
-                    #             for binary_rule in ccg_rules.binary_rules:
-                    #                 result = binary_rule(left.constituent, right.constituent)
-                    #                 if result:
-                    #                     new_item = CellItem(
-                    #                         constituent = result,
-                    #                         score = left.score + right.score
-                    #                     )
-                    #                     bisect.insort(results, new_item, key = lambda x: x.score)
-                    # else:
-                    #     if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
-                    #         for binary_rule in ccg_rules.binary_rules:
-                    #             result = binary_rule(left.constituent, right.constituent)
-                    #             if result:
-                    #                 new_item = CellItem(
-                    #                     constituent = result,
-                    #                     score = left.score + right.score
-                    #                 )
-                    #                 bisect.insort(results, new_item, key = lambda x: x.score)
-              
+                    for new_item in self._apply_binary_rules(left, right):
+                        bisect.insort(results, new_item, key = lambda x: x.score)
+            
         results = results[-1 : len(results)-1-self.beam_width : -1] if len(results)-1-self.beam_width >= 0 else results[-1::-1]
+        
+        results.extend(self._apply_unary_rules(results))
         chart.chart[i][k].cell_items = results
 
+    def _apply_unary_rules(self, cell_items: List[CellItem]) -> List[CellItem]:
+        results = list()
+        for cell_item in cell_items:
+            if cell_item.constituent.tag in self.apply_instantiated_unary_rules:
+                results.extend(
+                    [
+                        CellItem(
+                            constituent = ConstituentNode(
+                                tag = tag['result_cat'],
+                                children = [cell_item.constituent],
+                                used_rule = tag['used_rule']
+                            ),
+                            score = cell_item.score
+                        )
+                        for tag in self.apply_instantiated_unary_rules[cell_item.constituent.tag]
+                    ]
+                )
+        return results
+
+    def _apply_binary_rules(self, left: CellItem, right: CellItem) -> List[CellItem]:
+        results = list()
+        # apply instantiated rules first, otherwise search for binary rules if one of the two constituents contains the X feature, otherwise no results
+        if left.constituent.tag in self.apply_instantiated_binary_rules:
+            if right.constituent.tag in self.apply_instantiated_binary_rules[left.constituent.tag]:
+                for result in self.apply_instantiated_binary_rules[left.constituent.tag][right.constituent.tag]:
+                    new_item = CellItem(
+                        constituent = ConstituentNode(
+                            tag = result['result_cat'],
+                            children = [left.constituent, right.constituent],
+                            used_rule = result['used_rule']
+                        ),
+                        score = left.score + right.score
+                    )
+                    results.append(new_item)
+        #     else:
+        #         if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
+        #             for binary_rule in ccg_rules.binary_rules:
+        #                 result = binary_rule(left.constituent, right.constituent)
+        #                 if result:
+        #                     new_item = CellItem(
+        #                         constituent = result,
+        #                         score = left.score + right.score
+        #                     )
+        #                     results.append(new_item)
+        # else:
+        #     if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
+        #         for binary_rule in ccg_rules.binary_rules:
+        #             result = binary_rule(left.constituent, right.constituent)
+        #             if result:
+        #                 new_item = CellItem(
+        #                     constituent = result,
+        #                     score = left.score + right.score
+        #                 )
+        #                 results.append(new_item)
+
+        return results
 
 class CCGSpanDecoder(CCGBaseDecoder):
 
@@ -416,18 +463,31 @@ class CCGSpanDecoder(CCGBaseDecoder):
     def batch_decode(
         self,
         pretokenized_sents: List[List[str]],
-        batch_representations: List[SpanRepresentations]
+        batch_representations: List[SpanRepresentations],
+        golden_charts: List[Chart] = None
     ) -> List[Chart]:
         if self.mode is None:
             raise ValueError('Please specify the mode of CCGSpanDecoder!')
         charts = list()
-        for i in range(len(pretokenized_sents)):
-            charts.append(
-                self.decode(
-                    pretokenized_sents[i],
-                    batch_representations[i]
+
+        if golden_charts is not None:
+            for i in range(len(pretokenized_sents)):
+                charts.append(
+                    self.decode(
+                        pretokenized_sents[i],
+                        batch_representations[i],
+                        golden_charts[i]
+                    )
                 )
-            )
+        else:
+            for i in range(len(pretokenized_sents)):
+                charts.append(
+                    self.decode(
+                        pretokenized_sents[i],
+                        batch_representations[i]
+                    )
+                )
+
         return charts
 
     def decode(

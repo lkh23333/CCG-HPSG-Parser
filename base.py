@@ -5,16 +5,24 @@ Node = TypeVar('Node')
 FALSE = TypeVar('False')
 
 class Feature:
+
     def __init__(self, feature_str: str = None):
         self.feature = [feature_str]
 
     def __repr__(self) -> str:
-        return str(self.feature[0])
+        return str(self.feature[0]) if self.feature[0] is not None else ''
 
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Feature):
-            return repr(self) == repr(other)
+            if self.is_ignorable:
+                return other.is_ignorable # NP[nb] is equal to NP
+            return self.feature[0] == other.feature[0]
         return False
+
+    @property
+    def is_ignorable(self):
+        # 'nb' is treated as non-existing after combination
+        return self.feature[0] == None or self.feature[0] == 'nb'
 
 class Tag:
     def __init__(self, tag = None):
@@ -71,7 +79,8 @@ class Category(Tag):
             raise RuntimeError(f'failed to parse category: {category_str}')
         
 class Atom(Category):
-    def __init__(self, tag: str, feature: Feature = None):
+
+    def __init__(self, tag: str, feature: Feature = Feature()):
         super().__init__(tag = tag)
         self.feature = feature
 
@@ -79,10 +88,9 @@ class Atom(Category):
         return str({'tag': self.tag, 'feature': self.feature})
     
     def __str__(self) -> str: # to represent the atom category string itself
-        feature = repr(self.feature)
-        if feature == 'None':
+        if repr(self.feature) == '':
             return self.tag
-        return f'{self.tag}[{feature}]'
+        return f'{self.tag}[{self.feature}]'
     
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Atom):
@@ -93,6 +101,8 @@ class Atom(Category):
         return False
 
     def __hash__(self):
+        if self.feature.is_ignorable:
+            return hash(str(self.tag))
         return hash(str(self))
 
     def __xor__(self, other: object) -> bool:
@@ -202,3 +212,8 @@ if __name__ == '__main__':
 
     
     print(constituent_012)
+
+    a = Category.parse('S')
+    b = Category.parse('S[nb]')
+    c = Category.parse('S[nb]/S[dcl]')
+    print(a==b)
