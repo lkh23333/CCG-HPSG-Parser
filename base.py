@@ -1,3 +1,5 @@
+# adapted from https://github.com/masashi-y/depccg/blob/master/depccg/cat.py
+
 from typing import List, Tuple, Union, Optional, Callable, TypeVar
 import re
 
@@ -45,15 +47,22 @@ class Category(Tag):
             item = buffer.pop()
             if item in punctuations:
                 stack.append(Atom(item))
-            elif item == '(':
-                pass
-            elif item == ')':
+            elif item in '(<':
+                stack.append(item)
+            elif item in ')>':
                 y = stack.pop()
-                if len(stack) == 0:
-                    return y
-                slash = stack.pop()
-                x = stack.pop()
-                stack.append(Functor(x, slash, y))
+                assert len(stack) > 0
+                if (
+                    stack[-1] == '(' and item == ')'
+                    or stack[-1] == '<' and item == '>'
+                ):
+                    assert stack.pop() in '(<'
+                    stack.append(y)
+                else:
+                    slash = stack.pop()
+                    x = stack.pop()
+                    assert stack.pop() in '(<'
+                    stack.append(Functor(x, slash, y))
             elif item in '/\\':
                 stack.append(item)
             else:
@@ -213,7 +222,9 @@ if __name__ == '__main__':
     
     print(constituent_012)
 
-    a = Category.parse('S')
-    b = Category.parse('S[nb]')
-    c = Category.parse('S[nb]/S[dcl]')
-    print(a==b)
+    a = Category.parse('S/NP')
+    b = Category.parse('(S/NP)')
+    c = Category.parse('((S/NP))')
+    print(str(a))
+    print(str(b))
+    print(str(c))
