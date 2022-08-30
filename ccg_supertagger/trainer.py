@@ -8,7 +8,7 @@ import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 from transformers import BertTokenizer
 
-from models import BaseSupertaggingModel
+from models import BaseSupertaggingModel, LSTMSupertaggingModel, LSTMCRFSupertaggingModel
 from utils import prepare_data
 
 sys.path.append('..')
@@ -121,11 +121,16 @@ class CCGSupertaggingTrainer:
                 mask = mask.to(self.device)
                 target = target.to(self.device)
 
-                outputs = self.model(data, mask, word_piece_tracked)
+                if self.model.__class__.__name__ == 'LSTMCRFSupertaggingModel':
+                    outputs = self.model(data, target, mask, word_piece_tracked)
+                    loss = outputs
+                else:
+                    outputs = self.model(data, mask, word_piece_tracked)
 
-                outputs_ = outputs.view(-1, outputs.size(-1))
-                target_ = target.view(-1)
-                loss = self.criterion(outputs_, target_)
+                    outputs_ = outputs.view(-1, outputs.size(-1))
+                    target_ = target.view(-1)
+                    loss = self.criterion(outputs_, target_)
+
                 print(f'[epoch {epoch}/{self.n_epochs}] averaged training loss of batch {i}/{len(train_dataloader)} = {loss.item()}')
 
                 self.optimizer.zero_grad()
@@ -176,11 +181,27 @@ class CCGSupertaggingTrainer:
             mask = mask.to(self.device)
             target = target.to(self.device)
 
-            outputs = self.model(data, mask, word_piece_tracked)
+            if self.model.__class__.__name__ == 'LSTMCRFSupertaggingModel':
+                outputs = self.model(data, target, mask, word_piece_tracked)
+                loss = outputs
 
-            outputs_ = outputs.view(-1, outputs.size(-1))
-            target_ = target.view(-1)
-            loss = self.criterion(outputs_, target_)
+                predicted_tags = self.model.predict(data, mask, word_piece_tracked)
+
+                predicted = torch.empty_like(target).fill_(-1)
+                for j in range(predicted.shape[0]):
+                    predicted[j, 0:len(predicted_tags[j])] = torch.tensor(predicted_tags[j])
+
+                correct_cnt += (predicted == target).sum()
+            else:
+                outputs = self.model(data, mask, word_piece_tracked)
+
+                outputs_ = outputs.view(-1, outputs.size(-1))
+                target_ = target.view(-1)
+                loss = self.criterion(outputs_, target_)
+
+                outputs = self.softmax(outputs)
+                correct_cnt += (torch.argmax(outputs, dim=2) == target).sum()
+
             loss_sum += loss.item()
 
             total_cnt += sum(
@@ -188,9 +209,6 @@ class CCGSupertaggingTrainer:
                     len(word_pieces) for word_pieces in word_piece_tracked
                 ]
             )
-
-            outputs = self.softmax(outputs)
-            correct_cnt += (torch.argmax(outputs, dim = 2) == target).sum()
 
         loss_sum /= len(dataloader)
         print(f'averaged {mode} loss = {loss_sum}')
@@ -267,7 +285,7 @@ def main(args):
     trainer = CCGSupertaggingTrainer(
         n_epochs = args.n_epochs,
         device = args.device,
-        model = BaseSupertaggingModel(
+        model = LSTMSupertaggingModel(
             model_path = args.model_path,
             n_classes = len(category2idx),
             dropout_p = args.dropout_p
@@ -281,16 +299,16 @@ def main(args):
 
     print('================= supertagging training =================\n')
     # trainer.train() # default training from the beginning
-    trainer.load_checkpoint_and_train(checkpoint_epoch=2) # train from (checkpoint_epoch + 1)
-    # trainer.load_checkpoint_and_test(checkpoint_epoch=1, mode='dev_eval')
+    # trainer.load_checkpoint_and_train(checkpoint_epoch=2) # train from (checkpoint_epoch + 1)
+    trainer.load_checkpoint_and_test(checkpoint_epoch=20, mode='dev_eval')
     # trainer.test(dataset = self.test_dataset, mode = 'test_eval')
     
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'supertagging')
     parser.add_argument('--n_epochs', type = int, default = 20)
-    parser.add_argument('--device', type = torch.device, default = torch.device('cuda:7'))
-    parser.add_argument('--batch_size', type = int, default = 10)
+    parser.add_argument('--device', type = torch.device, default = torch.device('cuda'))
+    parser.add_argument('--batch_size', type = int, default = 8)
     parser.add_argument('--lr', type = float, default = 1e-5)
     parser.add_argument('--dropout_p', type = float, default = 0.2)
     parser.add_argument('--sample_data_dir', type = str, default = '../data/ccg-sample.auto')
@@ -298,7 +316,7 @@ if __name__ == '__main__':
     parser.add_argument('--dev_data_dir', type = str, default = '../data/ccgbank-wsj_00.auto')
     parser.add_argument('--test_data_dir', type = str, default = '../data/ccgbank-wsj_23.auto')
     parser.add_argument('--lexical_category2idx_dir', type = str, default = '../data/lexical_category2idx_cutoff.json')
-    parser.add_argument('--model_path', type = str, default = '../plms/bert-base-uncased')
+    parser.add_argument('--model_path', type = str, default = './models/plms/bert-base-uncased')
     parser.add_argument('--checkpoints_dir', type = str, default = './checkpoints')
     args = parser.parse_args()
 
