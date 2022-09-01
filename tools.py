@@ -82,13 +82,13 @@ def collect_binary_rules(data_dir: str, saving_dir: str):
             else:
                 idx = [rule[:2] for rule in instantiated_binary_rules].index(results[:2])
                 instantiated_binary_rules[idx][2].extend(results[2])
-        else:
-            results[2].append([binary_rule[2], 'UNK'])
-            if results[:2] not in [rule[:2] for rule in instantiated_binary_rules]:
-                instantiated_binary_rules.append(results)
-            else:
-                idx = [rule[:2] for rule in instantiated_binary_rules].index(results[:2])
-                instantiated_binary_rules[idx][2].extend(results[2])
+        # else:
+        #     results[2].append([binary_rule[2], 'UNK'])
+        #     if results[:2] not in [rule[:2] for rule in instantiated_binary_rules]:
+        #         instantiated_binary_rules.append(results)
+        #     else:
+        #         idx = [rule[:2] for rule in instantiated_binary_rules].index(results[:2])
+        #         instantiated_binary_rules[idx][2].extend(results[2])
     
     print(len(instantiated_binary_rules))
     with open(saving_dir, 'w', encoding = 'utf8') as f:
@@ -164,4 +164,4 @@ to_X_features = {
 
 
 if __name__ == '__main__':
-    pass
+    collect_binary_rules(data_dir = './data/seen_binary_rules.json', saving_dir = './data/instantiated_seen_binary_rules.json')

@@ -172,8 +172,8 @@ def generalized_forward_composition(x: ConstituentNode, y: ConstituentNode) -> U
 
 def generalized_backward_crossing_composition(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode, FALSE]:
     
-    pattern_0 = ('(b/c)/$', 'a/b')
-    pattern_1 = ('(b/c)\\$', 'a/b')
+    pattern_0 = ('(b/c)/$', 'a\\b')
+    pattern_1 = ('(b/c)\\$', 'a\\b')
 
     unified_pair = unification(copy.deepcopy(x.tag), copy.deepcopy(y.tag), pattern_0)
     if unified_pair:
@@ -207,7 +207,6 @@ def conjunction(x: ConstituentNode, y: ConstituentNode) -> Union[ConstituentNode
         and not _is_type_raised(y.tag)
         and str(x.tag) in (',', ';', 'conj')
         and not (y.tag ^ Category.parse('NP\\NP'))
-        and not (y.tag ^ Category.parse('N'))
     ):
         result = Functor(copy.deepcopy(y.tag), '\\', copy.deepcopy(y.tag))
         return ConstituentNode(
