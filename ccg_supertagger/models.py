@@ -64,9 +64,7 @@ class BaseSupertaggingModel(nn.Module):
             )
         )
         f2 = self.dropout(
-            self.relu(
-                self.w2(f1)
-            )
+            self.w2(f1)
         )
 
         return f2  # B*L*C (C the number of classes)
