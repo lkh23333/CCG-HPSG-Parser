@@ -1,10 +1,5 @@
-from data_loader import load_auto_file
-from typing import *
-import sys
-import os
-import argparse
-import random
-import json
+from typing import Union, Optional, Dict, Callable, Any
+import sys, os, argparse, random, json
 import numpy as np
 import torch
 import torch.nn as nn
@@ -17,6 +12,7 @@ from models import BaseSupertaggingModel, LSTMSupertaggingModel, LSTMCRFSupertag
 from utils import prepare_data
 
 sys.path.append('..')
+from data_loader import load_auto_file
 
 
 # to set the random seeds
@@ -39,11 +35,10 @@ def _setup_seed(seed):
 
 _setup_seed(0)
 
+
 # to set the random seed of the dataloader
-
-
 def _seed_worker(worker_id):
-    worker_seed = torch.initial_seed() % 2**32
+    worker_seed = torch.initial_seed() % 2 ** 32
     np.random.seed(worker_seed)
     random.seed(worker_seed)
 
@@ -60,7 +55,7 @@ class CCGSupertaggingDataset(Dataset):
         self.target = target
 
     def __getitem__(self, idx):
-        return (self.data[idx], self.mask[idx], self.word_piece_tracked[idx], self.target[idx])
+        return self.data[idx], self.mask[idx], self.word_piece_tracked[idx], self.target[idx]
 
     def __len__(self):
         return len(self.data)
@@ -80,17 +75,17 @@ def collate_fn(batch):
 
 class CCGSupertaggingTrainer:
     def __init__(
-        self,
-        n_epochs: int,
-        device: torch.device,
-        model: nn.Module,
-        batch_size: int,
-        checkpoints_dir: str,
-        train_dataset: Dataset,
-        dev_dataset: Dataset,
-        test_dataset: Dataset = None,
-        optimizer: torch.optim = AdamW,
-        lr=0.001,
+            self,
+            n_epochs: int,
+            device: torch.device,
+            model: nn.Module,
+            batch_size: int,
+            checkpoints_dir: str,
+            train_dataset: Dataset,
+            dev_dataset: Dataset,
+            test_dataset: Dataset = None,
+            optimizer: torch.optim = AdamW,
+            lr=0.00001,
     ):
         self.n_epochs = n_epochs
         self.device = device
@@ -105,7 +100,9 @@ class CCGSupertaggingTrainer:
         self.criterion = nn.CrossEntropyLoss()
         self.softmax = nn.Softmax(dim=2)
 
-    def train(self, checkpoint_epoch: int = 0):
+    def train(self, checkpoint_epoch: int = 0, print_every: int = 50):
+        if not os.path.exists(self.checkpoints_dir):
+            os.makedirs(self.checkpoints_dir)
 
         train_dataloader = DataLoader(
             dataset=self.train_dataset,
@@ -118,13 +115,17 @@ class CCGSupertaggingTrainer:
         )
 
         self.model.to(self.device)
-        self.model.train()
 
         if isinstance(self.optimizer, Callable):
             params = filter(lambda p: p.requires_grad, self.model.parameters())
             self.optimizer = self.optimizer(params, lr=self.lr)
 
+        best_epoch = -1
+        best_dev_acc = -1
+
         for epoch in range(checkpoint_epoch + 1, self.n_epochs + 1):
+            self.model.train()
+
             i = 0
             for data, mask, word_piece_tracked, target in train_dataloader:
                 i += 1
@@ -134,8 +135,7 @@ class CCGSupertaggingTrainer:
                 target = target.to(self.device)
 
                 if self.model.__class__.__name__ == 'LSTMCRFSupertaggingModel':
-                    outputs = self.model(
-                        data, target, mask, word_piece_tracked)
+                    outputs = self.model(data, target, mask, word_piece_tracked)
                     loss = outputs
                 else:
                     outputs = self.model(data, mask, word_piece_tracked)
@@ -144,15 +144,15 @@ class CCGSupertaggingTrainer:
                     target_ = target.view(-1)
                     loss = self.criterion(outputs_, target_)
 
-                print(
-                    f'[epoch {epoch}/{self.n_epochs}] averaged training loss of batch {i}/{len(train_dataloader)} = {loss.item()}')
+                if i % print_every == 0:
+                    print(
+                        f'[epoch {epoch}/{self.n_epochs}] averaged training loss of batch {i}/{len(train_dataloader)} = {loss.item()}')
 
                 self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
 
-            print(
-                f'\n======== [epoch {epoch}/{self.n_epochs}] saving the checkpoint ========\n')
+            print(f'\n======== [epoch {epoch}/{self.n_epochs}] saving the checkpoint ========\n')
             torch.save(
                 {
                     'epoch': epoch,
@@ -162,15 +162,20 @@ class CCGSupertaggingTrainer:
                 f=os.path.join(self.checkpoints_dir, f'epoch_{epoch}.pt')
             )
 
-            print(
-                f'\n======== [epoch {epoch}/{self.n_epochs}] train data evaluation ========\n')
-            self.test(self.train_dataset, mode='train_eval')
-            print(
-                f'\n======== [epoch {epoch}/{self.n_epochs}] dev data evaluation ========\n')
-            self.test(self.dev_dataset, mode='dev_eval')
+            with torch.no_grad():
+                print(f'\n======== [epoch {epoch}/{self.n_epochs}] train data evaluation ========\n')
+                _ = self.test(self.train_dataset, mode='train_eval')
+                print(f'\n======== [epoch {epoch}/{self.n_epochs}] dev data evaluation ========\n')
+                dev_acc = self.test(self.dev_dataset, mode='dev_eval')
 
-    # modes: ['train_eval', 'dev_eval', 'test_eval']
-    def test(self, dataset: Dataset, mode: str):
+                if dev_acc > best_dev_acc:
+                    best_epoch = epoch
+                    best_dev_acc = dev_acc
+
+        print('\n#Params: ', sum(p.numel() for p in self.model.parameters() if p.requires_grad))
+        print(f'\nBest epoch = {best_epoch} with dev_eval acc = {best_dev_acc}\n')
+
+    def test(self, dataset: Dataset, mode: str):  # modes: ['train_eval', 'dev_eval', 'test_eval']
 
         dataloader = DataLoader(
             dataset=dataset,
@@ -203,13 +208,11 @@ class CCGSupertaggingTrainer:
                 outputs = self.model(data, target, mask, word_piece_tracked)
                 loss = outputs
 
-                predicted_tags = self.model.predict(
-                    data, mask, word_piece_tracked)
+                predicted_tags = self.model.predict(data, mask, word_piece_tracked)
 
                 predicted = torch.empty_like(target).fill_(-1)
                 for j in range(predicted.shape[0]):
-                    predicted[j, 0:len(predicted_tags[j])] = torch.tensor(
-                        predicted_tags[j])
+                    predicted[j, 0:len(predicted_tags[j])] = torch.tensor(predicted_tags[j])
 
                 correct_cnt += (predicted == target).sum()
             else:
@@ -231,11 +234,13 @@ class CCGSupertaggingTrainer:
             )
 
         loss_sum /= len(dataloader)
+        acc = (correct_cnt / total_cnt) * 100
         print(f'averaged {mode} loss = {loss_sum}')
-        print(f'{mode} acc = {(correct_cnt / total_cnt) * 100: .3f}')
+        print(f'{mode} acc = {acc: .3f}')
 
-    # set the epoch from which to restart training
-    def load_checkpoint_and_train(self, checkpoint_epoch: int):
+        return acc
+
+    def load_checkpoint_and_train(self, checkpoint_epoch: int):  # set the epoch from which to restart training
         checkpoint = torch.load(
             os.path.join(self.checkpoints_dir, f'epoch_{checkpoint_epoch}.pt'),
             map_location=self.device
@@ -251,27 +256,26 @@ class CCGSupertaggingTrainer:
 
         self.train(checkpoint_epoch=epoch)
 
-    # modes: ['train_eval', 'dev_eval', 'test_eval']
-    def load_checkpoint_and_test(self, checkpoint_epoch: int, mode: str):
+    def load_checkpoint_and_test(self, checkpoint_epoch: int,
+                                 mode: str):  # modes: ['train_eval', 'dev_eval', 'test_eval']
         checkpoint = torch.load(
             os.path.join(self.checkpoints_dir, f'epoch_{checkpoint_epoch}.pt'),
             map_location=self.device
         )
         self.model.load_state_dict(checkpoint['model_state_dict'])
 
-        if mode == 'train_eval':
-            self.test(self.train_dataset, mode='train_eval')
-        elif mode == 'dev_eval':
-            self.test(self.dev_dataset, mode='dev_eval')
-        elif mode == 'test_eval':
-            self.test(self.test_dataset, mode='test_eval')
-        else:
-            raise ValueError(
-                'the mode should be one of train_eval, dev_eval and test_eval')
+        with torch.no_grad():
+            if mode == 'train_eval':
+                self.test(self.train_dataset, mode='train_eval')
+            elif mode == 'dev_eval':
+                self.test(self.dev_dataset, mode='dev_eval')
+            elif mode == 'test_eval':
+                self.test(self.test_dataset, mode='test_eval')
+            else:
+                raise ValueError('the mode should be one of train_eval, dev_eval and test_eval')
 
 
 def main(args):
-
     print('================= parsing data =================\n')
     train_data_items, _ = load_auto_file(args.train_data_dir)
     dev_data_items, _ = load_auto_file(args.dev_data_dir)
@@ -305,12 +309,20 @@ def main(args):
         target=dev_data['target']
     )
 
+    model = BaseSupertaggingModel
+    if args.model_name == 'lstm':
+        model = LSTMSupertaggingModel
+    elif args.model_name == 'lstm-crf':
+        model = LSTMCRFSupertaggingModel
+
     trainer = CCGSupertaggingTrainer(
         n_epochs=args.n_epochs,
         device=args.device,
-        model=LSTMSupertaggingModel(
+        model=model(
             model_path=args.model_path,
             n_classes=len(category2idx),
+            embed_dim=args.embed_dim,
+            num_lstm_layers=args.num_lstm_layers,
             dropout_p=args.dropout_p
         ),
         batch_size=args.batch_size,
@@ -321,33 +333,28 @@ def main(args):
     )
 
     print('================= supertagging training =================\n')
-    # trainer.train() # default training from the beginning
+    trainer.train()  # default training from the beginning
     # trainer.load_checkpoint_and_train(checkpoint_epoch=2) # train from (checkpoint_epoch + 1)
-    trainer.load_checkpoint_and_test(checkpoint_epoch=17, mode='train_eval')
-    trainer.load_checkpoint_and_test(checkpoint_epoch=17, mode='dev_eval')
+    # trainer.load_checkpoint_and_test(checkpoint_epoch=1, mode='dev_eval')
     # trainer.test(dataset = self.test_dataset, mode = 'test_eval')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='supertagging')
+    parser.add_argument('--model_name', type=str, default='fc', choices=['fc', 'lstm', 'lstm-crf'])
     parser.add_argument('--n_epochs', type=int, default=20)
-    parser.add_argument('--device', type=torch.device,
-                        default=torch.device('cuda:2'))
-    parser.add_argument('--batch_size', type=int, default=8)
+    parser.add_argument('--device', type=torch.device, default=torch.device('cuda'))
+    parser.add_argument('--batch_size', type=int, default=2)
     parser.add_argument('--lr', type=float, default=1e-5)
-    parser.add_argument('--dropout_p', type=float, default=0.5)
-    parser.add_argument('--sample_data_dir', type=str,
-                        default='../data/ccg-sample.auto')
-    parser.add_argument('--train_data_dir', type=str,
-                        default='../data/ccgbank-wsj_02-21.auto')
-    parser.add_argument('--dev_data_dir', type=str,
-                        default='../data/ccgbank-wsj_00.auto')
-    parser.add_argument('--test_data_dir', type=str,
-                        default='../data/ccgbank-wsj_23.auto')
-    parser.add_argument('--lexical_category2idx_dir', type=str,
-                        default='../data/lexical_category2idx_cutoff.json')
-    parser.add_argument('--model_path', type=str,
-                        default='../plms/bert-base-uncased')
+    parser.add_argument('--embed_dim', type=int, default=768)
+    parser.add_argument('--num_lstm_layers', type=int, default=1)
+    parser.add_argument('--dropout_p', type=float, default=0.2)
+    parser.add_argument('--sample_data_dir', type=str, default='../data/ccg-sample.auto')
+    parser.add_argument('--train_data_dir', type=str, default='../data/ccgbank-wsj_02-21.auto')
+    parser.add_argument('--dev_data_dir', type=str, default='../data/ccgbank-wsj_00.auto')
+    parser.add_argument('--test_data_dir', type=str, default='../data/ccgbank-wsj_23.auto')
+    parser.add_argument('--lexical_category2idx_dir', type=str, default='../data/lexical_category2idx_cutoff.json')
+    parser.add_argument('--model_path', type=str, default='./models/plms/bert-base-uncased')
     parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints')
     args = parser.parse_args()
 
