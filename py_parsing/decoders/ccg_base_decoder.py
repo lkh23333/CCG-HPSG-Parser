@@ -53,15 +53,14 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
         cat_dict: Dict[str, List[str]],
         top_k: int = 3,
         timeout: float = 4.0,
-        apply_cat_filtering: bool = True
+        apply_cat_filtering: bool = False
     ):
         super().__init__(
             top_k = top_k,
-            beam_width = beam_width,
             idx2tag = idx2tag
         )
+        self.beam_width = beam_width
         self.cat_dict = cat_dict # set the possible categories allowed for each word
-        self.tag2idx = {tag: idx for idx, tag in self.idx2tag.items()}
         self.timeout = timeout
         self.apply_cat_filtering = apply_cat_filtering
 
@@ -262,15 +261,16 @@ class CCGBaseDecoder(Decoder): # for testing directly, no need to train
         if left.constituent.tag in self.apply_instantiated_binary_rules:
             if right.constituent.tag in self.apply_instantiated_binary_rules[left.constituent.tag]:
                 for result in self.apply_instantiated_binary_rules[left.constituent.tag][right.constituent.tag]:
-                    new_item = CellItem(
-                        constituent = ConstituentNode(
-                            tag = result['result_cat'],
-                            children = [left.constituent, right.constituent],
-                            used_rule = result['used_rule']
-                        ),
-                        score = left.score + right.score
-                    )
-                    results.append(new_item)
+                    if self._check_constraints(left.constituent, right.constituent, result['used_rule']):
+                        new_item = CellItem(
+                            constituent = ConstituentNode(
+                                tag = result['result_cat'],
+                                children = [left.constituent, right.constituent],
+                                used_rule = result['used_rule']
+                            ),
+                            score = left.score + right.score
+                        )
+                        results.append(new_item)
         #     else:
         #         if left.constituent.tag.contain_X_feature or right.constituent.tag.contain_X_feature:
         #             for binary_rule in ccg_rules.binary_rules:

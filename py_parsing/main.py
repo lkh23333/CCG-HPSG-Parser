@@ -2,7 +2,8 @@ import time, os, sys, random, argparse
 import torch
 
 from decoders.ccg_base_decoder import CCGBaseDecoder
-from ccg_parsing_models import BaseParsingModel
+from decoders.ccg_a_star_decoder import CCGAStarDecoder
+from ccg_parsing_models import BaseParsingModel, LSTMParsingModel
 from parser import Parser
 
 sys.path.append('..')
@@ -11,6 +12,7 @@ from data_loader import load_auto_file
 from tools import to_auto
 
 def main(args):
+    # data_items, _ = load_auto_file(args.sanity_check_data_dir)
     data_items, _ = load_auto_file(args.dev_data_dir)
     pretokenized_sents = list()
     golden_supertags = list()
@@ -27,11 +29,20 @@ def main(args):
     with open(args.cat_dict_dir, 'r', encoding = 'utf8') as f:
         cat_dict = json.load(f)
 
-    decoder = CCGBaseDecoder(
-        beam_width = args.beam_width,
+    # decoder = CCGBaseDecoder(
+    #     beam_width = args.beam_width,
+    #     idx2tag = idx2category,
+    #     cat_dict = cat_dict,
+    #     top_k = args.top_k_supertags,
+    #     timeout = args.decoder_timeout,
+    #     apply_cat_filtering = args.apply_cat_filtering
+    # )
+    decoder = CCGAStarDecoder(
         idx2tag = idx2category,
         cat_dict = cat_dict,
         top_k = args.top_k_supertags,
+        apply_supertagging_pruning = args.apply_supertagging_pruning,
+        beta = args.beta,
         timeout = args.decoder_timeout,
         apply_cat_filtering = args.apply_cat_filtering
     )
@@ -42,7 +53,7 @@ def main(args):
     decoder._get_instantiated_unary_rules(instantiated_unary_rules)
     decoder._get_instantiated_binary_rules(instantiated_binary_rules)
 
-    parsing_model = BaseParsingModel(
+    parsing_model = LSTMParsingModel(
         model_path = args.supertagging_model_path,
         supertagging_n_classes = len(idx2category),
         checkpoints_dir = args.supertagging_model_checkpoints_dir,
@@ -108,7 +119,8 @@ def main(args):
     predicted_auto_file_output_dir = os.path.join(
         args.predicted_auto_files_dir,
         '_'.join([
-            'unary_X_binary_seen',
+            'a_star_unary_X_binary_seen',
+            'cat_dict' + str(args.apply_cat_filtering),
             'topk' + str(args.top_k_supertags),
             'beam_width' + str(args.beam_width),
             'timeout' + str(args.decoder_timeout)
@@ -120,6 +132,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = 'parsing')
+
     parser.add_argument('--train_data_dir', type = str, default = '../data/ccgbank-wsj_02-21.auto')
     parser.add_argument('--dev_data_dir', type = str, default = '../data/ccgbank-wsj_00.auto')
     parser.add_argument('--test_data_dir', type = str, default = '../data/ccgbank-wsj_23.auto')
@@ -128,17 +141,22 @@ if __name__ == '__main__':
     parser.add_argument('--instantiated_unary_rules_dir', type = str, default = '../data/instantiated_unary_rules_with_X.json')
     parser.add_argument('--instantiated_binary_rules_dir', type = str, default = '../data/instantiated_seen_binary_rules.json')
     parser.add_argument('--cat_dict_dir', type = str, default = '../data/cat_dict.json')
-    parser.add_argument('--apply_cat_filtering', type = bool, default = False)
     parser.add_argument('--supertagging_model_path', type = str, default = '../plms/bert-base-uncased')
     parser.add_argument('--supertagging_model_checkpoints_dir', type = str, default = '../ccg_supertagger/checkpoints')
-    parser.add_argument('--supertagging_model_checkpoint_epoch', type = str, default = 2)
+    parser.add_argument('--supertagging_model_checkpoint_epoch', type = str, default = 17)
+    parser.add_argument('--predicted_auto_files_dir', type = str, default = './evaluation')
+
+    parser.add_argument('--apply_cat_filtering', type = bool, default = True)
+    parser.add_argument('--apply_supertagging_pruning', type = bool, default = True)
+    parser.add_argument('--beta', type = float, default = 0.000001)
     parser.add_argument('--device', type = torch.device, default = torch.device('cpu'))
     parser.add_argument('--batch_size', type = int, default = 10)
-    parser.add_argument('--top_k_supertags', type = int, default = 3)
+    parser.add_argument('--top_k_supertags', type = int, default = 10)
     parser.add_argument('--beam_width', type = int, default = 4)
     parser.add_argument('--decoder_timeout', help = 'time out value for decoding one sentence', type = float, default = 16.0)
-    parser.add_argument('--predicted_auto_files_dir', type = str, default = './evaluation')
+
     args = parser.parse_args()
 
-    print(f'======== unary_X_binary_seen_topk{args.top_k_supertags}_beam_width{args.beam_width}_timeout{args.decoder_timeout} ========')
+    # print(f'======== base unary_X_binary_seen_topk{args.top_k_supertags}_beam_width{args.beam_width}_timeout{args.decoder_timeout} ========')
+    print(f'======== A* unary_X_binary_seen_topk{args.top_k_supertags}_cat_dict{args.apply_cat_filtering}_timeout{args.decoder_timeout} ========')
     main(args)

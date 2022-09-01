@@ -6,7 +6,7 @@ from transformers import BertModel, BertTokenizer
 
 sys.path.append('..')
 from ccg_supertagger.supertagger import CCGSupertagger
-from ccg_supertagger.models import BaseSupertaggingModel
+from ccg_supertagger.models import BaseSupertaggingModel, LSTMSupertaggingModel
 
 DATA_MASK_PADDING = 0
 
@@ -35,6 +35,31 @@ class BaseParsingModel(nn.Module):
     def forward(self, pretokenized_sents: List[List[str]]) -> List[SupertaggingRepresentations]:
         # return the embedding of each word in every sentence from the base supertagging model
         return self.supertagger.get_model_outputs_for_batch(pretokenized_sents)
+
+
+class LSTMParsingModel(nn.Module):
+
+    def __init__(
+        self,
+        model_path: str,
+        supertagging_n_classes: int,
+        checkpoints_dir: str,
+        checkpoint_epoch: int,
+        device: torch.device = torch.device('cuda:0')
+    ):
+        super().__init__()
+        self.device = device
+        self.supertagger = CCGSupertagger(
+            model = LSTMSupertaggingModel(model_path, supertagging_n_classes),
+            tokenizer = BertTokenizer.from_pretrained(model_path),
+            device = self.device
+        )
+        self.supertagger._load_model_checkpoint(checkpoints_dir, checkpoint_epoch)
+
+    def forward(self, pretokenized_sents: List[List[str]]) -> List[SupertaggingRepresentations]:
+        # return the embedding of each word in every sentence from the base supertagging model
+        return self.supertagger.get_model_outputs_for_batch(pretokenized_sents)
+
 
 class SpanParsingModel(BaseParsingModel):
 

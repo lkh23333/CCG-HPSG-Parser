@@ -5,7 +5,7 @@ import torch.nn as nn
 
 sys.path.append('..')
 from ccg_supertagger.utils import pre_tokenize_sent
-from ccg_supertagger.models import BaseSupertaggingModel
+from ccg_supertagger.models import BaseSupertaggingModel, LSTMSupertaggingModel
 from base import Category
 from data_loader import load_auto_file
 
@@ -22,6 +22,7 @@ class CCGSupertagger:
         tokenizer,
         idx2category: Dict[int, str] = None,
         top_k: int = 1,
+        beta: float = 1e-5, # pruning parameter for supertagging
         device: torch.device = torch.device('cuda:0')
     ):
         self.model = model
@@ -30,6 +31,7 @@ class CCGSupertagger:
         if idx2category is not None:
             self.category2idx = {idx: cat for idx, cat in idx2category.items()}
         self.top_k = top_k
+        self.beta = beta
         self.device = device
         self.softmax = nn.Softmax(dim = 2)
 
@@ -69,14 +71,29 @@ class CCGSupertagger:
         if self.idx2category == None:
             raise RuntimeError('Please specify idx2category in the supertagger!!!')
             
+        outputs = self._prune(outputs)
+
         batch_predicted = list()
         for output in outputs:
             predicted = list()
             for i in range(output.shape[0]):
-                topk_ids = torch.topk(output[i], self.top_k)[1]
-                predicted.append([str(Category.parse(self.idx2category[idx.item()])) for idx in topk_ids])
+                # topk_ids = torch.topk(output[i], self.top_k)[1]
+                topk_ps, topk_ids = torch.topk(output[i], self.top_k)
+                ids = topk_ids[topk_ps > 0]
+                # predicted.append([str(Category.parse(self.idx2category[idx.item()])) for idx in topk_ids])
+                predicted.append([str(Category.parse(self.idx2category[idx.item()])) for idx in ids])
             batch_predicted.append(predicted)
         return batch_predicted
+
+    def _prune(self, outputs) -> torch.Tensor:
+        # assign all probabilities beta times less than the best one to 0
+        for output in outputs:
+            for i in range(output.shape[0]):
+                top_p = torch.topk(output[i], 1)[0]
+                binarized = (output[i] > self.beta * top_p)
+                output[i] = output[i] * binarized
+
+        return outputs
 
     def _load_model_checkpoint(self, checkpoints_dir: str, checkpoint_epoch: int):
         checkpoint = torch.load(
@@ -128,8 +145,10 @@ class CCGSupertagger:
         batch_size = 10
     ) -> None:
         # check the supertagger through re-calculation of the acc
+        # can also used for multitagging acc checking
         correct_cnt = 0
         total_cnt = 0
+        n_categories = 0
 
         for i in range(0, len(pretokenized_sents), batch_size):
             if i % 50 == 0:
@@ -142,10 +161,12 @@ class CCGSupertagger:
             total_cnt += sum([len(golden) for golden in supertags])
             for j in range(len(supertags)):
                 for k in range(len(supertags[j])):
+                    n_categories += len(predicted[j][k])
                     if supertags[j][k] in predicted[j][k]:
                         correct_cnt += 1
 
         print(f'per-word acc of the supertagger = {(correct_cnt / total_cnt) * 100: .3f} (correct if the golden tag is in the top k predicted ones)')
+        print(f'averaged number of categories per word = {(n_categories / total_cnt): .2f}')
 
 
 if __name__ == '__main__':
@@ -159,13 +180,15 @@ if __name__ == '__main__':
     from transformers import BertTokenizer
     model_path = '../plms/bert-base-uncased'
     supertagger = CCGSupertagger(
-        model = BaseSupertaggingModel(model_path, len(category2idx)),
+        # model = BaseSupertaggingModel(model_path, len(category2idx)),
+        model = LSTMSupertaggingModel(model_path, len(category2idx)),
         tokenizer = BertTokenizer.from_pretrained(model_path),
         idx2category = idx2category,
-        top_k = 8
+        top_k = 10,
+        beta = 0.000001,
     )
     checkpoints_dir = './checkpoints'
-    checkpoint_epoch = 2
+    checkpoint_epoch = 17
     supertagger._load_model_checkpoint(checkpoints_dir, checkpoint_epoch)
 
     data_items, _ = load_auto_file('../data/ccgbank-wsj_00.auto')

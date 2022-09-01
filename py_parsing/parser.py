@@ -6,6 +6,7 @@ import torch.nn as nn
 from ccg_parsing_models import BaseParsingModel, SpanParsingModel
 from decoders.decoder import Chart, Decoder
 from decoders.ccg_base_decoder import CCGBaseDecoder
+from decoders.ccg_a_star_decoder import CCGAStarDecoder
 
 sys.path.append('..')
 from ccg_supertagger.utils import pre_tokenize_sent
@@ -66,11 +67,12 @@ if __name__ == '__main__':
     with open('../data/cat_dict.json', 'r', encoding = 'utf8') as f:
         cat_dict = json.load(f)
 
-    decoder = CCGBaseDecoder(
-        top_k = 50,
-        beam_width = beam_width,
+    decoder = CCGAStarDecoder(
         idx2tag = idx2category,
-        cat_dict = cat_dict
+        cat_dict = cat_dict,
+        top_k = 16,
+        timeout = 16.0,
+        apply_cat_filtering = False
     )
     with open('../data/instantiated_unary_rules_with_X.json', 'r', encoding = 'utf8') as f:
         instantiated_unary_rules = json.load(f)
@@ -93,6 +95,6 @@ if __name__ == '__main__':
 
     # chart = parser.sanity_check(pretokenized_sent, golden_supertags, print_cell_items=True)
     chart = parser.parse(pretokenized_sent)
-    
+    # chart._print_cell_items()
     for cell_item in chart.chart[0][-1].cell_items:
         print(to_auto(cell_item.constituent))

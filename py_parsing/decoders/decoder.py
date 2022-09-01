@@ -10,7 +10,7 @@ class CellItem:
 
     def __init__(
         self,
-        score: torch.Tensor,
+        score,
         constituent: Optional[ConstituentNode] = None, # for base decoding
         start_end: Optional[Tuple[int, int]] = None,
         span_tag_idx: Optional[int] = None,
@@ -56,6 +56,9 @@ class Cell:
         self.span_representation = span_representation
         self.cell_items = cell_items
 
+    def __repr__(self) -> str:
+        return str([repr(cell_item) for cell_item in self.cell_items])
+
     @property
     def _is_null(self):
         return self.span_representation == None and self.cell_items == None
@@ -83,12 +86,11 @@ class Decoder: # for testing directly, no need to train
     def __init__(
         self,
         top_k: int,
-        beam_width: int,
         idx2tag: Dict[int, Any]
     ):
         self.top_k = top_k
-        self.beam_width = beam_width
         self.idx2tag = idx2tag
+        self.tag2idx = {tag: idx for idx, tag in self.idx2tag.items()}
 
     def batch_decode(
         self,
@@ -139,6 +141,23 @@ class Decoder: # for testing directly, no need to train
                 self._apply_span_ops(chart, k, i + 1)
 
         return chart
+
+    @staticmethod
+    def _check_constraints(left: ConstituentNode, right: ConstituentNode, result_used_rule: str) -> bool:
+        
+        # Eisner constraints
+        if left.used_rule == 'FC' and (result_used_rule == 'FA' or result_used_rule == 'FC'):
+            return False
+        elif right.used_rule == 'BX' and (result_used_rule == 'BA' or result_used_rule == 'BX'):
+            return False
+        
+        # Julia and Bisk's Constraint 5
+        elif left.used_rule == 'FT' and result_used_rule == 'FA':
+            return False
+        elif right.used_rule == 'BT' and result_used_rule == 'BA':
+            return False
+        else:
+            return True
 
     def _apply_token_ops(self, chart: Chart, tokens, i: int): # token-level (span[i][i+1]) operations
         # i is the start position of the token to be processed
