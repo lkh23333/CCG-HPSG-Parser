@@ -19,6 +19,7 @@ class BaseParsingModel(nn.Module):
         self,
         model_path: str,
         supertagging_n_classes: int,
+        embed_dim: int,
         checkpoints_dir: str,
         checkpoint_epoch: int,
         device: torch.device = torch.device('cuda:0')
@@ -26,7 +27,7 @@ class BaseParsingModel(nn.Module):
         super().__init__()
         self.device = device
         self.supertagger = CCGSupertagger(
-            model = BaseSupertaggingModel(model_path, supertagging_n_classes),
+            model = BaseSupertaggingModel(model_path, supertagging_n_classes, embed_dim),
             tokenizer = BertTokenizer.from_pretrained(model_path),
             device = self.device
         )
@@ -43,6 +44,7 @@ class LSTMParsingModel(nn.Module):
         self,
         model_path: str,
         supertagging_n_classes: int,
+        embed_dim: int,
         checkpoints_dir: str,
         checkpoint_epoch: int,
         device: torch.device = torch.device('cuda:0')
@@ -50,7 +52,7 @@ class LSTMParsingModel(nn.Module):
         super().__init__()
         self.device = device
         self.supertagger = CCGSupertagger(
-            model = LSTMSupertaggingModel(model_path, supertagging_n_classes),
+            model = LSTMSupertaggingModel(model_path, supertagging_n_classes, embed_dim),
             tokenizer = BertTokenizer.from_pretrained(model_path),
             device = self.device
         )

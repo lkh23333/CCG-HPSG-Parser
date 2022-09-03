@@ -23,7 +23,7 @@ class CCGSupertagger:
         idx2category: Dict[int, str] = None,
         top_k: int = 1,
         beta: float = 1e-5, # pruning parameter for supertagging
-        device: torch.device = torch.device('cuda:0')
+        device: torch.device = torch.device('cuda')
     ):
         self.model = model
         self.tokenizer = tokenizer
@@ -178,17 +178,17 @@ if __name__ == '__main__':
     idx2category = {idx: category for category, idx in category2idx.items()}
 
     from transformers import BertTokenizer
-    model_path = '../plms/bert-base-uncased'
+    model_path = '../plms/bert-large-uncased'
     supertagger = CCGSupertagger(
         # model = BaseSupertaggingModel(model_path, len(category2idx)),
-        model = LSTMSupertaggingModel(model_path, len(category2idx)),
+        model = LSTMSupertaggingModel(model_path, len(category2idx), embed_dim = 1024),
         tokenizer = BertTokenizer.from_pretrained(model_path),
         idx2category = idx2category,
         top_k = 10,
-        beta = 0.000001,
+        beta = 0.00005,
     )
     checkpoints_dir = './checkpoints'
-    checkpoint_epoch = 17
+    checkpoint_epoch = 19
     supertagger._load_model_checkpoint(checkpoints_dir, checkpoint_epoch)
 
     data_items, _ = load_auto_file('../data/ccgbank-wsj_00.auto')

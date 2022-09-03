@@ -56,6 +56,7 @@ def main(args):
     parsing_model = LSTMParsingModel(
         model_path = args.supertagging_model_path,
         supertagging_n_classes = len(idx2category),
+        embed_dim = args.embed_dim,
         checkpoints_dir = args.supertagging_model_checkpoints_dir,
         checkpoint_epoch = args.supertagging_model_checkpoint_epoch,
         device = args.device
@@ -141,14 +142,15 @@ if __name__ == '__main__':
     parser.add_argument('--instantiated_unary_rules_dir', type = str, default = '../data/instantiated_unary_rules_with_X.json')
     parser.add_argument('--instantiated_binary_rules_dir', type = str, default = '../data/instantiated_seen_binary_rules.json')
     parser.add_argument('--cat_dict_dir', type = str, default = '../data/cat_dict.json')
-    parser.add_argument('--supertagging_model_path', type = str, default = '../plms/bert-base-uncased')
+    parser.add_argument('--supertagging_model_path', type = str, default = '../plms/bert-large-uncased')
     parser.add_argument('--supertagging_model_checkpoints_dir', type = str, default = '../ccg_supertagger/checkpoints')
-    parser.add_argument('--supertagging_model_checkpoint_epoch', type = str, default = 17)
+    parser.add_argument('--supertagging_model_checkpoint_epoch', type = str, default = 19)
     parser.add_argument('--predicted_auto_files_dir', type = str, default = './evaluation')
 
+    parser.add_argument('--embed_dim', type = int, default = 1024)
     parser.add_argument('--apply_cat_filtering', type = bool, default = True)
     parser.add_argument('--apply_supertagging_pruning', type = bool, default = True)
-    parser.add_argument('--beta', type = float, default = 0.000001)
+    parser.add_argument('--beta', type = float, default = 0.00005)
     parser.add_argument('--device', type = torch.device, default = torch.device('cpu'))
     parser.add_argument('--batch_size', type = int, default = 10)
     parser.add_argument('--top_k_supertags', type = int, default = 10)

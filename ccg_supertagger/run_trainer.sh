@@ -7,7 +7,7 @@ python -u trainer.py \
  --batch_size 8 \
  --embed_dim 768 \
  --num_lstm_layers 1 \
- --dropout_p 0.2 \
- --model_path ./models/plms/bert-base-uncased \
- --checkpoints_dir ./checkpoints_$EXP_NAME \
+ --dropout_p 0.5 \
+ --model_path ../plms/bert-large-uncased \
+ --checkpoints_dir ./checkpoints \
  2>&1 | tee -a trainer_$EXP_NAME.log
