@@ -25,6 +25,67 @@ Specify different parameters in `run_trainer.sh` so as to use different function
 `--test_mode`: only for `test` mode, choices include `train_eval`, `dev_eval` and `test_eval`, default to `dev_eval`  
 `--checkpoint_epoch`: only for `train_on` and `test` mode, the specific epoch of checkpoint to use, default to `14`
 
+Some example scripts
+- train a supertagger with BiLSTM + bert-base-uncased
+```
+#!/bin/bash
+
+#PJM -g gk77
+#PJM -L rscgrp=share-short
+#PJM -L gpu=1
+#PJM -j
+#PJM -o job.out
+
+source activate py310
+
+EXP_NAME="lstm"
+
+python -u trainer.py \
+ --model_name lstm \
+ --batch_size 8 \
+ --embed_dim 768 \
+ --num_lstm_layers 1 \
+ --dropout_p 0.5 \
+ --model_path ../plms/bert-base-uncased \
+ --checkpoints_dir ./checkpoints \
+ --mode train
+ 2>&1 | tee -a trainer_$EXP_NAME.log
+```
+
+- continue to train the supertagger from checkpoint of epoch 14
+```
+EXP_NAME="lstm"
+
+python -u trainer.py \
+ --model_name lstm \
+ --batch_size 8 \
+ --embed_dim 768 \
+ --num_lstm_layers 1 \
+ --dropout_p 0.5 \
+ --model_path ../plms/bert-base-uncased \
+ --checkpoints_dir ./checkpoints \
+ --mode train_on \
+ --checkpoint_epoch 14
+ 2>&1 | tee -a trainer_$EXP_NAME.log
+```
+
+- test the supertagger using the checkpoint from epoch 14, on dev data
+```
+EXP_NAME="lstm"
+
+python -u trainer.py \
+ --model_name lstm \
+ --batch_size 8 \
+ --embed_dim 768 \
+ --num_lstm_layers 1 \
+ --dropout_p 0.5 \
+ --model_path ../plms/bert-base-uncased \
+ --checkpoints_dir ./checkpoints \
+ --mode test \
+ --test_mode dev_eval
+ --checkpoint_epoch 14
+ 2>&1 | tee -a trainer_$EXP_NAME.log
+```
 
 ### Use the Supertagger
 ```
@@ -46,6 +107,23 @@ Specify different parameters in `run_supertagger.sh` so as to use different func
 `--pretokenized_sents_dir`: used for `predict_batch`, default to `'../data/pretokenized_sents.json'`  
 `--batch_predicted_dir`: used for `predict_batch`, default to `'./batch_predicted_supertags.json'`
 
+ - An example scripts to use the supertagger with the checkpoint file `./checkpoints/lstm_bert-base-uncased_drop0.5_epoch_14.pt` in the mode `sanity_check`
+```
+EXP_NAME="lstm"
+
+python -u supertagger.py \
+ --model_path ../plms/bert-base-uncased \
+ --checkpoint_dir ./checkpoints/lstm_bert-base-uncased_drop0.5_epoch_14.pt \
+ --model_name lstm \
+ --device cuda \
+ --batch_size 8 \
+ --embed_dim 768 \
+ --num_lstm_layers 1 \
+ --top_k 10 \
+ --beta 0.0001 \
+ --mode sanity_check
+ 2>&1 | tee -a supertagger_$EXP_NAME.log
+```
 ## Parsing
 
 ### Use the Parser
@@ -73,6 +151,24 @@ Specify different parameters in `run_parser.sh` so as to use different functions
 `--device`: the device to use during supertagging, default to `cuda`  
 `--mode`: the mode of the parser, choices include `sanity_check`, `predict_sent`, `batch_sanity_check` and `predict_batch`. If `sanity_check`, the parser reads the sample data in `sample.auto` and returns the parsing result with its golden supertags. If `predict_sent`, the parser reads sample data in `sample.auto` and returns the parsing result using its own supertagging results. If `batch_sanity_check`, the parser reads in dev data and returns the predicted .auto file using their golden supertags. If `predict_batch`, the parser reads in dev data and returns the predicted .auto file using its own supertagging results. Default to `sanity_check`.  
 
+- An example script to use the parser with a BiLSTM+bert-base-uncased supertagging model and A* decoding in `predict_batch` mode
+```
+EXP_NAME="lstm"
+
+python -u parser.py \
+ --supertagging_model_path ../plms/bert-base-uncased \
+ --supertagging_model_checkpoint_dir ../ccg_supertagger/checkpoints/lstm_bert-base-uncased_drop0.5_epoch_14.pt \
+ --predicted_auto_files_dir ./evaluation \
+ --supertagging_model_name lstm \
+ --embed_dim 768 \
+ --num_lstm_layers 1 \
+ --decoder a_star \
+ --beta 0.0001 \
+ --top_k_supertags 10 \
+ --batch_size 10 \
+ --mode predict_batch \
+ 2>&1 | tee -a parser_$EXP_NAME.log
+```
 ### Evaluation of the Parsing Results
 ```
 cd py_parsing/evaluation

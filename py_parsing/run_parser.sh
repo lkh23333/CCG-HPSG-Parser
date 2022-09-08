@@ -11,7 +11,7 @@ source activate py310
 EXP_NAME="lstm"
 
 python -u parser.py \
- --supertagging_model_path ../plms/bert-large-uncased \
+ --supertagging_model_path ../plms/bert-base-uncased \
  --supertagging_model_checkpoint_dir ../ccg_supertagger/checkpoints/lstm_bert-base-uncased_drop0.5_epoch_14.pt \
  --predicted_auto_files_dir ./evaluation \
  --supertagging_model_name lstm \

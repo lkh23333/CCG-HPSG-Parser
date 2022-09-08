@@ -20,4 +20,4 @@ python -u trainer.py \
  --checkpoints_dir ./checkpoints \
  --mode train_on \
  --checkpoint_epoch 19
- 2>&1 | tee -a supertagger_$EXP_NAME.log
+ 2>&1 | tee -a trainer_$EXP_NAME.log
