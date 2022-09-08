@@ -246,7 +246,7 @@ def apply_supertagger(args):
         idx2category=idx2category,
         top_k=args.top_k,
         beta=args.beta,
-        device=args.device
+        device=torch.device(args.device)
     )
     supertagger._load_model_checkpoint(args.checkpoint_dir)
 
@@ -263,19 +263,17 @@ def apply_supertagger(args):
         ]
 
         supertagger.sanity_check(pretokenized_sents, golden_supertags)
-    elif args.mode == 'predict_sent':
-        # predict supertags of only one sentence
-        # and print the results
-        predicted = supertagger.predict_sent(args.sent_to_predict)
-        print(predicted)
-    elif args.mode == 'predict_batch':
-        # predict supertags of many sentences from args.pretokenized_sents_dir
+
+    elif args.mode == 'predict':
+        # predict supertags of one to many sentences from args.pretokenized_sents_dir
         # and save the results to args.batch_predicted_dir
         with open(args.pretokenized_sents_dir, 'r', encoding='utf8') as f:
             pretokenized_sents = json.load(f)
         predicted = supertagger.predict_batch(pretokenized_sents)
+        print(predicted)
         with open(args.batch_predicted_dir, 'w', encoding='utf8') as f:
             json.dump(predicted, f, indent=2, ensure_ascii=False)
+
     else:
         raise RuntimeError('Please check the mode of the supertagger!!!')
 
@@ -292,25 +290,25 @@ if __name__ == '__main__':
                         default='../data/ccgbank-wsj_23.auto')
     parser.add_argument('--lexical_category2idx_dir', type=str,
                         default='../data/lexical_category2idx_cutoff.json')
+                        
     parser.add_argument('--model_path', type=str,
-                        default='../plms/bert-base-uncased')
-    parser.add_argument('--checkpoint_dir', type=str, default='./checkpoints/epoch_14')
+                        default='../plms/bert-large-uncased')
+    parser.add_argument('--checkpoint_dir', type=str,
+                        default='./checkpoints/lstm_bert-large-uncased_drop0.5_epoch_19.pt')
 
     parser.add_argument('--model_name', type=str,
                         default='lstm', choices=['fc', 'lstm'])
     parser.add_argument('--embed_dim', type=int, default=1024)
     parser.add_argument('--num_lstm_layers', type=int, default=1)
-    parser.add_argument('--device', type=torch.device,
-                        default=torch.device('cuda'))
-    parser.add_argument('--batch_size', type=int, default=10)
+    parser.add_argument('--device', type=str,
+                        default='cuda')
+    parser.add_argument('--batch_size', type=int, default=8)
     parser.add_argument('--top_k', type=int, default=10)
     parser.add_argument('--beta', help='the coefficient used to prune predicted categories',
                         type=float, default=0.0005)
 
-    parser.add_argument('--mode', type=str, default='',
-                        choices=['predict_sent', 'predict_batch', 'sanity_check'])
-    parser.add_argument('--sent_to_predict', type=List[str],
-                        default=['No', ',', 'it', 'was', 'n\'t', 'Black', 'Monday', '.'])
+    parser.add_argument('--mode', type=str, default='sanity_check',
+                        choices=['predict', 'sanity_check'])
     parser.add_argument('--pretokenized_sents_dir', type=str,
                         default='../data/pretokenized_sents.json')
     parser.add_argument('--batch_predicted_dir', type=str,

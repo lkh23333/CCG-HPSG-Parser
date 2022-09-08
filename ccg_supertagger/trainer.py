@@ -306,30 +306,25 @@ class CCGSupertaggingTrainer:
 
 def main(args):
     print('================= parsing data =================\n')
-    # train_data_items, _ = load_auto_file(args.train_data_dir)
+    train_data_items, _ = load_auto_file(args.train_data_dir)
     dev_data_items, _ = load_auto_file(args.dev_data_dir)
     # test_data_items, _ = load_auto_file(args.test_data_dir)
 
     with open(args.lexical_category2idx_dir, 'r', encoding='utf8') as f:
         category2idx = json.load(f)
 
-    # # for testing codes
-    # categories = sorted(categories) # !!! to ensure the same order for reproducibility !!!
-    # category2idx = {categories[idx]: idx for idx in range(len(categories))}
-    # idx2category = {idx: category for category, idx in category2idx.items()}
-
     print('================= preparing data =================\n')
     tokenizer = BertTokenizer.from_pretrained(args.model_path)
-    # train_data = prepare_data(train_data_items, tokenizer, category2idx)
+    train_data = prepare_data(train_data_items, tokenizer, category2idx)
     dev_data = prepare_data(dev_data_items, tokenizer, category2idx)
     # test_data = prepare_data(test_data_items, tokenizer, category2idx)
 
-    # train_dataset = CCGSupertaggingDataset(
-    #     data=train_data['input_ids'],
-    #     mask=train_data['mask'],
-    #     word_piece_tracked=train_data['word_piece_tracked'],
-    #     target=train_data['target']
-    # )
+    train_dataset = CCGSupertaggingDataset(
+        data=train_data['input_ids'],
+        mask=train_data['mask'],
+        word_piece_tracked=train_data['word_piece_tracked'],
+        target=train_data['target']
+    )
     dev_dataset = CCGSupertaggingDataset(
         data=dev_data['input_ids'],
         mask=dev_data['mask'],
@@ -345,7 +340,7 @@ def main(args):
 
     trainer = CCGSupertaggingTrainer(
         n_epochs=args.n_epochs,
-        device=args.device,
+        device=torch.device(args.device),
         model=model(
             model_path=args.model_path,
             n_classes=len(category2idx),
@@ -362,16 +357,31 @@ def main(args):
                 'drop' + str(args.dropout_p)
             ]
         ),
-        train_dataset=dev_dataset,
+        train_dataset=train_dataset,
         dev_dataset=dev_dataset,
         lr=args.lr
     )
 
-    print('================= supertagging training =================\n')
-    trainer.train()  # default training from the beginning
-    # trainer.load_checkpoint_and_train(checkpoint_epoch=2) # train from (checkpoint_epoch + 1)
-    # trainer.load_checkpoint_and_test(checkpoint_epoch=19, mode='dev_eval')
-    # trainer.test(dataset = self.test_dataset, mode = 'test_eval')
+    if args.mode == 'train':
+        # default training from the beginning
+        print('================= supertagging training =================\n')
+        trainer.train()
+
+    elif args.mode == 'train_on':
+        # train from (checkpoint_epoch + 1)
+        print('================= supertagging training on =================\n')
+        trainer.load_checkpoint_and_train(checkpoint_epoch=args.checkpoint_epoch)
+    
+    elif args.mode == 'test':
+        # test using the saved model from checkpoint_epoch
+        print(f'================= supertagging testing: {args.test_mode} =================\n')
+        trainer.load_checkpoint_and_test(
+            checkpoint_epoch=args.checkpoint_epoch,
+            mode=args.test_mode
+        )
+
+    else:
+        raise RuntimeError('Please check the mode of the trainer!!!')
 
 
 if __name__ == '__main__':
@@ -387,6 +397,7 @@ if __name__ == '__main__':
                         default='../data/ccgbank-wsj_23.auto')
     parser.add_argument('--lexical_category2idx_dir', type=str,
                         default='../data/lexical_category2idx_cutoff.json')
+                        
     parser.add_argument('--model_path', type=str,
                         default='../plms/bert-large-uncased')
     parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints')
@@ -394,13 +405,19 @@ if __name__ == '__main__':
     parser.add_argument('--model_name', type=str,
                         default='lstm', choices=['fc', 'lstm', 'lstm-crf'])
     parser.add_argument('--n_epochs', type=int, default=20)
-    parser.add_argument('--device', type=torch.device,
-                        default=torch.device('cuda'))
+    parser.add_argument('--device', type=str, default='cuda')
     parser.add_argument('--batch_size', type=int, default=8)
     parser.add_argument('--lr', type=float, default=1e-5)
     parser.add_argument('--embed_dim', type=int, default=1024)
     parser.add_argument('--num_lstm_layers', type=int, default=1)
     parser.add_argument('--dropout_p', type=float, default=0.5)
+
+    parser.add_argument('--mode', type=str, default='train',
+                        choices=['train', 'train_on', 'test'])
+    parser.add_argument('--test_mode', type=str, default='dev_eval',
+                        choices=['train_eval', 'dev_eval', 'test_eval'])
+    parser.add_argument('--checkpoint_epoch', type=int,
+                        default=14)
 
     args = parser.parse_args()
 

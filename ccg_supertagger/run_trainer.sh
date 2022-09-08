@@ -8,13 +8,16 @@
 
 source activate py310
 
-EXP_NAME="fc"
+EXP_NAME="lstm"
 
 python -u trainer.py \
- --model_name fc \
+ --model_name lstm \
  --batch_size 8 \
- --embed_dim 768 \
+ --embed_dim 1024 \
+ --num_lstm_layers 1 \
  --dropout_p 0.5 \
- --model_path ../plms/bert-base-uncased \
+ --model_path ../plms/bert-large-uncased \
  --checkpoints_dir ./checkpoints \
- 2>&1 | tee -a trainer_$EXP_NAME.log
+ --mode train_on \
+ --checkpoint_epoch 19
+ 2>&1 | tee -a supertagger_$EXP_NAME.log
