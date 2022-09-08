@@ -1,4 +1,7 @@
-"""adapted from depccg's implementation @ https://github.com/masashi-y/depccg"""
+"""
+adapted from depccg's implementation @ https://github.com/masashi-y/depccg
+"""
+
 from typing import List, Tuple, NamedTuple
 from base import Token, ConstituentNode, Category
 
@@ -71,7 +74,7 @@ class _AutoLineReader(object):
             word = ')'
         self.next()
 
-        return ConstituentNode(tag = token.tag, children = [token])
+        return ConstituentNode(tag=token.tag, children=[token])
 
     def parse_tree(self):
         self.check('(')
@@ -93,7 +96,7 @@ class _AutoLineReader(object):
         if len(children) > 2:
             raise RuntimeError(f'failed to parse: {self.line}')
         else:
-            node = ConstituentNode(tag = cat, children = children)
+            node = ConstituentNode(tag=cat, children=children)
             return node
 
 
@@ -143,49 +146,24 @@ def load_auto_file(filename: str) -> Tuple[List[DataItem], List[str]]:
 
 
 if __name__ == '__main__':
-    # # sample usage
-    # filename = "data/ccg-sample.auto"
+    # sample usage
+    filename = "data/ccg-sample.auto"
 
-    # items, cats = load_auto_file(filename)
+    items, cats = load_auto_file(filename)
 
-    # for item in items:
-    #     print(item.id)
+    for item in items:
+        print(item.id)
 
-    #     for token in item.tokens:
-    #         print('{}\t{}\t{}'.format(token.contents, token.POS, token.tag))
+        for token in item.tokens:
+            print('{}\t{}\t{}'.format(token.contents, token.POS, token.tag))
 
-    #     root = item.tree_root
+        root = item.tree_root
 
-    #     def _iter(node):
-    #         print(node.tag)
-    #         if isinstance(node, ConstituentNode):
-    #             for child in node.children:
-    #                 _iter(child)
-    #     _iter(root)
+        def _iter(node):
+            print(node.tag)
+            if isinstance(node, ConstituentNode):
+                for child in node.children:
+                    _iter(child)
+        _iter(root)
 
-    # print(cats)
-
-
-    train_dir = 'data/ccgbank-wsj_02-21.auto'
-    items, _ = load_auto_file(train_dir)
-
-    def _iter(node, instantiated_rules):
-        if isinstance(node, ConstituentNode):
-            children_tags = [str(child.tag) for child in node.children]
-            if '(S\\NP)\\(S\\NP)' in children_tags or '(S\\NP)/(S\\NP)' in children_tags:
-                rule = [children_tags[0], children_tags[1], str(node.tag)]
-                if rule not in instantiated_rules:
-                    instantiated_rules.append(rule)
-            for child in node.children:
-                _iter(child, instantiated_rules)
-
-    instantiated_rules = []
-    for data_item in items:
-        root_node = data_item.tree_root
-        _iter(root_node, instantiated_rules)
-    
-    print(instantiated_rules)
-
-    import json
-    with open('instantiated_rules.json', 'w', encoding = 'utf8') as f:
-        json.dump(instantiated_rules, f, indent = 2, ensure_ascii = False)
+    print(cats)
