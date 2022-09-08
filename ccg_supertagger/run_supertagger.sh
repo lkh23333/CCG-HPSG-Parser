@@ -20,5 +20,5 @@ python -u supertagger.py \
  --num_lstm_layers 1 \
  --top_k 10 \
  --beta 0.0001 \
- --mode sanity_check
+ --mode sanity_check \
  2>&1 | tee -a supertagger_$EXP_NAME.log

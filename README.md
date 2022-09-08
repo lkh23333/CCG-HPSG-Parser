@@ -48,7 +48,7 @@ python -u trainer.py \
  --dropout_p 0.5 \
  --model_path ../plms/bert-base-uncased \
  --checkpoints_dir ./checkpoints \
- --mode train
+ --mode train \
  2>&1 | tee -a trainer_$EXP_NAME.log
 ```
 
@@ -65,7 +65,7 @@ python -u trainer.py \
  --model_path ../plms/bert-base-uncased \
  --checkpoints_dir ./checkpoints \
  --mode train_on \
- --checkpoint_epoch 14
+ --checkpoint_epoch 14 \
  2>&1 | tee -a trainer_$EXP_NAME.log
 ```
 
@@ -82,8 +82,8 @@ python -u trainer.py \
  --model_path ../plms/bert-base-uncased \
  --checkpoints_dir ./checkpoints \
  --mode test \
- --test_mode dev_eval
- --checkpoint_epoch 14
+ --test_mode dev_eval \
+ --checkpoint_epoch 14 \
  2>&1 | tee -a trainer_$EXP_NAME.log
 ```
 
@@ -121,7 +121,7 @@ python -u supertagger.py \
  --num_lstm_layers 1 \
  --top_k 10 \
  --beta 0.0001 \
- --mode sanity_check
+ --mode sanity_check \
  2>&1 | tee -a supertagger_$EXP_NAME.log
 ```
 ## Parsing

@@ -17,7 +17,7 @@ python -u trainer.py \
  --num_lstm_layers 1 \
  --dropout_p 0.5 \
  --model_path ../plms/bert-large-uncased \
- --checkpoints_dir ./checkpoints \
+ --checkpoints_dir ./checkpoints_$EXP_NAME \
  --mode train_on \
- --checkpoint_epoch 19
+ --checkpoint_epoch 19 \
  2>&1 | tee -a trainer_$EXP_NAME.log
