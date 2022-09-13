@@ -4,6 +4,15 @@ This is a pure python CCG parser still under development. Follow instructions be
 
 ## Supertagging
 
+### Current Best Result
+| Model | Params | Best Result | Multitagging Results (with the best epoch) |
+| ----- | ------ | ----------- | ----------------------------- |
+| BERT+BiLSTM | n_epochs = 20;<br>dropout = 0.5;<br>AdamW;<br>lr = 1e-5;<br>batch_size = 8; | best_epoch = 19,<br>dev_eval acc = 96.21 | beta = 0.0005, topk = 10 --> averaged number of lexical categories = 2.21, acc = 99.014;<br><br>beta = 0.0001, topk = 10 --> averaged number of lexical categories = 4.13, acc = 99.340;<br><br>beta = 0.00005, topk = 10, averaged number of lexical categories = 5.36, acc = 99.417;<br><br>beta = 0.00001, topk = 10, averaged number of lexical categories = 9.35, acc = 99.491;
+
+### Available Models
+- BERT: embeddings from BERT with some additional linear layers, words averaged along the word pieces  
+- BERT + BiLSTM: add a BiLSTM on the basis of the first model  
+- BERT + BiLSTM + CRF: add a CRF layer on the basis of the second model  
 ### Train a Supertagger
 ```
 cd ccg_supertagger
@@ -13,7 +22,7 @@ pjsub run_trainer.sh
 Specify different parameters in `run_trainer.sh` so as to use different functions.  
 `--model_path`: the relative path to the pretrained model folder, default to `../plms/bert-large-uncased`  
 `--checkpoints_dir`: the directory to the folder storing checkpoints (.pt files), default to `./checkpoints`  
-`--model_name`: [`fc`, `lstm`, `lstm-crf`], default to `lstm`  
+`--model_name`: [`fc`, `lstm`, `lstm-crf`], `fc` is a BERT, `lstm` is a BERT with a BiLSTM, and `lstm-crf` is a BERT with a BiLSTM and CRF layer, default to `lstm`   
 `--n_epochs`: the preset number of epochs, default to `20`  
 `--device`: specify the device to use, default to `'cuda'`  
 `--batch_size`: the batch size in training, default to `8`  
@@ -107,7 +116,7 @@ Specify different parameters in `run_supertagger.sh` so as to use different func
 `--pretokenized_sents_dir`: used for `predict_batch`, default to `'../data/pretokenized_sents.json'`  
 `--batch_predicted_dir`: used for `predict_batch`, default to `'./batch_predicted_supertags.json'`
 
- - An example scripts to use the supertagger with the checkpoint file `./checkpoints/lstm_bert-base-uncased_drop0.5_epoch_14.pt` in the mode `sanity_check`
+ - An example script to use the supertagger with the checkpoint file `./checkpoints/lstm_bert-base-uncased_drop0.5_epoch_14.pt` in the mode `sanity_check`
 ```
 EXP_NAME="lstm"
 
@@ -125,6 +134,17 @@ python -u supertagger.py \
  2>&1 | tee -a supertagger_$EXP_NAME.log
 ```
 ## Parsing
+
+### Current best result
+
+| Supertagging Model Setting | Parser Setting | Labelled P | Labelled R | Labelled F1 | Coverage |
+| - | - | - | - | - | - |
+| bert-large-uncased;<br>BERT+1xBiLSTM;<br>dropout0.5; | top_k=10;<br>beta=0.0005;<br>A* search; | 87.36% | 87.71% | 87.53% | 91.32% |
+
+### Available Search Algorithms
+
+- `base`: beam search
+- `a_star`: A* search
 
 ### Use the Parser
 ```
