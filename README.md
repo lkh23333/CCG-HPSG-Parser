@@ -139,7 +139,7 @@ python -u supertagger.py \
 
 | Supertagging Model Setting | Parser Setting | Labelled P | Labelled R | Labelled F1 | Coverage |
 | - | - | - | - | - | - |
-| bert-large-uncased;<br>BERT+1xBiLSTM;<br>dropout0.5; | top_k=10;<br>beta=0.0005;<br>A* search; | 87.36% | 87.71% | 87.53% | 91.32% |
+| bert-large-uncased;<br>BERT+1xBiLSTM;<br>dropout0.5; | apply_cat_filtering=False;<br>top_k=10;<br>beta=0.0005;<br>A* search; | 87.43% | 87.79% | 87.61% | 91.69% |
 
 ### Available Search Algorithms
 
@@ -160,8 +160,8 @@ Specify different parameters in `run_parser.sh` so as to use different functions
 `--embed_dim`: the dimension of the last hidden vectors in used BERT, 768 for bert-base-uncased and 1024 for bert-large-uncased, default to `768`  
 `--num_lstm_layers`: number of BiLSTM layers if `--model_name` contains `lstm`, default to `1`  
 `--decoder`: the decoder to use, choices include `base` and `a_star`, default to `a_star`  
-`--apply_cat_filtering`: to control whether to apply category filtering, default to `True`  
-`--apply_supertagging_pruning`: to control whether to apply the supertagging pruning method, if True, please specify the `--beta` parameter, default to `True`  
+`--apply_cat_filtering`/`--no-apply_cat_filtering`: to control whether to apply category filtering, default to `--apply_cat_filtering` 
+`--apply_supertagging_pruning`/`--no-apply_supertagging_pruning`: to control whether to apply the supertagging pruning method, if True, please specify the `--beta` parameter, default to `--apply_supertagging_pruning`  
 `--beta`: the coefficient to prune predicted categories whose probabilities lie within $\beta$ of that of the best category, default to `0.0005`  
 `--top_k_supertags`: the maximum number of supertags allowed for one word, default to `10`  
 `--beam_width`: used for `base` decoder, default to `4`  

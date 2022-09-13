@@ -351,9 +351,10 @@ if __name__ == '__main__':
     parser.add_argument('--num_lstm_layers', type=int, default=1)
     parser.add_argument('--decoder', type=str, default='a_star',
                         choices=['base', 'a_star'])
-    parser.add_argument('--apply_cat_filtering', type=bool, default=True)
-    parser.add_argument('--apply_supertagging_pruning',
-                        type=bool, default=True)
+    parser.add_argument('--apply_cat_filtering', default=True,
+                        action=argparse.BooleanOptionalAction)
+    parser.add_argument('--apply_supertagging_pruning', default=True,
+                        action=argparse.BooleanOptionalAction)
     parser.add_argument('--beta', type=float, default=0.0005)
     parser.add_argument('--top_k_supertags', type=int, default=10)
     parser.add_argument('--beam_width', type=int, default=4)

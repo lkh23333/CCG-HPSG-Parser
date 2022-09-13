@@ -9,16 +9,19 @@
 source activate py310
 
 EXP_NAME="lstm"
+MODEL_NAME="large"
+TOPK="10"
+BETA="0.001"
 
 python -u supertagger.py \
- --model_path ../plms/bert-base-uncased \
- --checkpoint_dir ./checkpoints/lstm_bert-base-uncased_drop0.5_epoch_14.pt \
+ --model_path ../plms/bert-large-uncased \
+ --checkpoint_dir ./checkpoints/lstm_bert-large-uncased_drop0.5_epoch_19.pt \
  --model_name lstm \
  --device cuda \
  --batch_size 8 \
- --embed_dim 768 \
+ --embed_dim 1024 \
  --num_lstm_layers 1 \
  --top_k 10 \
- --beta 0.0001 \
+ --beta 0.001 \
  --mode sanity_check \
- 2>&1 | tee -a supertagger_$EXP_NAME.log
+ 2>&1 | tee -a supertagger_${EXP_NAME}_${MODEL_NAME}_${TOPK}_${BETA}.log
