@@ -7,7 +7,7 @@ This is a pure python CCG parser still under development. Follow instructions be
 ### Current Best Result
 | Model | Params | Best Result | Multitagging Results (with the best epoch) |
 | ----- | ------ | ----------- | ----------------------------- |
-| BERT+BiLSTM | n_epochs = 20;<br>dropout = 0.5;<br>AdamW;<br>lr = 1e-5;<br>batch_size = 8; | best_epoch = 19,<br>dev_eval acc = 96.21 | beta = 0.0005, topk = 10 --> averaged number of lexical categories = 2.21, acc = 99.014;<br><br>beta = 0.0001, topk = 10 --> averaged number of lexical categories = 4.13, acc = 99.340;<br><br>beta = 0.00005, topk = 10, averaged number of lexical categories = 5.36, acc = 99.417;<br><br>beta = 0.00001, topk = 10, averaged number of lexical categories = 9.35, acc = 99.491;
+| BERT+BiLSTM | n_epochs = 20;<br>dropout = 0.5;<br>AdamW;<br>lr = 1e-5;<br>batch_size = 8; | best_epoch = 19,<br>dev_eval acc = 96.21 | beta = 0.0005, topk = 10 --> averaged number of lexical categories = 2.21, acc = 99.014;<br><br>beta = 0.0001, topk = 10 --> averaged number of lexical categories = 4.13, acc = 99.340;<br><br>beta = 0.00005, topk = 10 --> averaged number of lexical categories = 5.36, acc = 99.417;<br><br>beta = 0.00001, topk = 10 --> averaged number of lexical categories = 9.35, acc = 99.491;
 
 ### Available Models
 - BERT: embeddings from BERT with some additional linear layers, words averaged along the word pieces  
